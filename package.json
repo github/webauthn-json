@@ -1,0 +1,42 @@
+{
+  "name": "@github/webauthn-json",
+  "version": "0.1.0",
+  "description": "A wrapper for the webauthn API that adapts input/output values to plain JSON with base64.",
+  "author": "GitHub, Inc. <opensource+webauthn-json@github.com>",
+  "license": "MIT",
+  "repository": "github:github/webauthn-json",
+  "main": "dist/index.js",
+  "umd": "dist/webauthn-json.umd.js",
+  "types": "dist/src/index.d.ts",
+  "dependencies": {
+    "@types/webappsec-credential-management": "^0.3.11"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "jest": "^24.8.0",
+    "rollup": "^1.16.3",
+    "rollup-plugin-terser": "^5.0.0",
+    "rollup-plugin-tslint": "^0.2.2",
+    "rollup-plugin-typescript2": "^0.21.2",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.2"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -cw",
+    "clean": "rm -rf dist",
+    "test": "jest && npm run lint",
+    "setup": "npm install",
+    "print-schemas": "npx ts-node script/print-schemas.ts",
+    "lint": "tslint --fix --project . && tslint --fix rollup.config.js",
+    "prepack": "npm run clean && npm run build"
+  },
+  "keywords": [
+    "webauthn",
+    "auth",
+    "u2f",
+    "security",
+    "credentials"
+  ]
+}
