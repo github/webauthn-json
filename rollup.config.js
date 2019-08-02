@@ -9,13 +9,13 @@ export default {
   output: [
     {
       file: pkg.main,
-      format: "cjs",
+      format: "umd",
+      name: "webauthnJSON",
       sourcemap: true,
     },
     {
-      file: pkg.umd,
-      format: "umd",
-      name: "webauthnJSON",
+      file: pkg.module,
+      format: "esm",
       sourcemap: true,
     },
   ],

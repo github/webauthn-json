@@ -6,6 +6,7 @@
   "license": "MIT",
   "repository": "github:github/webauthn-json",
   "main": "dist/index.js",
+  "module": "dist/index.esm.js",
   "umd": "dist/webauthn-json.umd.js",
   "types": "dist/src/index.d.ts",
   "dependencies": {
@@ -31,8 +32,8 @@
     "print-schemas": "npx ts-node script/print-schemas.ts",
     "lint": "tslint --fix --project . && tslint --fix rollup.config.js",
     "prepack": "npm run clean && npm run build",
-    "copy-flow": "mkdir -p dist/ && rm -f dist/index.js.flow && cp src/index.js.flow dist/",
-    "link-flow": "mkdir -p dist/ && rm -f dist/index.js.flow && ln -s src/index.js.flow dist/"
+    "copy-flow": "mkdir -p dist/ && rm -f dist/index.js.flow dist/index.esm.js.flow && cp    src/index.js.flow dist/ && cp    src/index.js.flow dist/index.esm.js.flow",
+    "link-flow": "mkdir -p dist/ && rm -f dist/index.js.flow dist/index.esm.js.flow && ln -s src/index.js.flow dist/ && ln -s src/index.js.flow dist/index.esm.js.flow"
   },
   "keywords": [
     "webauthn",
