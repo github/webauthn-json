@@ -4,7 +4,7 @@ import * as typescript from "typescript";
 import typescript2 from "rollup-plugin-typescript2";
 import tslint from "rollup-plugin-tslint";
 
-export default {
+const config = {
   input: "src/index.ts",
   output: [
     {
@@ -24,6 +24,11 @@ export default {
     typescript2({
       typescript: typescript,
     }),
-    terser(),
   ],
 };
+
+if (!process.env.ROLLUP_WATCH) {
+  config.plugins.push(terser());
+}
+
+export default config;
