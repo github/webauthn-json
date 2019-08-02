@@ -23,14 +23,16 @@
     "typescript": "^3.5.2"
   },
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -cw",
+    "build": "npm run copy-flow && rollup -c",
+    "dev": "npm run link-flow && rollup -cw",
     "clean": "rm -rf dist",
     "test": "jest && npm run lint",
     "setup": "npm install",
     "print-schemas": "npx ts-node script/print-schemas.ts",
     "lint": "tslint --fix --project . && tslint --fix rollup.config.js",
-    "prepack": "npm run clean && npm run build"
+    "prepack": "npm run clean && npm run build",
+    "copy-flow": "mkdir -p dist/ && rm -f dist/index.js.flow && cp src/index.js.flow dist/",
+    "link-flow": "mkdir -p dist/ && rm -f dist/index.js.flow && ln -s src/index.js.flow dist/"
   },
   "keywords": [
     "webauthn",
