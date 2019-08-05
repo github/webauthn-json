@@ -13,11 +13,11 @@ The WebAuthn API itself takes input and output values that look almost like JSON
 
 Install using:
 
-    npm install --save webauthn-json
+    npm install --save @github/webauthn-json
     
 Then:
 
-    import {create} from "webauthn-json"
+    import {create} from "@github/webauthn-json"
 
     async auth() {
       const request = await fetch("...");
