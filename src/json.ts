@@ -1,10 +1,10 @@
-import {Base64String} from "./base64";
+import {Base64urlString} from "./base64url";
 
 // Shared
 
 export interface PublicKeyCredentialDescriptorJSON {
   type: PublicKeyCredentialType;
-  id: Base64String;
+  id: Base64urlString;
   transports?: AuthenticatorTransport[];
 }
 
@@ -19,7 +19,7 @@ interface CorrectedPublicKeyCredentialRpEntity {
 }
 
 interface PublicKeyCredentialUserEntityJSON {
-  id: Base64String;
+  id: Base64urlString;
   name: string;
   icon?: string;
   displayName: string;
@@ -29,7 +29,7 @@ interface PublicKeyCredentialCreationOptionsJSON {
   rp: CorrectedPublicKeyCredentialRpEntity;
   user: PublicKeyCredentialUserEntityJSON;
 
-  challenge: Base64String;
+  challenge: Base64urlString;
   pubKeyCredParams: PublicKeyCredentialParameters[];
 
   timeout?: number;
@@ -47,20 +47,20 @@ export interface CredentialCreationOptionsJSON {
 // `navigator.create()` response
 
 interface AuthenticatorAttestationResponseJSON {
-  clientDataJSON: Base64String;
-  attestationObject: Base64String;
+  clientDataJSON: Base64urlString;
+  attestationObject: Base64urlString;
 }
 
 export interface PublicKeyCredentialWithAttestationJSON {
   type: PublicKeyCredentialType;
-  rawId: Base64String;
+  rawId: Base64urlString;
   response: AuthenticatorAttestationResponseJSON;
 }
 
 // `navigator.get()` request
 
 interface PublicKeyCredentialRequestOptionsJSON {
-  challenge: Base64String;
+  challenge: Base64urlString;
   timeout?: number;
   rpId?: string;
   allowCredentials?: PublicKeyCredentialDescriptorJSON[];
@@ -78,15 +78,15 @@ export interface CredentialRequestOptionsJSON {
 // `navigator.get()` response
 
 interface AuthenticatorAssertionResponseJSON {
-  clientDataJSON: Base64String;
-  authenticatorData: Base64String;
-  signature: Base64String;
-  userHandle: Base64String | null;
+  clientDataJSON: Base64urlString;
+  authenticatorData: Base64urlString;
+  signature: Base64urlString;
+  userHandle: Base64urlString | null;
 }
 
 export interface PublicKeyCredentialWithAssertionJSON {
   type: PublicKeyCredentialType;
   id: string;
-  rawId: Base64String;
+  rawId: Base64urlString;
   response: AuthenticatorAssertionResponseJSON;
 }

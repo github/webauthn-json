@@ -1,50 +1,50 @@
-import {base64ToBuffer} from "../src/base64";
+import {base64urlToBuffer} from "../src/base64url";
 import {convert, convertValue, copyValue, optional, required, Schema} from "../src/schema";
 import "./arraybuffer";
 
 describe("conversion", () => {
   test("can handle empty schema", () => {
     const schema: Schema = {};
-    expect(() => convert(base64ToBuffer, schema, {})).not.toThrow();
+    expect(() => convert(base64urlToBuffer, schema, {})).not.toThrow();
   });
 
   test("copies a required `copy` value", () => {
     const schema: Schema = {number: {required: true, schema: "copy"}};
-    const converted = convert(base64ToBuffer, schema, {number: 4});
+    const converted = convert(base64urlToBuffer, schema, {number: 4});
     expect(converted.number).toBe(4);
   });
 
   test("errors when a required `copy` value is missing", () => {
     const schema: Schema = {number: {required: true, schema: "copy"}};
-    expect(() => convert(base64ToBuffer, schema, {})).toThrowError(/Missing key/);
+    expect(() => convert(base64urlToBuffer, schema, {})).toThrowError(/Missing key/);
   });
 
   test("copies a required `convert` value", () => {
     const schema: Schema = {number: {required: true, schema: "convert"}};
-    const converted = convert(base64ToBuffer, schema, {number: "AA=="});
+    const converted = convert(base64urlToBuffer, schema, {number: "AA=="});
     expect(converted.number).toEqualBuffer(new Uint8Array([0]));
   });
 
   test("errors when a required `convert` value is missing", () => {
     const schema: Schema = {number: {required: true, schema: "convert"}};
-    expect(() => convert(base64ToBuffer, schema, {})).toThrowError(/Missing key/);
+    expect(() => convert(base64urlToBuffer, schema, {})).toThrowError(/Missing key/);
   });
 
   test("copies an optional required copy value", () => {
     const schema: Schema = {number: {required: false, schema: "copy"}};
-    const converted = convert(base64ToBuffer, schema, {number: 5});
+    const converted = convert(base64urlToBuffer, schema, {number: 5});
     expect(converted.number).toBe(5);
   });
 
   test("allows a missing optional value", () => {
     const schema: Schema = {number: {required: false, schema: "copy"}};
-    const converted = convert(base64ToBuffer, schema, {});
+    const converted = convert(base64urlToBuffer, schema, {});
     expect(converted).not.toHaveProperty("number");
   });
 
   test("ignores unknown properties", () => {
     const schema: Schema = {number: {required: false, schema: "copy"}};
-    const converted = convert(base64ToBuffer, schema, {number: 6, extra: "hi"});
+    const converted = convert(base64urlToBuffer, schema, {number: 6, extra: "hi"});
     expect(converted.number).toBe(6);
     expect(converted).not.toHaveProperty("extra");
   });
@@ -59,7 +59,7 @@ describe("conversion", () => {
         },
       },
     };
-    const converted = convert(base64ToBuffer, schema, {
+    const converted = convert(base64urlToBuffer, schema, {
       nestedObject: {number: 7, convertField: "BB=="},
     });
     expect(converted.nestedObject.number).toBe(7);
@@ -77,7 +77,7 @@ describe("conversion", () => {
         }],
       },
     };
-    const converted = convert(base64ToBuffer, schema, {
+    const converted = convert(base64urlToBuffer, schema, {
       nestedObjectList: [
         {number: 8, string: "hi", convertField: "CC=="},
         {number: 9, convertField: "DD=="},
@@ -104,7 +104,7 @@ describe("convenience functions", () => {
       c: optional(copyValue),
       d: optional(convertValue),
     };
-    const converted = convert(base64ToBuffer, schema, {
+    const converted = convert(base64urlToBuffer, schema, {
       a: 5,
       b: "EE==",
       c: 7,
@@ -118,12 +118,12 @@ describe("convenience functions", () => {
 
   test("enforce required value", () => {
     const schema: Schema = {number: required(copyValue)};
-    expect(() => convert(base64ToBuffer, schema, {})).toThrowError(/Missing key/);
+    expect(() => convert(base64urlToBuffer, schema, {})).toThrowError(/Missing key/);
   });
 
   test("allow leaving out optional value", () => {
     const schema: Schema = {number: {required: false, schema: "copy"}};
-    const converted = convert(base64ToBuffer, schema, {});
+    const converted = convert(base64urlToBuffer, schema, {});
     expect(converted).not.toHaveProperty("number");
   });
 });
