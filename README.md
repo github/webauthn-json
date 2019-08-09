@@ -28,10 +28,16 @@ Then:
       });
     }
 
-## Design Considerations
+## Schema
 
 There are are several ways to encode JSON with binary fields. `webauthn-json` focuses on one simple approach: converting the known structure [using a simple (custom) schema format](https://github.com/github/webauthn-json/blob/master/src/webauthn-schema.ts). `webauthn-json` uses a few tricks for a compact schema encoding: the production build is about ≈2KB uncompressed (<1KB gzipped).
 
 Right now, we only convert fields explicitly known to be used by the WebAuthn API. This means that you'll have to update to a newer version of this library if you want to use new fields in the future.
+
+To print the current schema, run:
+
+    npx @github/webauthn-json schema
+
+## Contributions
 
 The scope of `webauthn-json` is fairly small — it's essentially feature-complete. However, we're happy to accept issues or pull requests that address the core goal of the project!
