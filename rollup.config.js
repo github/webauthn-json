@@ -38,7 +38,7 @@ const configs = [{
       file: pkg.bin["webauthn-json"],
       format: "umd",
       sourcemap: true,
-      banner: "#!/usr/bin/env node",
+      banner: `#!/usr/bin/env node\nconst version = \"${pkg.version}\";`,
     },
   ],
   plugins
