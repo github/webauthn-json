@@ -1,7 +1,7 @@
 import {base64urlToBuffer, bufferToBase64url} from "../src/base64url";
 import {CredentialCreationOptionsJSON, CredentialRequestOptionsJSON} from "../src/json";
-import {convert} from "../src/schema";
-import {credentialCreationOptionsSchema, credentialRequestOptionsSchema, publicKeyCredentialWithAssertionSchema, publicKeyCredentialWithAttestationSchema} from "../src/webauthn-schema";
+import {convert} from "../src/schema-format";
+import {credentialCreationOptions, credentialRequestOptions, publicKeyCredentialWithAssertion, publicKeyCredentialWithAttestation} from "../src/webauthn-schema";
 import "./arraybuffer";
 
 describe("webauthn schema", () => {
@@ -26,7 +26,7 @@ describe("webauthn schema", () => {
         challenge: "TEST-CHALLENGE_TEST-CHALLENGE_TEST-CHALLENG",
       },
     };
-    const converted = convert(base64urlToBuffer, credentialCreationOptionsSchema, cco);
+    const converted = convert(base64urlToBuffer, credentialCreationOptions, cco);
     expect(converted.publicKey.user.name).toBe("test_user_name");
     expect(converted.publicKey.challenge).toEqualBuffer(new Uint8Array([76, 68, 147, 248, 33, 192, 44, 177, 13, 24, 79, 211, 17, 36, 254, 8, 112, 11, 44, 67, 70, 19, 244, 196, 73, 63, 130, 28, 2, 203, 16, 209]));
   });
@@ -41,7 +41,7 @@ describe("webauthn schema", () => {
         attestationObject: new Uint8Array([13, 14, 15, 16]),
       },
     };
-    const converted = convert(bufferToBase64url, publicKeyCredentialWithAttestationSchema, pkcwa);
+    const converted = convert(bufferToBase64url, publicKeyCredentialWithAttestation, pkcwa);
     expect(converted).toEqual({
       type: "public-key",
       id: "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
@@ -74,7 +74,7 @@ describe("webauthn schema", () => {
         },
       },
     };
-    const converted = convert(base64urlToBuffer, credentialRequestOptionsSchema, cro);
+    const converted = convert(base64urlToBuffer, credentialRequestOptions, cro);
     expect(converted.publicKey.timeout).toBe(30000);
     expect(converted.publicKey.allowCredentials[0].id).toEqualBuffer(new Uint8Array([9, 17, 3, 16, 212, 200, 0, 191, 136, 15, 237, 127, 9, 17, 3, 16, 212, 200, 0, 191, 136, 15, 237, 127, 9, 17, 3, 16, 212, 200, 0, 191, 136, 15, 237, 127, 9, 17, 3, 16, 212, 200, 0, 191, 136, 15, 237, 127, 9, 17, 3, 16, 212, 200, 0, 191, 136, 15, 237, 127, 9, 17, 3, 16]));
   });
@@ -91,7 +91,7 @@ describe("webauthn schema", () => {
         userHandle: null,
       },
     };
-    const converted = convert(bufferToBase64url, publicKeyCredentialWithAssertionSchema, pkcwa);
+    const converted = convert(bufferToBase64url, publicKeyCredentialWithAssertion, pkcwa);
     expect(converted).toEqual({
       type: "public-key",
       id: "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",

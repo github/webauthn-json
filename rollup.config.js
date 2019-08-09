@@ -4,7 +4,18 @@ import * as typescript from "typescript";
 import typescript2 from "rollup-plugin-typescript2";
 import tslint from "rollup-plugin-tslint";
 
-const config = {
+const plugins = [
+  tslint({}),
+  typescript2({
+    typescript: typescript,
+  }),
+];
+
+if (!process.env.ROLLUP_WATCH) {
+  plugins.push(terser());
+}
+
+const configs = [{
   input: "src/index.ts",
   output: [
     {
@@ -19,16 +30,18 @@ const config = {
       sourcemap: true,
     },
   ],
-  plugins: [
-    tslint({}),
-    typescript2({
-      typescript: typescript,
-    }),
+  plugins
+}, {
+  input: "src/bin/webauthn-json.ts",
+  output: [
+    {
+      file: pkg.bin["webauthn-json"],
+      format: "umd",
+      sourcemap: true,
+      banner: "#!/usr/bin/env node",
+    },
   ],
-};
+  plugins
+}];
 
-if (!process.env.ROLLUP_WATCH) {
-  config.plugins.push(terser());
-}
-
-export default config;
+export default configs;

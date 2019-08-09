@@ -29,11 +29,13 @@
     "clean": "rm -rf dist",
     "test": "jest && npm run lint",
     "setup": "npm install",
-    "print-schemas": "npx ts-node script/print-schemas.ts",
     "lint": "tslint --fix --project . && tslint --fix rollup.config.js",
     "prepack": "npm run clean && npm run build",
     "copy-flow": "mkdir -p dist/ && rm -f dist/index.js.flow dist/index.esm.js.flow && cp    src/index.js.flow dist/ && cp    src/index.js.flow dist/index.esm.js.flow",
     "link-flow": "mkdir -p dist/ && rm -f dist/index.js.flow dist/index.esm.js.flow && ln -s src/index.js.flow dist/ && ln -s src/index.js.flow dist/index.esm.js.flow"
+  },
+  "bin": {
+    "webauthn-json": "./dist/bin/webauthn-json.js"
   },
   "keywords": [
     "webauthn",

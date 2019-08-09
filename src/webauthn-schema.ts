@@ -1,4 +1,4 @@
-import {convertValue as convert, copyValue as copy, optional, required, Schema} from "./schema";
+import {convertValue as convert, copyValue as copy, optional, required, Schema} from "./schema-format";
 
 // Shared by `create()` and `get()`.
 
@@ -10,7 +10,7 @@ const publicKeyCredentialDescriptorSchema: Schema = {
 
 // `navigator.create()` request
 
-export const credentialCreationOptionsSchema: Schema = {
+export const credentialCreationOptions: Schema = {
   publicKey: required({
     rp: required(copy),
     user: required({
@@ -34,7 +34,7 @@ export const credentialCreationOptionsSchema: Schema = {
 
 // `navigator.create()` response
 
-export const publicKeyCredentialWithAttestationSchema: Schema = {
+export const publicKeyCredentialWithAttestation: Schema = {
   type: required(copy),
   id: required(copy),
   rawId: required(convert),
@@ -46,7 +46,7 @@ export const publicKeyCredentialWithAttestationSchema: Schema = {
 
 // `navigator.get()` request
 
-export const credentialRequestOptionsSchema: Schema = {
+export const credentialRequestOptions: Schema = {
   unmediated: optional(copy),
   mediation: optional(copy),
   publicKey: required({
@@ -62,7 +62,7 @@ export const credentialRequestOptionsSchema: Schema = {
 
 // `navigator.get()` response
 
-export const publicKeyCredentialWithAssertionSchema: Schema = {
+export const publicKeyCredentialWithAssertion: Schema = {
   type: required(copy),
   id: required(copy),
   rawId: required(convert),
@@ -72,4 +72,11 @@ export const publicKeyCredentialWithAssertionSchema: Schema = {
     signature: required(convert),
     userHandle: required(convert),
   }),
+};
+
+export const schema: {[s: string]: Schema} = {
+  credentialCreationOptions,
+  publicKeyCredentialWithAttestation,
+  credentialRequestOptions,
+  publicKeyCredentialWithAssertion,
 };

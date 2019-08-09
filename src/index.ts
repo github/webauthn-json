@@ -8,3 +8,6 @@ export {
   create,
   get,
 } from "./webauthn";
+export {
+  schema,
+} from "./webauthn-schema";
