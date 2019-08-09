@@ -31,3 +31,5 @@ export interface PublicKeyCredentialWithAssertionJSON {
 }
 
 declare export function get(requestJSON: CredentialRequestOptionsJSON): Promise<PublicKeyCredentialWithAssertionJSON>;
+
+declare export function supported(): boolean;
