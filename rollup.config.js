@@ -30,18 +30,18 @@ const configs = [{
       sourcemap: true,
     },
   ],
-  plugins
+  plugins,
 }, {
   input: "src/bin/webauthn-json.ts",
   output: [
     {
+      banner: `#!/usr/bin/env node\nconst version = \"${pkg.version}\";`,
       file: pkg.bin["webauthn-json"],
       format: "umd",
       sourcemap: true,
-      banner: `#!/usr/bin/env node\nconst version = \"${pkg.version}\";`,
     },
   ],
-  plugins
+  plugins,
 }];
 
 export default configs;
