@@ -7,6 +7,7 @@ export {
 export {
   create,
   get,
+  supported,
 } from "./webauthn";
 export {
   schema,

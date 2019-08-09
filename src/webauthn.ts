@@ -14,3 +14,17 @@ export async function get(requestJSON: CredentialRequestOptionsJSON): Promise<Pu
   const response = (await navigator.credentials.get(request)) as PublicKeyCredential;
   return convert(bufferToBase64url, publicKeyCredentialWithAssertion, response);
 }
+
+declare global {
+  interface Window {
+    PublicKeyCredential: any | undefined;
+  }
+}
+
+// This function does a simple check to test for the credential management API
+// functions we need, and an indication of public credential authentication
+// support.
+// https://developers.google.com/web/updates/2018/03/webauthn-credential-management
+export function supported(): boolean {
+  return !!(navigator.credentials && navigator.credentials.create && navigator.credentials.get && window.PublicKeyCredential);
+}
