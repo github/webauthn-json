@@ -1,10 +1,6 @@
 type SchemaLeaf = "copy" | "convert";
-interface SchemaObject { [s: string]: SchemaField; }
+interface SchemaObject { [property: string]: { required: boolean; schema: Schema; }; }
 type SchemaArray = [SchemaObject];
-interface SchemaField {
-  required: boolean;
-  schema: Schema;
-}
 
 export type Schema = SchemaLeaf | SchemaArray | SchemaObject;
 
