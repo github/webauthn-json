@@ -4,50 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1">
   <script src="src.388ad9f6.js"></script>
-  <style>* {
-      box-sizing: border-box;
-    }
-    html {
-      height: 100%;
-    }
-    body {
-      margin: 0;
-      padding: 1em;
-      display: grid;
-      height: 100%;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(2, 2em) 1fr;
-      grid-gap: 1em;
-    }
-    textarea {
-      height: auto;
-      flex: 1;
-      font-family: monospace;
-      grid-column: 1 / 4;
-    }
-    .title {
-      text-align: center;
-      font-size: 1.5em;
-    }
-    @media (max-width: 600px) {
-      body {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(3, 1.5em) repeat(3, 2em) 1fr;
-        row-gap: 0.5em;
-      }
-      textarea {
-        grid-column: 1;
-      }
-    }</style>
+  <link rel="stylesheet" type="text/css" href="src.f120e445.css">
 </head>
 <body>
   <code class="title">@github/webauthn-json</code>
   <div class="title"><a href="https://github.com/github/webauthn-json">project page</a></div>
   <div class="title"><a href="https://github.com/github/webauthn-json/tree/gh-pages/src/src">demo source</a></div>
+
   <button id="register">Register<span class="status"></span></button>
   <button id="authenticate">Authenticate<span class="status"></span></button>
   <button id="clear">Clear<span class="status"></span></button>
+
   <textarea id="registrations" spellcheck="false" placeholder="localStorage.webauthnExampleRegistrations" title="localStorage.webauthnExampleRegistrations"></textarea>
+
   <textarea id="error" spellcheck="false" placeholder="Errors will be logged here."></textarea>
 </body>
 </html>

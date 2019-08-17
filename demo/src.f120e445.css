@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 1em;
+  display: grid;
+  height: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 2em) 1fr;
+  grid-gap: 1em;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+textarea {
+  height: auto;
+  flex: 1;
+  font-family: monospace;
+  grid-column: 1 / 4;
+}
+
+@media (max-width: 600px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1.5em) repeat(3, 2em) 1fr;
+    row-gap: 0.5em;
+  }
+
+  textarea {
+    grid-column: 1;
+  }
+}
+
+
+/*# sourceMappingURL=src.f120e445.css.map */
