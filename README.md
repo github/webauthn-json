@@ -13,20 +13,32 @@ The WebAuthn API itself takes input and output values that look almost like JSON
 
 Install using:
 
-    npm install --save @github/webauthn-json
-    
+```shell
+npm install --save @github/webauthn-json
+```
+
 Then:
 
-    import {create} from "@github/webauthn-json"
+```typescript
+import {create} from "@github/webauthn-json"
 
-    async auth() {
-      const request = await fetch("...");
-      const response = create(request.json());
-      await fetch("...", {
-        method: "POST",
-        body: JSON.stringify(response)
-      });
-    }
+async auth() {
+  const request = await fetch("...");
+  const response = create(request.json());
+  await fetch("...", {
+    method: "POST",
+    body: JSON.stringify(response)
+  });
+}
+```
+
+### API
+
+```typescript
+function create(requestJSON: JSON): Promise<JSON>;
+function get(requestJSON: JSON): Promise<JSON>;
+function supported(): boolean;
+```
 
 ## Schema
 
