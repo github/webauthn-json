@@ -434,6 +434,7 @@ function withStatus(selector, fn) {
       return __generator(this, function (_a) {
         switch (_a.label) {
           case 0:
+            document.querySelector("#error").textContent = "";
             document.querySelector(selector).textContent = "…";
             _a.label = 1;
 
@@ -456,6 +457,7 @@ function withStatus(selector, fn) {
             e_1 = _a.sent();
             document.querySelector(selector).textContent = " ❌";
             console.error(e_1);
+            document.querySelector("#error").textContent = e_1;
             return [3
             /*break*/
             , 4];
@@ -475,6 +477,7 @@ exports.withStatus = withStatus;
 function saveInput() {
   return __awaiter(this, void 0, Promise, function () {
     return __generator(this, function (_a) {
+      document.querySelector("#error").textContent = "";
       registrationElem().style.backgroundColor = "rgba(255, 127, 0, 0.5)";
 
       try {
@@ -483,6 +486,7 @@ function saveInput() {
       } catch (e) {
         registrationElem().style.backgroundColor = "rgba(255, 0, 0, 0.5)";
         console.error(e);
+        document.querySelector("#error").textContent = e;
       }
 
       return [2
@@ -493,10 +497,14 @@ function saveInput() {
 }
 
 window.addEventListener("load", function () {
-  displayRegistrations();
-  registrationElem().addEventListener("keyup", saveInput);
-  registrationElem().addEventListener("change", saveInput);
-  registrationElem().addEventListener("paste", saveInput);
+  try {
+    displayRegistrations();
+    registrationElem().addEventListener("keyup", saveInput);
+    registrationElem().addEventListener("change", saveInput);
+    registrationElem().addEventListener("paste", saveInput);
+  } catch (e) {
+    console.error(e);
+  }
 });
 },{}],"7QCb":[function(require,module,exports) {
 "use strict"; // A minimal example to test `webauthn-json`.
@@ -734,9 +742,13 @@ function clear() {
 }
 
 window.addEventListener("load", function () {
-  document.querySelector("#register").addEventListener("click", state_1.withStatus("#register .status", register));
-  document.querySelector("#authenticate").addEventListener("click", state_1.withStatus("#authenticate .status", authenticate));
-  document.querySelector("#clear").addEventListener("click", state_1.withStatus("#clear .status", clear));
+  try {
+    document.querySelector("#register").addEventListener("click", state_1.withStatus("#register .status", register));
+    document.querySelector("#authenticate").addEventListener("click", state_1.withStatus("#authenticate .status", authenticate));
+    document.querySelector("#clear").addEventListener("click", state_1.withStatus("#clear .status", clear));
+  } catch (e) {
+    console.error(e);
+  }
 });
 },{"@github/webauthn-json":"DDVf","./state":"mIWh"}]},{},["7QCb"], null)
-//# sourceMappingURL=src.78c87b80.js.map
+//# sourceMappingURL=src.388ad9f6.js.map

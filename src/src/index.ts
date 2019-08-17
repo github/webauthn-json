@@ -36,7 +36,11 @@ async function clear(): Promise<void> {
 }
 
 window.addEventListener("load", function() {
-  document.querySelector("#register").addEventListener("click", withStatus("#register .status", register));
-  document.querySelector("#authenticate").addEventListener("click", withStatus("#authenticate .status", authenticate));
-  document.querySelector("#clear").addEventListener("click", withStatus("#clear .status", clear));
+  try {
+    document.querySelector("#register").addEventListener("click", withStatus("#register .status", register));
+    document.querySelector("#authenticate").addEventListener("click", withStatus("#authenticate .status", authenticate));
+    document.querySelector("#clear").addEventListener("click", withStatus("#clear .status", clear));
+  } catch(e) {
+    console.error(e);
+  }
 })
