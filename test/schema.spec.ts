@@ -106,9 +106,9 @@ describe("convenience functions", () => {
     };
     const converted = convert(base64urlToBuffer, schema, {
       a: 5,
-      b: "EE==",
+      b: "EE",
       c: 7,
-      d: "FF==",
+      d: "FF",
     });
     expect(converted.a).toBe(5);
     expect(converted.b).toEqualBuffer(new Uint8Array([16]));
