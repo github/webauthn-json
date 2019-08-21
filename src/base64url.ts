@@ -29,7 +29,7 @@ export function bufferToBase64url(buffer: ArrayBuffer): Base64urlString {
   const base64String = btoa(str);
 
   // Base64 to base64url
-  // We assume that the base64 string is well-formed.
+  // We assume that the base64url string is well-formed.
   const base64urlString = base64String.replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
   return base64urlString;
 }

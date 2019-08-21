@@ -10,7 +10,7 @@ export interface CredentialCreationOptionsJSON {
 
 export interface PublicKeyCredentialWithAttestationJSON {
   type: "public-key";
-  rawId: string; // base 64
+  rawId: string; // base64url
   response: {};
 }
 
@@ -26,7 +26,7 @@ export interface CredentialRequestOptionsJSON {
 export interface PublicKeyCredentialWithAssertionJSON {
   type: "public-key";
   id: string;
-  rawId: string; // base 64
+  rawId: string; // base64url
   response: {};
 }
 
