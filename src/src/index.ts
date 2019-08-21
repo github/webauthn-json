@@ -3,6 +3,14 @@
 
 import {create, get} from "@github/webauthn-json"
 import { saveRegistration, getRegistrations, setRegistrations, withStatus } from "./state";
+import { PublicKeyCredentialDescriptorJSON } from "@github/webauthn-json/dist/src/json";
+
+function registeredCredentials(): PublicKeyCredentialDescriptorJSON[] {
+  return getRegistrations().map((reg) => ({
+    id: reg.rawId,
+    type: reg.type
+  }))
+}
 
 async function register(): Promise<void> {
   saveRegistration(await create({
@@ -11,10 +19,7 @@ async function register(): Promise<void> {
       rp: {name: "Localhost, Inc."},
       user: {id: "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII", name: "test_user", displayName: "Test User"},
       pubKeyCredParams: [{type: "public-key", alg: -7}],
-      excludeCredentials: getRegistrations().map((reg) => ({
-        id: reg.rawId,
-        type: reg.type
-      }))
+      excludeCredentials: registeredCredentials()
     }
   }));
 }
@@ -23,10 +28,7 @@ async function authenticate(): Promise<void> {
   await get({
     publicKey: {
       challenge: "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
-      allowCredentials: getRegistrations().map((reg) => ({
-        id: reg.rawId,
-        type: reg.type
-      }))
+      allowCredentials: registeredCredentials()
     }
   });
 }

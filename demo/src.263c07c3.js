@@ -655,6 +655,15 @@ var webauthn_json_1 = require("@github/webauthn-json");
 
 var state_1 = require("./state");
 
+function registeredCredentials() {
+  return state_1.getRegistrations().map(function (reg) {
+    return {
+      id: reg.rawId,
+      type: reg.type
+    };
+  });
+}
+
 function register() {
   return __awaiter(this, void 0, Promise, function () {
     var _a;
@@ -680,12 +689,7 @@ function register() {
                 type: "public-key",
                 alg: -7
               }],
-              excludeCredentials: state_1.getRegistrations().map(function (reg) {
-                return {
-                  id: reg.rawId,
-                  type: reg.type
-                };
-              })
+              excludeCredentials: registeredCredentials()
             }
           })];
 
@@ -751,4 +755,4 @@ window.addEventListener("load", function () {
   }
 });
 },{"@github/webauthn-json":"DDVf","./state":"mIWh"}]},{},["7QCb"], null)
-//# sourceMappingURL=src.74015bb0.js.map
+//# sourceMappingURL=src.263c07c3.js.map
