@@ -32,6 +32,8 @@ async auth() {
 }
 ```
 
+See [here](https://github.com/github/webauthn-json/blob/gh-pages/src/src/index.ts) for fully working client-side [demo](https://github.github.com/webauthn-json/demo/) code.
+
 ### API
 
 ```typescript
