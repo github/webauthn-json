@@ -2,10 +2,10 @@
 // Note: do not hardcode values in production.
 
 import {create, get} from "@github/webauthn-json"
-import { addRegistration, getRegistrations, setRegistrations, withStatus } from "./state";
+import { saveRegistration, getRegistrations, setRegistrations, withStatus } from "./state";
 
 async function register(): Promise<void> {
-  addRegistration(await create({
+  saveRegistration(await create({
     publicKey: {
       challenge: "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
       rp: {name: "Localhost, Inc."},

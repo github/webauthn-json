@@ -10,7 +10,7 @@ export function setRegistrations(registrations: PublicKeyCredentialWithAttestati
   displayRegistrations();
 }
 
-export function addRegistration(registration: PublicKeyCredentialWithAttestationJSON): void {
+export function saveRegistration(registration: PublicKeyCredentialWithAttestationJSON): void {
   const registrations = getRegistrations();
   registrations.push(registration);
   setRegistrations(registrations);

@@ -409,13 +409,13 @@ function setRegistrations(registrations, display) {
 
 exports.setRegistrations = setRegistrations;
 
-function addRegistration(registration) {
+function saveRegistration(registration) {
   var registrations = getRegistrations();
   registrations.push(registration);
   setRegistrations(registrations);
 }
 
-exports.addRegistration = addRegistration;
+exports.saveRegistration = saveRegistration;
 
 function registrationElem() {
   return document.querySelector("#registrations");
@@ -662,7 +662,7 @@ function register() {
     return __generator(this, function (_b) {
       switch (_b.label) {
         case 0:
-          _a = state_1.addRegistration;
+          _a = state_1.saveRegistration;
           return [4
           /*yield*/
           , webauthn_json_1.create({
@@ -751,4 +751,4 @@ window.addEventListener("load", function () {
   }
 });
 },{"@github/webauthn-json":"DDVf","./state":"mIWh"}]},{},["7QCb"], null)
-//# sourceMappingURL=src.388ad9f6.js.map
+//# sourceMappingURL=src.74015bb0.js.map
