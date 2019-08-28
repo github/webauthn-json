@@ -50,7 +50,9 @@ Right now, we only convert fields explicitly known to be used by the WebAuthn AP
 
 To print the current schema, run:
 
-    npx @github/webauthn-json schema
+```shell
+npx @github/webauthn-json schema
+```
 
 ## Contributions
 
