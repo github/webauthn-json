@@ -1,4 +1,4 @@
-import {Base64urlString} from "./base64url";
+import { Base64urlString } from "./base64url";
 
 // Shared
 

@@ -1,4 +1,4 @@
-import {convertValue as convert, copyValue as copy, optional, required, Schema} from "./schema-format";
+import { convertValue as convert, copyValue as copy, optional, required, Schema } from "./schema-format";
 
 // Shared by `create()` and `get()`.
 
@@ -73,7 +73,7 @@ export const publicKeyCredentialWithAssertion: Schema = {
   }),
 };
 
-export const schema: {[s: string]: Schema} = {
+export const schema: { [s: string]: Schema } = {
   credentialCreationOptions,
   publicKeyCredentialWithAttestation,
   credentialRequestOptions,
