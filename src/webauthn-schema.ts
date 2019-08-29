@@ -47,7 +47,6 @@ export const publicKeyCredentialWithAttestation: Schema = {
 // `navigator.get()` request
 
 export const credentialRequestOptions: Schema = {
-  unmediated: optional(copy),
   mediation: optional(copy),
   publicKey: required({
     challenge: required(convert),

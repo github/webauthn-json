@@ -10,6 +10,7 @@ export interface CredentialCreationOptionsJSON {
 
 export interface PublicKeyCredentialWithAttestationJSON {
   type: "public-key";
+  id: string;
   rawId: string; // base64url
   response: {};
 }
@@ -17,7 +18,6 @@ export interface PublicKeyCredentialWithAttestationJSON {
 declare export function create(requestJSON: CredentialCreationOptionsJSON): Promise<PublicKeyCredentialWithAttestationJSON>;
 
 export interface CredentialRequestOptionsJSON {
-  unmediated?: boolean;
   mediation?: "silent" | "optional" | "required";
   publicKey: {};
   signal?: AbortSignal;

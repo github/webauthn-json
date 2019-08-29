@@ -10,23 +10,13 @@ export interface PublicKeyCredentialDescriptorJSON {
 
 // `navigator.create()` request
 
-// TODO(https://github.com/DefinitelyTyped/DefinitelyTyped/pull/36590): Change
-// this back to `PublicKeyCredentialRpEntity`.
-interface CorrectedPublicKeyCredentialRpEntity {
-  id?: string;
-  name: string;
-  icon?: string;
-}
-
-interface PublicKeyCredentialUserEntityJSON {
-  id: Base64urlString;
-  name: string;
-  icon?: string;
+interface PublicKeyCredentialUserEntityJSON extends PublicKeyCredentialEntity {
   displayName: string;
+  id: Base64urlString;
 }
 
 interface PublicKeyCredentialCreationOptionsJSON {
-  rp: CorrectedPublicKeyCredentialRpEntity;
+  rp: PublicKeyCredentialRpEntity;
   user: PublicKeyCredentialUserEntityJSON;
 
   challenge: Base64urlString;
@@ -52,6 +42,7 @@ interface AuthenticatorAttestationResponseJSON {
 }
 
 export interface PublicKeyCredentialWithAttestationJSON {
+  id: string;
   type: PublicKeyCredentialType;
   rawId: Base64urlString;
   response: AuthenticatorAttestationResponseJSON;
@@ -69,9 +60,8 @@ interface PublicKeyCredentialRequestOptionsJSON {
 }
 
 export interface CredentialRequestOptionsJSON {
-  unmediated?: boolean;
-  mediation?: "silent" | "optional" | "required";
-  publicKey: PublicKeyCredentialRequestOptionsJSON;
+  mediation?: CredentialMediationRequirement;
+  publicKey?: PublicKeyCredentialRequestOptionsJSON;
   signal?: AbortSignal;
 }
 
