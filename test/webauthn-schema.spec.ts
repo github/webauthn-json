@@ -1,7 +1,7 @@
-import {base64urlToBuffer, bufferToBase64url} from "../src/base64url";
-import {CredentialCreationOptionsJSON, CredentialRequestOptionsJSON} from "../src/json";
-import {convert} from "../src/schema-format";
-import {credentialCreationOptions, credentialRequestOptions, publicKeyCredentialWithAssertion, publicKeyCredentialWithAttestation} from "../src/webauthn-schema";
+import { base64urlToBuffer, bufferToBase64url } from "../src/base64url";
+import { CredentialCreationOptionsJSON, CredentialRequestOptionsJSON } from "../src/json";
+import { convert } from "../src/schema-format";
+import { credentialCreationOptions, credentialRequestOptions, publicKeyCredentialWithAssertion, publicKeyCredentialWithAttestation } from "../src/webauthn-schema";
 import "./arraybuffer";
 
 describe("webauthn schema", () => {
@@ -32,14 +32,16 @@ describe("webauthn schema", () => {
   });
 
   test("converts PublicKeyCredentialWithAttestationJSON", () => {
+    const authenticatorAttestationResponse = {
+      clientDataJSON: new Uint8Array([9, 10, 11, 12]),
+      attestationObject: new Uint8Array([13, 14, 15, 16]),
+    };
     const pkcwa: PublicKeyCredential = {
       type: "public-key",
       id: "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
       rawId: new Uint8Array([1, 2, 3, 4]),
-      response: {
-        clientDataJSON: new Uint8Array([9, 10, 11, 12]),
-        attestationObject: new Uint8Array([13, 14, 15, 16]),
-      },
+      response: authenticatorAttestationResponse,
+      getClientExtensionResults: () => ({}),
     };
     const converted = convert(bufferToBase64url, publicKeyCredentialWithAttestation, pkcwa);
     expect(converted).toEqual({
@@ -80,16 +82,18 @@ describe("webauthn schema", () => {
   });
 
   test("converts PublicKeyCredentialWithAssertionJSON", () => {
+    const authenticatorAssertionResponse = {
+      authenticatorData: new Uint8Array([5, 6, 7, 8]),
+      clientDataJSON: new Uint8Array([9, 10, 11, 12]),
+      signature: new Uint8Array([13, 14, 15, 16]),
+      userHandle: null,
+    };
     const pkcwa: PublicKeyCredential = {
       type: "public-key",
       id: "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
       rawId: new Uint8Array([1, 2, 3, 4]),
-      response: {
-        authenticatorData: new Uint8Array([5, 6, 7, 8]),
-        clientDataJSON: new Uint8Array([9, 10, 11, 12]),
-        signature: new Uint8Array([13, 14, 15, 16]),
-        userHandle: null,
-      },
+      response: authenticatorAssertionResponse,
+      getClientExtensionResults: () => ({}),
     };
     const converted = convert(bufferToBase64url, publicKeyCredentialWithAssertion, pkcwa);
     expect(converted).toEqual({
