@@ -25,7 +25,7 @@ export function displayRegistrations() {
 }
 
 export function withStatus(selector: string, fn: () => Promise<void>) {
-  return async function() {
+  return async function () {
     document.querySelector("#error").textContent = "";
     document.querySelector(selector).textContent = "…";
     try {
@@ -52,13 +52,13 @@ async function saveInput(): Promise<void> {
   }
 }
 
-window.addEventListener("load", function() {
+window.addEventListener("load", function () {
   try {
     displayRegistrations();
     registrationElem().addEventListener("keyup", saveInput);
     registrationElem().addEventListener("change", saveInput);
     registrationElem().addEventListener("paste", saveInput);
-  } catch(e) {
+  } catch (e) {
     console.error(e);
   }
 });
