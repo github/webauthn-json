@@ -1,5 +1,5 @@
-import {base64urlToBuffer} from "../src/base64url";
-import {convert, convertValue, copyValue, optional, required, Schema} from "../src/schema-format";
+import { base64urlToBuffer } from "../src/base64url";
+import { convert, convertValue, copyValue, optional, required, Schema } from "../src/schema-format";
 import "./arraybuffer";
 
 describe("conversion", () => {
@@ -9,42 +9,36 @@ describe("conversion", () => {
   });
 
   test("copies a required `copy` value", () => {
-    const schema: Schema = {number: {required: true, schema: "copy"}};
-    const converted = convert(base64urlToBuffer, schema, {number: 4});
+    const schema: Schema = { number: { required: true, schema: "copy" } };
+    const converted = convert(base64urlToBuffer, schema, { number: 4 });
     expect(converted.number).toBe(4);
   });
 
   test("errors when a required `copy` value is missing", () => {
-    const schema: Schema = {number: {required: true, schema: "copy"}};
+    const schema: Schema = { number: { required: true, schema: "copy" } };
     expect(() => convert(base64urlToBuffer, schema, {})).toThrowError(/Missing key/);
   });
 
   test("copies a required `convert` value", () => {
-    const schema: Schema = {number: {required: true, schema: "convert"}};
-    const converted = convert(base64urlToBuffer, schema, {number: "AA=="});
+    const schema: Schema = { number: { required: true, schema: "convert" } };
+    const converted = convert(base64urlToBuffer, schema, { number: "AA==" });
     expect(converted.number).toEqualBuffer(new Uint8Array([0]));
   });
 
   test("errors when a required `convert` value is missing", () => {
-    const schema: Schema = {number: {required: true, schema: "convert"}};
+    const schema: Schema = { number: { required: true, schema: "convert" } };
     expect(() => convert(base64urlToBuffer, schema, {})).toThrowError(/Missing key/);
   });
 
-  test("copies an optional required copy value", () => {
-    const schema: Schema = {number: {required: false, schema: "copy"}};
-    const converted = convert(base64urlToBuffer, schema, {number: 5});
-    expect(converted.number).toBe(5);
-  });
-
   test("allows a missing optional value", () => {
-    const schema: Schema = {number: {required: false, schema: "copy"}};
+    const schema: Schema = { number: { required: false, schema: "copy" } };
     const converted = convert(base64urlToBuffer, schema, {});
     expect(converted).not.toHaveProperty("number");
   });
 
   test("ignores unknown properties", () => {
-    const schema: Schema = {number: {required: false, schema: "copy"}};
-    const converted = convert(base64urlToBuffer, schema, {number: 6, extra: "hi"});
+    const schema: Schema = { number: { required: false, schema: "copy" } };
+    const converted = convert(base64urlToBuffer, schema, { number: 6, extra: "hi" });
     expect(converted.number).toBe(6);
     expect(converted).not.toHaveProperty("extra");
   });
@@ -54,13 +48,13 @@ describe("conversion", () => {
       nestedObject: {
         required: true,
         schema: {
-          number: {required: true, schema: "copy"},
-          convertField: {required: true, schema: "convert"},
+          number: { required: true, schema: "copy" },
+          convertField: { required: true, schema: "convert" },
         },
       },
     };
     const converted = convert(base64urlToBuffer, schema, {
-      nestedObject: {number: 7, convertField: "BB=="},
+      nestedObject: { number: 7, convertField: "BB==" },
     });
     expect(converted.nestedObject.number).toBe(7);
     expect(converted.nestedObject.convertField).toEqualBuffer(new Uint8Array([4]));
@@ -71,16 +65,16 @@ describe("conversion", () => {
       nestedObjectList: {
         required: true,
         schema: [{
-          number: {required: true, schema: "copy"},
-          string: {required: false, schema: "copy"},
-          convertField: {required: true, schema: "convert"},
+          number: { required: true, schema: "copy" },
+          string: { required: false, schema: "copy" },
+          convertField: { required: true, schema: "convert" },
         }],
       },
     };
     const converted = convert(base64urlToBuffer, schema, {
       nestedObjectList: [
-        {number: 8, string: "hi", convertField: "CC=="},
-        {number: 9, convertField: "DD=="},
+        { number: 8, string: "hi", convertField: "CC==" },
+        { number: 9, convertField: "DD==" },
       ],
     });
 
@@ -94,6 +88,14 @@ describe("conversion", () => {
     expect(converted.nestedObjectList[1]).not.toHaveProperty("string");
     expect(converted.nestedObjectList[1].convertField).toEqualBuffer(new Uint8Array([12]));
   });
+});
+
+test("converts leaf lists", () => {
+  const schema: Schema = ["convert"];
+  const converted = convert(base64urlToBuffer, schema, ["EE", "FF"]);
+  expect(converted).toHaveLength(2);
+  expect(converted[0]).toEqualBuffer(new Uint8Array([16]));
+  expect(converted[1]).toEqualBuffer(new Uint8Array([20]));
 });
 
 describe("convenience functions", () => {
@@ -117,12 +119,12 @@ describe("convenience functions", () => {
   });
 
   test("enforce required value", () => {
-    const schema: Schema = {number: required(copyValue)};
+    const schema: Schema = { number: required(copyValue) };
     expect(() => convert(base64urlToBuffer, schema, {})).toThrowError(/Missing key/);
   });
 
   test("allow leaving out optional value", () => {
-    const schema: Schema = {number: {required: false, schema: "copy"}};
+    const schema: Schema = { number: { required: false, schema: "copy" } };
     const converted = convert(base64urlToBuffer, schema, {});
     expect(converted).not.toHaveProperty("number");
   });
@@ -134,8 +136,8 @@ describe("conversion function", () => {
   }
 
   test("allows using an arbitrary conversion function", () => {
-    const schema: Schema = {convertField: {required: true, schema: "convert"}};
-    const converted = convert(double, schema, {convertField: "hi"});
+    const schema: Schema = { convertField: { required: true, schema: "convert" } };
+    const converted = convert(double, schema, { convertField: "hi" });
     expect(converted.convertField).toBe("hihi");
   });
 });
