@@ -1,4 +1,4 @@
-import { Base64urlString } from "./base64url";
+import {Base64urlString} from "./base64url";
 
 // Shared
 
@@ -46,6 +46,7 @@ export interface PublicKeyCredentialWithAttestationJSON {
   type: PublicKeyCredentialType;
   rawId: Base64urlString;
   response: AuthenticatorAttestationResponseJSON;
+  clientExtensionResults: AuthenticationExtensionsClientOutputs;
 }
 
 // `navigator.get()` request
@@ -79,4 +80,5 @@ export interface PublicKeyCredentialWithAssertionJSON {
   id: string;
   rawId: Base64urlString;
   response: AuthenticatorAssertionResponseJSON;
+  clientExtensionResults: AuthenticationExtensionsClientOutputs;
 }

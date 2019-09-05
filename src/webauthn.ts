@@ -6,13 +6,17 @@ import {credentialCreationOptions, credentialRequestOptions, publicKeyCredential
 export async function create(requestJSON: CredentialCreationOptionsJSON): Promise<PublicKeyCredentialWithAttestationJSON> {
   const request = convert(base64urlToBuffer, credentialCreationOptions, requestJSON);
   const credential = (await navigator.credentials.create(request)) as PublicKeyCredential;
-  return convert(bufferToBase64url, publicKeyCredentialWithAttestation, credential);
+  const responseJSON = convert(bufferToBase64url, publicKeyCredentialWithAttestation, credential);
+  responseJSON.clientExtensionResults = credential.getClientExtensionResults();
+  return responseJSON;
 }
 
 export async function get(requestJSON: CredentialRequestOptionsJSON): Promise<PublicKeyCredentialWithAssertionJSON> {
   const request = convert(base64urlToBuffer, credentialRequestOptions, requestJSON);
   const response = (await navigator.credentials.get(request)) as PublicKeyCredential;
-  return convert(bufferToBase64url, publicKeyCredentialWithAssertion, response);
+  const responseJSON = convert(bufferToBase64url, publicKeyCredentialWithAssertion, response);
+  responseJSON.clientExtensionResults = response.getClientExtensionResults();
+  return responseJSON;
 }
 
 declare global {
