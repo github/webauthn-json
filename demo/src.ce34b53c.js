@@ -123,19 +123,21 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.create = d;
-exports.get = p;
+exports.create = g;
+exports.get = h;
+exports.supported = y;
+exports.schema = void 0;
 
 function e(e) {
   const t = "==".slice(0, (4 - e.length % 4) % 4),
         n = e.replace(/-/g, "+").replace(/_/g, "/") + t,
-        r = atob(n),
-        a = new ArrayBuffer(r.length),
-        i = new Uint8Array(a);
+        i = atob(n),
+        r = new ArrayBuffer(i.length),
+        a = new Uint8Array(r);
 
-  for (let e = 0; e < r.length; e++) i[e] = r.charCodeAt(e);
+  for (let e = 0; e < i.length; e++) a[e] = i.charCodeAt(e);
 
-  return a;
+  return r;
 }
 
 function t(e) {
@@ -148,23 +150,23 @@ function t(e) {
 }
 
 const n = "copy",
-      r = "convert";
+      i = "convert";
 
-function a(e, t, i) {
-  if (t === n) return i;
-  if (t === r) return e(i);
-  if (t instanceof Array) return i.map(n => a(e, t[0], n));
+function r(e, t, a) {
+  if (t === n) return a;
+  if (t === i) return e(a);
+  if (t instanceof Array) return a.map(n => r(e, t[0], n));
 
   if (t instanceof Object) {
     const n = {};
 
-    for (const [r, o] of Object.entries(t)) if (r in i) null != i[r] ? n[r] = a(e, o.schema, i[r]) : n[r] = null;else if (o.required) throw new Error(`Missing key: ${r}`);
+    for (const [i, o] of Object.entries(t)) if (i in a) null != a[i] ? n[i] = r(e, o.schema, a[i]) : n[i] = null;else if (o.required) throw new Error(`Missing key: ${i}`);
 
     return n;
   }
 }
 
-function i(e) {
+function a(e) {
   return {
     required: !0,
     schema: e
@@ -179,73 +181,99 @@ function o(e) {
 }
 
 const c = {
-  type: i(n),
-  id: i(r),
+  type: a(n),
+  id: a(i),
   transports: o(n)
 },
       s = {
-  publicKey: i({
-    rp: i(n),
-    user: i({
-      id: i(r),
-      name: i(n),
-      displayName: i(n),
+  appid: o(n),
+  txAuthSimple: o(n),
+  txAuthGeneric: o({
+    contentType: a(n),
+    content: a(i)
+  }),
+  authnSel: o([i]),
+  exts: o(n),
+  uvi: o(n),
+  loc: o(n),
+  uvm: o(n),
+  authenticatorBiometricPerfBounds: o(n)
+},
+      l = {
+  publicKey: a({
+    rp: a(n),
+    user: a({
+      id: a(i),
+      name: a(n),
+      displayName: a(n),
       icon: o(n)
     }),
-    challenge: i(r),
-    pubKeyCredParams: i(n),
+    challenge: a(i),
+    pubKeyCredParams: a(n),
     timeout: o(n),
     excludeCredentials: o([c]),
     authenticatorSelection: o(n),
     attestation: o(n),
-    extensions: o(n)
+    extensions: o(s)
   }),
   signal: o(n)
 },
-      l = {
-  type: i(n),
-  id: i(n),
-  rawId: i(r),
-  response: i({
-    clientDataJSON: i(r),
-    attestationObject: i(r)
+      u = {
+  type: a(n),
+  id: a(n),
+  rawId: a(i),
+  response: a({
+    clientDataJSON: a(i),
+    attestationObject: a(i)
   })
 },
-      u = {
-  unmediated: o(n),
+      d = {
   mediation: o(n),
-  publicKey: i({
-    challenge: i(r),
+  publicKey: a({
+    challenge: a(i),
     timeout: o(n),
     rpId: o(n),
     allowCredentials: o([c]),
     userVerification: o(n),
-    extensions: o(n)
+    extensions: o(s)
   }),
   signal: o(n)
 },
-      f = {
-  type: i(n),
-  id: i(n),
-  rawId: i(r),
-  response: i({
-    clientDataJSON: i(r),
-    authenticatorData: i(r),
-    signature: i(r),
-    userHandle: i(r)
+      p = {
+  type: a(n),
+  id: a(n),
+  rawId: a(i),
+  response: a({
+    clientDataJSON: a(i),
+    authenticatorData: a(i),
+    signature: a(i),
+    userHandle: a(i)
   })
+},
+      f = {
+  credentialCreationOptions: l,
+  publicKeyCredentialWithAttestation: u,
+  credentialRequestOptions: d,
+  publicKeyCredentialWithAssertion: p
 };
+exports.schema = f;
 
-async function d(n) {
-  const r = a(e, s, n),
-        i = await navigator.credentials.create(r);
-  return a(t, l, i);
+async function g(n) {
+  const i = r(e, l, n),
+        a = await navigator.credentials.create(i),
+        o = r(t, u, a);
+  return o.clientExtensionResults = a.getClientExtensionResults(), o;
 }
 
-async function p(n) {
-  const r = a(e, u, n),
-        i = await navigator.credentials.get(r);
-  return a(t, f, i);
+async function h(n) {
+  const i = r(e, d, n),
+        a = await navigator.credentials.get(i),
+        o = r(t, p, a);
+  return o.clientExtensionResults = a.getClientExtensionResults(), o;
+}
+
+function y() {
+  return !!(navigator.credentials && navigator.credentials.create && navigator.credentials.get && window.PublicKeyCredential);
 }
 },{}],"mIWh":[function(require,module,exports) {
 "use strict";
@@ -714,12 +742,7 @@ function authenticate() {
           , webauthn_json_1.get({
             publicKey: {
               challenge: "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
-              allowCredentials: state_1.getRegistrations().map(function (reg) {
-                return {
-                  id: reg.rawId,
-                  type: reg.type
-                };
-              })
+              allowCredentials: registeredCredentials()
             }
           })];
 
@@ -755,4 +778,4 @@ window.addEventListener("load", function () {
   }
 });
 },{"@github/webauthn-json":"DDVf","./state":"mIWh"}]},{},["7QCb"], null)
-//# sourceMappingURL=src.263c07c3.js.map
+//# sourceMappingURL=src.ce34b53c.js.map
