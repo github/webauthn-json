@@ -1,4 +1,4 @@
-import {Base64urlString} from "./base64url";
+import { Base64urlString } from "./base64url";
 
 // Shared
 
@@ -6,6 +6,24 @@ export interface PublicKeyCredentialDescriptorJSON {
   type: PublicKeyCredentialType;
   id: Base64urlString;
   transports?: AuthenticatorTransport[];
+}
+
+interface WebAuthnExtensionsJSON {
+  appid?: string;
+  txAuthSimple?: string;
+  txAuthGeneric?: {
+    contentType: string;
+    content: Base64urlString;
+  };
+  authnSel?: Base64urlString[];
+  exts?: boolean;
+  uvi?: boolean;
+  loc?: boolean;
+  uvm?: boolean;
+  authenticatorBiometricPerfBounds?: {
+    FAR: number;
+    FRR: number;
+  };
 }
 
 // `navigator.create()` request
@@ -26,7 +44,7 @@ interface PublicKeyCredentialCreationOptionsJSON {
   excludeCredentials?: PublicKeyCredentialDescriptorJSON[];
   authenticatorSelection?: AuthenticatorSelectionCriteria;
   attestation?: AttestationConveyancePreference;
-  extensions?: any;
+  extensions?: WebAuthnExtensionsJSON;
 }
 
 export interface CredentialCreationOptionsJSON {
@@ -57,7 +75,7 @@ interface PublicKeyCredentialRequestOptionsJSON {
   rpId?: string;
   allowCredentials?: PublicKeyCredentialDescriptorJSON[];
   userVerification?: UserVerificationRequirement;
-  extensions?: any;
+  extensions?: WebAuthnExtensionsJSON;
 }
 
 export interface CredentialRequestOptionsJSON {
