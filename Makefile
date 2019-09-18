@@ -1,5 +1,5 @@
 # Note: the first command becomes the default `make` target.
-NPM_COMMANDS = build dev
+NPM_COMMANDS = build dev clean
 
 .PHONY: $(NPM_COMMANDS)
 $(NPM_COMMANDS):

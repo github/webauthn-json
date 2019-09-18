@@ -1,7 +1,7 @@
 // A minimal example to test `webauthn-json`.
 // Note: do not hardcode values in production.
 
-import { create, get } from "@github/webauthn-json"
+import { create, get, supported } from "@github/webauthn-json"
 import { saveRegistration, getRegistrations, setRegistrations, withStatus } from "./state";
 import { PublicKeyCredentialDescriptorJSON } from "@github/webauthn-json/dist/src/json";
 
@@ -37,11 +37,17 @@ async function clear(): Promise<void> {
   setRegistrations([]);
 }
 
+async function testSupported() {
+  document.querySelector("#supported .status").textContent = "…";
+  document.querySelector("#supported .status").textContent = supported() ? " ✅" : " ❌";
+}
+
 window.addEventListener("load", function () {
   try {
     document.querySelector("#register").addEventListener("click", withStatus("#register .status", register));
     document.querySelector("#authenticate").addEventListener("click", withStatus("#authenticate .status", authenticate));
     document.querySelector("#clear").addEventListener("click", withStatus("#clear .status", clear));
+    document.querySelector("#supported").addEventListener("click", testSupported);
   } catch (e) {
     console.error(e);
   }

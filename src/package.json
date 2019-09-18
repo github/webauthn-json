@@ -1,7 +1,8 @@
 {
   "scripts": {
     "build": "rm -rf ../demo/* && npx parcel build src/index.html --no-minify --public-url './' -d ../demo",
-    "dev": "npx parcel serve src/index.html -d ../demo"
+    "dev": "npx parcel serve src/index.html -d ../demo",
+    "clean": "rm -rf ../demo"
   },
   "dependencies": {
     "@github/webauthn-json": "^0.4.0-beta.0",
