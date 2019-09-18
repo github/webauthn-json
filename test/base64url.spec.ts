@@ -1,4 +1,4 @@
-import {base64urlToBuffer, bufferToBase64url} from "../src/base64url";
+import { base64urlToBuffer, bufferToBase64url } from "../src/base64url";
 import "./arraybuffer";
 
 describe("base64url", () => {

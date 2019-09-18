@@ -17,7 +17,7 @@ expect.extend({
         };
       }
     }
-    return {pass: true, message: () => "OK"};
+    return { pass: true, message: () => "OK" };
   },
 });
 
@@ -30,4 +30,4 @@ declare global {
 }
 
 // This is needed to modify the global namespace.
-export {};
+export { };
