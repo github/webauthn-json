@@ -21,7 +21,7 @@ export async function get(requestJSON: CredentialRequestOptionsJSON): Promise<Pu
 
 declare global {
   interface Window {
-    PublicKeyCredential: any | undefined;
+    PublicKeyCredential: PublicKeyCredential | undefined;
   }
 }
 
