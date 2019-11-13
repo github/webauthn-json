@@ -1,0 +1,5 @@
+{
+  "main": "../dist/extended.js",
+  "module": "../dist/extended.esm.js",
+  "types": "../dist/src/extended.d.ts"
+}

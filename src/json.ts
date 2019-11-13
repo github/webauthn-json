@@ -8,22 +8,8 @@ export interface PublicKeyCredentialDescriptorJSON {
   transports?: AuthenticatorTransport[];
 }
 
-interface WebAuthnExtensionsJSON {
+interface SimpleWebAuthnExtensionsJSON {
   appid?: string;
-  txAuthSimple?: string;
-  txAuthGeneric?: {
-    contentType: string;
-    content: Base64urlString;
-  };
-  authnSel?: Base64urlString[];
-  exts?: boolean;
-  uvi?: boolean;
-  loc?: boolean;
-  uvm?: boolean;
-  authenticatorBiometricPerfBounds?: {
-    FAR: number;
-    FRR: number;
-  };
 }
 
 // `navigator.create()` request
@@ -33,7 +19,7 @@ interface PublicKeyCredentialUserEntityJSON extends PublicKeyCredentialEntity {
   id: Base64urlString;
 }
 
-interface PublicKeyCredentialCreationOptionsJSON {
+export interface PublicKeyCredentialCreationOptionsJSON {
   rp: PublicKeyCredentialRpEntity;
   user: PublicKeyCredentialUserEntityJSON;
 
@@ -44,7 +30,7 @@ interface PublicKeyCredentialCreationOptionsJSON {
   excludeCredentials?: PublicKeyCredentialDescriptorJSON[];
   authenticatorSelection?: AuthenticatorSelectionCriteria;
   attestation?: AttestationConveyancePreference;
-  extensions?: WebAuthnExtensionsJSON;
+  extensions?: SimpleWebAuthnExtensionsJSON;
 }
 
 export interface CredentialCreationOptionsJSON {
@@ -64,18 +50,17 @@ export interface PublicKeyCredentialWithAttestationJSON {
   type: PublicKeyCredentialType;
   rawId: Base64urlString;
   response: AuthenticatorAttestationResponseJSON;
-  clientExtensionResults: AuthenticationExtensionsClientOutputs;
 }
 
 // `navigator.get()` request
 
-interface PublicKeyCredentialRequestOptionsJSON {
+export interface PublicKeyCredentialRequestOptionsJSON {
   challenge: Base64urlString;
   timeout?: number;
   rpId?: string;
   allowCredentials?: PublicKeyCredentialDescriptorJSON[];
   userVerification?: UserVerificationRequirement;
-  extensions?: WebAuthnExtensionsJSON;
+  extensions?: SimpleWebAuthnExtensionsJSON;
 }
 
 export interface CredentialRequestOptionsJSON {
@@ -98,5 +83,4 @@ export interface PublicKeyCredentialWithAssertionJSON {
   id: string;
   rawId: Base64urlString;
   response: AuthenticatorAssertionResponseJSON;
-  clientExtensionResults: AuthenticationExtensionsClientOutputs;
 }

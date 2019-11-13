@@ -8,19 +8,8 @@ const publicKeyCredentialDescriptorSchema: Schema = {
   transports: optional(copy),
 };
 
-const extensionsSchema: Schema = {
+const simplifiedExtensionsSchema: Schema = {
   appid: optional(copy),
-  txAuthSimple: optional(copy),
-  txAuthGeneric: optional({
-    contentType: required(copy),
-    content: required(convert),
-  }),
-  authnSel: optional([convert]),
-  exts: optional(copy),
-  uvi: optional(copy),
-  loc: optional(copy),
-  uvm: optional(copy),
-  authenticatorBiometricPerfBounds: optional(copy),
 };
 
 // `navigator.create()` request
@@ -42,7 +31,7 @@ export const credentialCreationOptions: Schema = {
     excludeCredentials: optional([publicKeyCredentialDescriptorSchema]),
     authenticatorSelection: optional(copy),
     attestation: optional(copy),
-    extensions: optional(extensionsSchema),
+    extensions: optional(simplifiedExtensionsSchema),
   }),
   signal: optional(copy),
 };
@@ -69,7 +58,7 @@ export const credentialRequestOptions: Schema = {
     rpId: optional(copy),
     allowCredentials: optional([publicKeyCredentialDescriptorSchema]),
     userVerification: optional(copy),
-    extensions: optional(extensionsSchema),
+    extensions: optional(simplifiedExtensionsSchema),
   }),
   signal: optional(copy),
 };
