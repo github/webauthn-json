@@ -12,3 +12,5 @@ export {
 export {
   schema,
 } from "./webauthn-schema";
+
+export default WebAuthnJSON;
