@@ -24,7 +24,7 @@ import {create} from "@github/webauthn-json"
 
 async auth() {
   const request = await fetch("...");
-  const response = create(request.json());
+  const response = await create(request.json());
   await fetch("...", {
     method: "POST",
     body: JSON.stringify(response)
