@@ -22,15 +22,13 @@
     "typescript": "^3.7.2"
   },
   "scripts": {
-    "build": "npm run copy-flow && rollup -c",
-    "dev": "npm run link-flow && rollup -cw",
+    "build": "rollup -c",
+    "dev": "rollup -cw",
     "clean": "rm -rf dist",
     "test": "jest && npm run lint",
     "setup": "npm install",
     "lint": "tslint --fix --project . && tslint --fix rollup.config.js",
     "prepack": "npm run clean && npm run build",
-    "copy-flow": "mkdir -p dist/ && rm -f dist/index.js.flow dist/index.esm.js.flow && cp    src/index.js.flow dist/ && cp    src/index.js.flow dist/index.esm.js.flow",
-    "link-flow": "mkdir -p dist/ && rm -f dist/index.js.flow dist/index.esm.js.flow && ln -s src/index.js.flow dist/ && ln -s src/index.js.flow dist/index.esm.js.flow",
     "postpublish": "npm publish --ignore-scripts --@github:registry='https://npm.pkg.github.com'"
   },
   "bin": {

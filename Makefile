@@ -2,7 +2,7 @@
 # https://github.com/lgarron/Makefile-scripts
 
 # Note: the first command becomes the default `make` target.
-NPM_COMMANDS = build dev clean test setup lint prepack copy-flow link-flow
+NPM_COMMANDS = build dev clean test setup lint prepack postpublish
 
 .PHONY: $(NPM_COMMANDS)
 $(NPM_COMMANDS):
