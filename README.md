@@ -6,8 +6,8 @@ The WebAuthn API itself takes input and output values that look almost like JSON
 
 ## Usage
 
-1) Replace calls to `navigator.credentials.create()` with `create()`, and `navigator.credentials.get()` with `get()`.
-2) Encode/decode binary values on the server as base64url.
+1. Replace calls to `navigator.credentials.create()` with `create()`, and `navigator.credentials.get()` with `get()`.
+2. Encode/decode binary values on the server as base64url.
 
 ### Example
 
@@ -56,7 +56,7 @@ npx @github/webauthn-json schema
 
 ## Extensions
 
-Modern browsers generally only support a single extension: the `appid` string. If you need to convert additional input or output extensions, use `createExtended()` and `getExtended()` from `@github/webauthn-json/extended`.
+Modern browsers generally only support a single extension: the `appid` string. If you need to convert additional input or output extensions, use `createExtended()` and `getExtended()` from `@github/webauthn-json/dist/extended`.
 
 ## Contributions
 
