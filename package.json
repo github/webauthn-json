@@ -22,12 +22,12 @@
     "typescript": "^3.7.2"
   },
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -cw",
+    "build": "npx rollup -c",
+    "dev": "npx rollup -cw",
     "clean": "rm -rf dist",
-    "test": "jest && npm run lint",
+    "test": "npx jest && npm run lint",
     "setup": "npm install",
-    "lint": "tslint --fix --project . && tslint --fix rollup.config.js",
+    "lint": "npx tslint --fix --project . && npx tslint --fix rollup.config.js",
     "prepack": "npm run clean && npm run build",
     "postpublish": "npm publish --ignore-scripts --@github:registry='https://npm.pkg.github.com'"
   },
