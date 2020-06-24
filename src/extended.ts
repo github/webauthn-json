@@ -12,6 +12,7 @@ export { credentialRequestOptionsExtended };
 
 interface FullWebAuthnExtensionsJSON {
   appid?: string;
+  appidExclude?: string;
   txAuthSimple?: string;
   txAuthGeneric?: {
     contentType: string;
@@ -30,6 +31,7 @@ interface FullWebAuthnExtensionsJSON {
 
 const authenticationExtensionsClientInputsSchema: Schema = {
   appid: optional(copyValue),
+  appidExclude: optional(copyValue),
   txAuthSimple: optional(copyValue),
   txAuthGeneric: optional({
     contentType: required(copyValue),
@@ -45,6 +47,7 @@ const authenticationExtensionsClientInputsSchema: Schema = {
 
 const authenticationExtensionsClientOutputsSchema: Schema = {
   appid: optional(copyValue),
+  appidExclude: optional(copyValue),
   authnSel: optional(copyValue),
   exts: optional(copyValue),
   loc: optional(copyValue),
