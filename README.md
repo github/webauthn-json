@@ -1,6 +1,6 @@
 # `@github/webauthn-json`
 
-`webauthn-json` is a client-side Javascript library that serves as convenience wrapper for the the [WebAuthn API](https://www.w3.org/TR/webauthn/) by encoding binary data using [base64url](https://w3c.github.io/webauthn/#sctn-dependencies) (also known as "websafe" or "urlsafe" base64).
+`@github/webauthn-json` is a client-side Javascript library that serves as convenience wrapper for the the [WebAuthn API](https://www.w3.org/TR/webauthn/) by encoding binary data using [base64url](https://w3c.github.io/webauthn/#sctn-dependencies) (also known as "websafe" or "urlsafe" base64).
 
 The WebAuthn API itself takes input and output values that look almost like JSON, except that binary data is represented as `ArrayBuffer`s. Using `webauthn-json` allows the data to be sent from/to the server as normal JSON without client-side processing.
 
@@ -44,7 +44,7 @@ function supported(): boolean;
 
 ## Schema
 
-There are are several ways to encode JSON with binary fields. `webauthn-json` focuses on one simple approach: converting the known structure [using a simple (custom) schema format](https://github.com/github/webauthn-json/blob/master/src/webauthn-schema.ts). `webauthn-json` uses a few tricks for a compact schema encoding: the production build is about ≈2KB uncompressed (<1KB gzipped).
+There are are several ways to encode JSON with binary fields. `@github/webauthn-json` focuses on one simple approach: converting the known structure [using a simple (custom) schema format](https://github.com/github/webauthn-json/blob/master/src/webauthn-schema.ts). `@github/webauthn-json` uses a few tricks for a compact schema encoding: the production build is about ≈2KB uncompressed (<1KB gzipped).
 
 Right now, we only convert fields explicitly known to be used by the WebAuthn API. This means that you'll have to update to a newer version of this library if you want to use new fields in the future.
 
@@ -60,4 +60,4 @@ Modern browsers generally only support a single extension: the `appid` string. I
 
 ## Contributions
 
-The scope of `webauthn-json` is fairly small — it's essentially feature-complete. However, we're happy to accept issues or pull requests that address the core goal of the project!
+The scope of `@github/webauthn-json` is fairly small — it's essentially feature-complete. However, we're happy to accept issues or pull requests that address the core goal of the project!
