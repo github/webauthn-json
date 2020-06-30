@@ -10,6 +10,7 @@ export interface PublicKeyCredentialDescriptorJSON {
 
 interface SimpleWebAuthnExtensionsJSON {
   appid?: string;
+  appidExclude?: string;
 }
 
 // `navigator.create()` request

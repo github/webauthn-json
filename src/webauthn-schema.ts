@@ -10,6 +10,7 @@ const publicKeyCredentialDescriptorSchema: Schema = {
 
 const simplifiedExtensionsSchema: Schema = {
   appid: optional(copy),
+  appidExclude: optional(copy),
 };
 
 // `navigator.create()` request
