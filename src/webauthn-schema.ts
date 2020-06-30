@@ -21,7 +21,6 @@ export const credentialCreationOptions: Schema = {
       id: required(convert),
       name: required(copy),
       displayName: required(copy),
-      icon: optional(copy),
     }),
 
     challenge: required(convert),
