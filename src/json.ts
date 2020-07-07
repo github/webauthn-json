@@ -21,6 +21,7 @@ interface SimpleWebAuthnExtensionsJSON {
 
 interface SimpleClientExtensionResultsJSON {
   appid?: boolean;
+  appidExclude?: boolean;
 }
 
 // `navigator.create()` request

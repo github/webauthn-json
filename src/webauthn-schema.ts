@@ -15,6 +15,7 @@ const simplifiedExtensionsSchema: Schema = {
 
 const simplifiedClientExtensionResultsSchema = {
   appid: optional(copy),
+  appidExclude: optional(copy),
 };
 
 // `navigator.create()` request
