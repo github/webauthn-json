@@ -44,7 +44,7 @@ function supported(): boolean;
 
 ## Schema
 
-There are are several ways to encode JSON with binary fields. `@github/webauthn-json` focuses on one simple approach: converting the known structure [using a simple (custom) schema format](https://github.com/github/webauthn-json/blob/master/src/webauthn-schema.ts). `@github/webauthn-json` uses a few tricks for a compact schema encoding: the production build is about ≈2KB uncompressed (<1KB gzipped).
+There are are several ways to encode JSON with binary fields. `@github/webauthn-json` focuses on one simple approach: converting the known structure [using a simple (custom) schema format](https://github.com/github/webauthn-json/blob/main/src/webauthn-schema.ts). `@github/webauthn-json` uses a few tricks for a compact schema encoding: the production build is about ≈2KB uncompressed (<1KB gzipped).
 
 Right now, we only convert fields explicitly known to be used by the WebAuthn API. This means that you'll have to update to a newer version of this library if you want to use new fields in the future.
 
