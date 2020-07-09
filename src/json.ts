@@ -2,8 +2,13 @@ import { Base64urlString } from "./base64url";
 
 // Intermediate type needed for attaching client outputs to WebAuthn API call
 // results before converting to JSON.
+
+interface AuthenticationExtensionsClientOutputsJSON extends AuthenticationExtensionsClientOutputs {
+  appidExclude?: boolean;
+}
+
 export interface PublicKeyCredentialWithClientExtensionResults extends PublicKeyCredential {
-  clientExtensionResults?: AuthenticationExtensionsClientOutputs;
+  clientExtensionResults?: AuthenticationExtensionsClientOutputsJSON;
 }
 
 // Shared

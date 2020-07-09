@@ -1,5 +1,5 @@
 import { base64urlToBuffer, bufferToBase64url } from "../src/base64url";
-import { CredentialCreationOptionsJSON, CredentialRequestOptionsJSON } from "../src/json";
+import { CredentialCreationOptionsJSON, CredentialRequestOptionsJSON, PublicKeyCredentialWithClientExtensionResults } from "../src/json";
 import { convert } from "../src/schema-format";
 import { credentialCreationOptions, credentialRequestOptions, publicKeyCredentialWithAssertion, publicKeyCredentialWithAttestation } from "../src/webauthn-schema";
 import "./arraybuffer";
@@ -35,7 +35,7 @@ describe("webauthn schema", () => {
   });
 
   test("converts PublicKeyCredentialWithAttestationJSON", () => {
-    const pkcwa: PublicKeyCredential = {
+    const pkcwa: PublicKeyCredentialWithClientExtensionResults = {
       type: "public-key",
       id: "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
       rawId: new Uint8Array([1, 2, 3, 4]),
@@ -44,6 +44,9 @@ describe("webauthn schema", () => {
         attestationObject: new Uint8Array([13, 14, 15, 16]),
       } as AuthenticatorAttestationResponse,
       getClientExtensionResults: () => ({}),
+      clientExtensionResults: {
+        appidExclude: true,
+      },
     };
     const converted = convert(bufferToBase64url, publicKeyCredentialWithAttestation, pkcwa);
     expect(converted).toEqual({
@@ -54,6 +57,8 @@ describe("webauthn schema", () => {
         attestationObject: "DQ4PEA",
         clientDataJSON: "CQoLDA",
       },
+      clientExtensionResults: {
+        appidExclude: true},
     });
   });
 
@@ -84,7 +89,7 @@ describe("webauthn schema", () => {
   });
 
   test("converts PublicKeyCredentialWithAssertionJSON", () => {
-    const pkcwa: PublicKeyCredential = {
+    const pkcwa: PublicKeyCredentialWithClientExtensionResults = {
       type: "public-key",
       id: "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
       rawId: new Uint8Array([1, 2, 3, 4]),
@@ -95,6 +100,9 @@ describe("webauthn schema", () => {
         userHandle: null,
       } as AuthenticatorAssertionResponse,
       getClientExtensionResults: () => ({}),
+      clientExtensionResults: {
+        appid: true,
+      },
     };
     const converted = convert(bufferToBase64url, publicKeyCredentialWithAssertion, pkcwa);
     expect(converted).toEqual({
@@ -106,6 +114,9 @@ describe("webauthn schema", () => {
         clientDataJSON: "CQoLDA",
         signature: "DQ4PEA",
         userHandle: null,
+      },
+      clientExtensionResults: {
+        appid: true,
       },
     });
   });
