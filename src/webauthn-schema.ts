@@ -12,6 +12,10 @@ const simplifiedExtensionsSchema: Schema = {
   appid: optional(copy),
 };
 
+const simplifiedClientExtensionResultsSchema = {
+  appid: optional(copy),
+};
+
 // `navigator.create()` request
 
 export const credentialCreationOptions: Schema = {
@@ -45,6 +49,7 @@ export const publicKeyCredentialWithAttestation: Schema = {
     clientDataJSON: required(convert),
     attestationObject: required(convert),
   }),
+  clientExtensionResults: required(simplifiedClientExtensionResultsSchema),
 };
 
 // `navigator.get()` request
@@ -74,6 +79,7 @@ export const publicKeyCredentialWithAssertion: Schema = {
     signature: required(convert),
     userHandle: required(convert),
   }),
+  clientExtensionResults: required(simplifiedClientExtensionResultsSchema),
 };
 
 export const schema: { [s: string]: Schema } = {

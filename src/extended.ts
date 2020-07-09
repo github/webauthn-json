@@ -1,7 +1,7 @@
 import { Base64urlString, base64urlToBuffer, bufferToBase64url } from "./base64url";
-import { CredentialCreationOptionsJSON, CredentialRequestOptionsJSON, PublicKeyCredentialCreationOptionsJSON, PublicKeyCredentialRequestOptionsJSON, PublicKeyCredentialWithAssertionJSON, PublicKeyCredentialWithAttestationJSON } from "./json";
+import { CredentialCreationOptionsJSON, CredentialRequestOptionsJSON, PublicKeyCredentialCreationOptionsJSON, PublicKeyCredentialRequestOptionsJSON, PublicKeyCredentialWithAssertionJSON, PublicKeyCredentialWithAttestationJSON, PublicKeyCredentialWithClientExtensionResults } from "./json";
 import { convert, convertValue, copyValue, optional, required, Schema } from "./schema-format";
-import { credentialCreationOptions, credentialRequestOptions, publicKeyCredentialWithAssertion, publicKeyCredentialWithAttestation } from "./webauthn-schema";
+import { credentialCreationOptions, credentialRequestOptions } from "./webauthn-schema";
 
 export { supported } from "./webauthn";
 export { schema } from "./webauthn-schema";
@@ -71,12 +71,14 @@ export interface PublicKeyCredentialWithAttestationExtendedResultsJSON extends P
 const credentialCreationOptionsExtended: Schema = JSON.parse(JSON.stringify(credentialCreationOptions));
 (credentialCreationOptionsExtended as any).publicKey.schema.extensions = optional(authenticationExtensionsClientInputsSchema);
 
+const publicKeyCredentialWithAttestationExtended: Schema = JSON.parse(JSON.stringify(credentialCreationOptions));
+(publicKeyCredentialWithAttestationExtended as any).clientExtensionResults = required(authenticationExtensionsClientOutputsSchema);
+
 export async function createExtended(requestJSON: CredentialCreationOptionsExtendedJSON): Promise<PublicKeyCredentialWithAttestationExtendedResultsJSON> {
   const request = convert(base64urlToBuffer, credentialCreationOptionsExtended, requestJSON);
-  const credential = (await navigator.credentials.create(request)) as PublicKeyCredential;
-  const responseJSON: PublicKeyCredentialWithAttestationExtendedResultsJSON = convert(bufferToBase64url, publicKeyCredentialWithAttestation, credential);
-  responseJSON.clientExtensionResults = convert(bufferToBase64url, authenticationExtensionsClientOutputsSchema, credential.getClientExtensionResults());
-  return responseJSON;
+  const credential = (await navigator.credentials.create(request)) as PublicKeyCredentialWithClientExtensionResults;
+  credential.clientExtensionResults = credential.getClientExtensionResults();
+  return convert(bufferToBase64url, publicKeyCredentialWithAttestationExtended, credential);
 }
 
 // get
@@ -96,10 +98,12 @@ export interface PublicKeyCredentialWithAssertionExtendedResultsJSON extends Pub
 const credentialRequestOptionsExtended: Schema = JSON.parse(JSON.stringify(credentialRequestOptions));
 (credentialRequestOptionsExtended as any).publicKey.schema.extensions = optional(authenticationExtensionsClientInputsSchema);
 
+const publicKeyCredentialWithAssertionExtended: Schema = JSON.parse(JSON.stringify(credentialCreationOptions));
+(publicKeyCredentialWithAssertionExtended as any).clientExtensionResults = required(authenticationExtensionsClientOutputsSchema);
+
 export async function getExtended(requestJSON: CredentialRequestOptionsExtendedJSON): Promise<PublicKeyCredentialWithAssertionExtendedResultsJSON> {
   const request = convert(base64urlToBuffer, credentialRequestOptionsExtended, requestJSON);
-  const response = (await navigator.credentials.get(request)) as PublicKeyCredential;
-  const responseJSON: PublicKeyCredentialWithAssertionExtendedResultsJSON = convert(bufferToBase64url, publicKeyCredentialWithAssertion, response);
-  responseJSON.clientExtensionResults = convert(bufferToBase64url, authenticationExtensionsClientOutputsSchema, response.getClientExtensionResults());
-  return responseJSON;
+  const response = (await navigator.credentials.get(request)) as PublicKeyCredentialWithClientExtensionResults;
+  response.clientExtensionResults = response.getClientExtensionResults();
+  return convert(bufferToBase64url, publicKeyCredentialWithAssertionExtended, response);
 }
