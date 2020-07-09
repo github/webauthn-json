@@ -24,6 +24,9 @@ describe("webauthn schema", () => {
         ],
         timeout: 30000,
         challenge: "TEST-CHALLENGE_TEST-CHALLENGE_TEST-CHALLENG",
+        extensions: {
+          appidExclude: "https://example.com/trusted_facets",
+        },
       },
     };
     const converted = convert(base64urlToBuffer, credentialCreationOptions, cco);

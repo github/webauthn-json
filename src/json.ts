@@ -16,6 +16,7 @@ export interface PublicKeyCredentialDescriptorJSON {
 
 interface SimpleWebAuthnExtensionsJSON {
   appid?: string;
+  appidExclude?: string;
 }
 
 interface SimpleClientExtensionResultsJSON {
