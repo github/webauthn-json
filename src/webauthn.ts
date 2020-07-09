@@ -1,7 +1,7 @@
 import { base64urlToBuffer, bufferToBase64url } from "./base64url";
 import { CredentialCreationOptionsJSON, CredentialRequestOptionsJSON, PublicKeyCredentialWithAssertionJSON, PublicKeyCredentialWithAttestationJSON, PublicKeyCredentialWithClientExtensionResults } from "./json";
 import { convert } from "./schema-format";
-import { credentialCreationOptions, credentialRequestOptions, publicKeyCredentialWithAttestation, publicKeyCredentialWithAssertion } from "./webauthn-schema";
+import { credentialCreationOptions, credentialRequestOptions, publicKeyCredentialWithAssertion, publicKeyCredentialWithAttestation } from "./webauthn-schema";
 
 export async function create(requestJSON: CredentialCreationOptionsJSON): Promise<PublicKeyCredentialWithAttestationJSON> {
   const request = convert(base64urlToBuffer, credentialCreationOptions, requestJSON);

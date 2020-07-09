@@ -3,7 +3,7 @@ import { Base64urlString } from "./base64url";
 // Intermediate type needed for attaching client outputs to WebAuthn API call
 // results before converting to JSON.
 export interface PublicKeyCredentialWithClientExtensionResults extends PublicKeyCredential {
-  clientExtensionResults?: AuthenticationExtensionsClientOutputs
+  clientExtensionResults?: AuthenticationExtensionsClientOutputs;
 }
 
 // Shared
@@ -20,7 +20,7 @@ interface SimpleWebAuthnExtensionsJSON {
 }
 
 interface SimpleClientExtensionResultsJSON {
-  appid?: boolean
+  appid?: boolean;
 }
 
 // `navigator.create()` request
