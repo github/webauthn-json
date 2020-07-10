@@ -24,26 +24,12 @@ interface ExtendedExtensionsClientInputsJSON {
   }
 }
 
-interface ExtendedExtensionsClientOutputsJSON {
+interface ExtendedAuthenticationExtensionsClientOutputsJSON {
   appid?: boolean;
   appidExclude?: boolean;
   uvm?: [number, number, number][];
   credProps?: {
     rk: boolean;
-  };
-  largeBlob?: {
-    read?: boolean,
-    write?: Base64urlString,
-  }
-}
-
-interface ExtendedExtensionsClientOutputsJSON {
-  appid?: string;
-  appidExclude?: string;
-  uvm?: boolean;
-  credProps?: {
-    first: Base64urlString,
-    second?: Base64urlString
   };
   largeBlob?: {
     read?: boolean,
@@ -68,13 +54,12 @@ const authenticationExtensionsClientInputsSchema: Schema = {
 const authenticationExtensionsClientOutputsSchema: Schema = {
   appid: optional(copyValue),
   appidExclude: optional(copyValue),
-  authnSel: optional(copyValue),
-  exts: optional(copyValue),
-  loc: optional(copyValue),
-  txAuthGeneric: optional(convertValue),
-  txAuthSimple: optional(copyValue),
-  uvi: optional(convertValue),
   uvm: optional(copyValue),
+  credProps: optional(copyValue),
+  largeBlob: optional({
+    read: optional(copyValue),
+    write: optional(convertValue)
+  })
 };
 
 // create
@@ -88,7 +73,7 @@ export interface CredentialCreationOptionsExtendedJSON extends CredentialCreatio
 }
 
 export interface PublicKeyCredentialWithAttestationExtendedResultsJSON extends PublicKeyCredentialWithAttestationJSON {
-  clientExtensionResults: AuthenticationExtensionsClientOutputs;
+  clientExtensionResults: ExtendedAuthenticationExtensionsClientOutputsJSON;
 }
 
 const credentialCreationOptionsExtended: Schema = JSON.parse(JSON.stringify(credentialCreationOptions));
@@ -115,7 +100,7 @@ export interface CredentialRequestOptionsExtendedJSON extends CredentialRequestO
 }
 
 export interface PublicKeyCredentialWithAssertionExtendedResultsJSON extends PublicKeyCredentialWithAssertionJSON {
-  clientExtensionResults: AuthenticationExtensionsClientOutputs;
+  clientExtensionResults: ExtendedAuthenticationExtensionsClientOutputsJSON;
 }
 
 const credentialRequestOptionsExtended: Schema = JSON.parse(JSON.stringify(credentialRequestOptions));
