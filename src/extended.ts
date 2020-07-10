@@ -10,39 +10,59 @@ export { credentialRequestOptionsExtended };
 
 // shared
 
-interface FullWebAuthnExtensionsJSON {
+interface ExtendedExtensionsClientInputsJSON {
   appid?: string;
   appidExclude?: string;
-  txAuthSimple?: string;
-  txAuthGeneric?: {
-    contentType: string;
-    content: Base64urlString;
-  };
-  authnSel?: Base64urlString[];
-  exts?: boolean;
-  uvi?: boolean;
-  loc?: boolean;
   uvm?: boolean;
-  authenticatorBiometricPerfBounds?: {
-    FAR: number;
-    FRR: number;
+  credProps?: {
+    first: Base64urlString,
+    second?: Base64urlString
   };
+  largeBlob?: {
+    read?: boolean,
+    write?: Base64urlString,
+  }
+}
+
+interface ExtendedExtensionsClientOutputsJSON {
+  appid?: boolean;
+  appidExclude?: boolean;
+  uvm?: [number, number, number][];
+  credProps?: {
+    rk: boolean;
+  };
+  largeBlob?: {
+    read?: boolean,
+    write?: Base64urlString,
+  }
+}
+
+interface ExtendedExtensionsClientOutputsJSON {
+  appid?: string;
+  appidExclude?: string;
+  uvm?: boolean;
+  credProps?: {
+    first: Base64urlString,
+    second?: Base64urlString
+  };
+  largeBlob?: {
+    read?: boolean,
+    write?: Base64urlString,
+  }
 }
 
 const authenticationExtensionsClientInputsSchema: Schema = {
   appid: optional(copyValue),
   appidExclude: optional(copyValue),
-  txAuthSimple: optional(copyValue),
-  txAuthGeneric: optional({
-    contentType: required(copyValue),
-    content: required(convertValue),
-  }),
-  authnSel: optional([convertValue]),
-  exts: optional(copyValue),
-  uvi: optional(copyValue),
-  loc: optional(copyValue),
   uvm: optional(copyValue),
-  authenticatorBiometricPerfBounds: optional(copyValue),
+  credProps: optional({
+    first: required(convertValue),
+    secod: optional(convertValue),
+  }),
+  largeBlob: optional({
+    read: optional(copyValue),
+    write: optional(convertValue),
+  })
 };
 
 const authenticationExtensionsClientOutputsSchema: Schema = {
@@ -60,7 +80,7 @@ const authenticationExtensionsClientOutputsSchema: Schema = {
 // create
 
 interface PublicKeyCredentialCreationOptionsExtendedJSON extends PublicKeyCredentialCreationOptionsJSON {
-  extensions?: FullWebAuthnExtensionsJSON;
+  extensions?: ExtendedExtensionsClientInputsJSON;
 }
 
 export interface CredentialCreationOptionsExtendedJSON extends CredentialCreationOptionsJSON {
@@ -87,7 +107,7 @@ export async function createExtended(requestJSON: CredentialCreationOptionsExten
 // get
 
 interface PublicKeyCredentialRequestOptionsExtendedJSON extends PublicKeyCredentialRequestOptionsJSON {
-  extensions?: FullWebAuthnExtensionsJSON;
+  extensions?: ExtendedExtensionsClientInputsJSON;
 }
 
 export interface CredentialRequestOptionsExtendedJSON extends CredentialRequestOptionsJSON {
