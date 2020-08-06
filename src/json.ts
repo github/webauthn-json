@@ -36,6 +36,12 @@ interface PublicKeyCredentialUserEntityJSON extends PublicKeyCredentialEntity {
   id: Base64urlString;
 }
 
+type ResidentKeyRequirement = "discouraged" |"preferred" |"required";
+
+interface AuthenticatorSelectionCriteriaJSON extends AuthenticatorSelectionCriteria {
+  residentKey?: ResidentKeyRequirement;
+}
+
 export interface PublicKeyCredentialCreationOptionsJSON {
   rp: PublicKeyCredentialRpEntity;
   user: PublicKeyCredentialUserEntityJSON;
@@ -45,7 +51,7 @@ export interface PublicKeyCredentialCreationOptionsJSON {
 
   timeout?: number;
   excludeCredentials?: PublicKeyCredentialDescriptorJSON[];
-  authenticatorSelection?: AuthenticatorSelectionCriteria;
+  authenticatorSelection?: AuthenticatorSelectionCriteriaJSON;
   attestation?: AttestationConveyancePreference;
   extensions?: SimpleWebAuthnExtensionsJSON;
 }
