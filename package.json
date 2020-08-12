@@ -24,7 +24,7 @@
     "jest": "^26.1.0",
     "prettier": "^2.0.5",
     "rollup": "^1.27.0",
-    "rollup-plugin-terser": "^5.1.3",
+    "rollup-plugin-terser": "^7.0.0",
     "rollup-plugin-tslint": "^0.2.2",
     "rollup-plugin-typescript2": "^0.21.2",
     "ts-jest": "^26.1.1",
