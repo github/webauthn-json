@@ -1,4 +1,4 @@
 {
   "presets": ["@babel/preset-typescript"],
-  "plugins": []
+  "plugins": ["@babel/plugin-proposal-optional-chaining"]
 }

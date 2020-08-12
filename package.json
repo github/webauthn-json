@@ -11,12 +11,14 @@
   "extended": "dist/extended/webauthn-json.extended.js",
   "extended-types": "dist/extended/webauthn-json.extended.d.ts",
   "browser-global": "dist/browser-global/webauthn-json.browser-global.js",
-  "bin": "dist/bin/webauthn-json.js",
+  "bin": "dist/bin/webauthn-json-bin.js",
   "demo": "dist/demo/index.html",
+  "inspector": "dist/inspector/webauthn-json-inspector.js",
   "dependencies": {
     "parcel": "^2.0.0-nightly.360"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.11.0",
     "@babel/preset-typescript": "^7.10.4",
     "@types/jest": "^24.0.23",
     "jest": "^26.1.0",
@@ -38,7 +40,9 @@
     "build-browser-global": "npx parcel build --target browser-global src/targets/browser-global.ts",
     "build-bin": "npx parcel build --target bin src/targets/bin.ts && make format-bin",
     "build-demo": "npx parcel build --public-url . --target demo src/targets/demo/index.html",
+    "build-inspector": "npx parcel build --target inspector src/targets/inspector/inspector.ts",
     "dev": "npx parcel serve src/targets/demo/index.html",
+    "dev-inspector": "npx parcel serve src/targets/inspector/index.html",
     "clean": "rm -rf ./.parcel-cache ./dist",
     "test": "npx jest && npm run lint",
     "setup": "npm install",
@@ -69,6 +73,9 @@
     },
     "demo": {
       "outputFormat": "esmodule",
+      "includeNodeModules": true
+    },
+    "inspector": {
       "includeNodeModules": true
     }
   },
