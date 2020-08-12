@@ -192,3 +192,5 @@ navigator.credentials.get = async function (
   const interceptor = new WebAuthnInspector();
   return await interceptor.get(options);
 };
+
+console.log("WebAuthn Inspector is active!");
