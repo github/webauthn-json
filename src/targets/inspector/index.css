@@ -10,8 +10,10 @@
   overflow: hidden;
   resize: both;
 
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(0.5em);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1000000;
 }
 
 .wrapper {
