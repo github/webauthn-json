@@ -38,9 +38,10 @@ interface PublicKeyCredentialUserEntityJSON extends PublicKeyCredentialEntity {
   id: Base64urlString;
 }
 
-type ResidentKeyRequirement = "discouraged" |"preferred" |"required";
+type ResidentKeyRequirement = "discouraged" | "preferred" | "required";
 
-interface AuthenticatorSelectionCriteriaJSON extends AuthenticatorSelectionCriteria {
+interface AuthenticatorSelectionCriteriaJSON
+  extends AuthenticatorSelectionCriteria {
   residentKey?: ResidentKeyRequirement;
 }
 
