@@ -1,9 +1,12 @@
 export type Base64urlString = string;
 
-export function base64urlToBuffer(baseurl64String: Base64urlString): ArrayBuffer {
+export function base64urlToBuffer(
+  baseurl64String: Base64urlString,
+): ArrayBuffer {
   // Base64url to Base64
   const padding = "==".slice(0, (4 - (baseurl64String.length % 4)) % 4);
-  const base64String = baseurl64String.replace(/-/g, "+").replace(/_/g, "/") + padding;
+  const base64String =
+    baseurl64String.replace(/-/g, "+").replace(/_/g, "/") + padding;
 
   // Base64 to binary string
   const str = atob(base64String);
@@ -30,6 +33,9 @@ export function bufferToBase64url(buffer: ArrayBuffer): Base64urlString {
 
   // Base64 to base64url
   // We assume that the base64url string is well-formed.
-  const base64urlString = base64String.replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
+  const base64urlString = base64String
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=/g, "");
   return base64urlString;
 }

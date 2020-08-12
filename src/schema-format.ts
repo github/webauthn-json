@@ -1,5 +1,7 @@
 type SchemaLeaf = "copy" | "convert";
-interface SchemaObject { [property: string]: { required: boolean; schema: Schema; }; }
+interface SchemaObject {
+  [property: string]: { required: boolean; schema: Schema };
+}
 type SchemaArray = [SchemaObject] | [SchemaLeaf];
 
 export type Schema = SchemaLeaf | SchemaArray | SchemaObject;
@@ -9,7 +11,11 @@ export type Schema = SchemaLeaf | SchemaArray | SchemaObject;
 export const copyValue = "copy";
 export const convertValue = "convert";
 
-export function convert<From, To>(conversionFn: (v: From) => To, schema: Schema, input: any): any {
+export function convert<From, To>(
+  conversionFn: (v: From) => To,
+  schema: Schema,
+  input: any,
+): any {
   if (schema === copyValue) {
     return input;
   }
@@ -35,7 +41,11 @@ export function convert<From, To>(conversionFn: (v: From) => To, schema: Schema,
         output[key] = null;
         continue;
       }
-      output[key] = convert<From, To>(conversionFn, schemaField.schema, input[key]);
+      output[key] = convert<From, To>(
+        conversionFn,
+        schemaField.schema,
+        input[key],
+      );
     }
     return output;
   }

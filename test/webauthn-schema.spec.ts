@@ -1,7 +1,16 @@
 import { base64urlToBuffer, bufferToBase64url } from "../src/base64url";
-import { CredentialCreationOptionsJSON, CredentialRequestOptionsJSON, PublicKeyCredentialWithClientExtensionResults } from "../src/json";
+import {
+  CredentialCreationOptionsJSON,
+  CredentialRequestOptionsJSON,
+  PublicKeyCredentialWithClientExtensionResults,
+} from "../src/basic/json";
+import {
+  credentialCreationOptions,
+  credentialRequestOptions,
+  publicKeyCredentialWithAssertion,
+  publicKeyCredentialWithAttestation,
+} from "../src/basic/schema";
 import { convert } from "../src/schema-format";
-import { credentialCreationOptions, credentialRequestOptions, publicKeyCredentialWithAssertion, publicKeyCredentialWithAttestation } from "../src/webauthn-schema";
 import "./arraybuffer";
 
 describe("webauthn schema", () => {
@@ -14,7 +23,8 @@ describe("webauthn schema", () => {
         user: {
           name: "test_user_name",
           displayName: "Test User Display Name",
-          id: "TEST-USER-ID_TEST-USER-ID_TEST-USER-ID_TEST-USER-ID_TEST-USER-ID_TEST-USER-ID_TEST-USE",
+          id:
+            "TEST-USER-ID_TEST-USER-ID_TEST-USER-ID_TEST-USER-ID_TEST-USER-ID_TEST-USER-ID_TEST-USE",
         },
         pubKeyCredParams: [
           {
@@ -29,15 +39,55 @@ describe("webauthn schema", () => {
         },
       },
     };
-    const converted = convert(base64urlToBuffer, credentialCreationOptions, cco);
+    const converted = convert(
+      base64urlToBuffer,
+      credentialCreationOptions,
+      cco,
+    );
     expect(converted.publicKey.user.name).toBe("test_user_name");
-    expect(converted.publicKey.challenge).toEqualBuffer(new Uint8Array([76, 68, 147, 248, 33, 192, 44, 177, 13, 24, 79, 211, 17, 36, 254, 8, 112, 11, 44, 67, 70, 19, 244, 196, 73, 63, 130, 28, 2, 203, 16, 209]));
+    expect(converted.publicKey.challenge).toEqualBuffer(
+      new Uint8Array([
+        76,
+        68,
+        147,
+        248,
+        33,
+        192,
+        44,
+        177,
+        13,
+        24,
+        79,
+        211,
+        17,
+        36,
+        254,
+        8,
+        112,
+        11,
+        44,
+        67,
+        70,
+        19,
+        244,
+        196,
+        73,
+        63,
+        130,
+        28,
+        2,
+        203,
+        16,
+        209,
+      ]),
+    );
   });
 
   test("converts PublicKeyCredentialWithAttestationJSON", () => {
     const pkcwa: PublicKeyCredentialWithClientExtensionResults = {
       type: "public-key",
-      id: "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
+      id:
+        "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
       rawId: new Uint8Array([1, 2, 3, 4]),
       response: {
         clientDataJSON: new Uint8Array([9, 10, 11, 12]),
@@ -48,17 +98,23 @@ describe("webauthn schema", () => {
         appidExclude: true,
       },
     };
-    const converted = convert(bufferToBase64url, publicKeyCredentialWithAttestation, pkcwa);
+    const converted = convert(
+      bufferToBase64url,
+      publicKeyCredentialWithAttestation,
+      pkcwa,
+    );
     expect(converted).toEqual({
       type: "public-key",
-      id: "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
+      id:
+        "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
       rawId: "AQIDBA",
       response: {
         attestationObject: "DQ4PEA",
         clientDataJSON: "CQoLDA",
       },
       clientExtensionResults: {
-        appidExclude: true},
+        appidExclude: true,
+      },
     });
   });
 
@@ -70,11 +126,13 @@ describe("webauthn schema", () => {
         allowCredentials: [
           {
             type: "public-key",
-            id: "CREDENTIAL-ID-1_CREDENTIAL-ID-1_CREDENTIAL-ID-1_CREDENTIAL-ID-1_CREDENTIAL-ID-1_CREDEN",
+            id:
+              "CREDENTIAL-ID-1_CREDENTIAL-ID-1_CREDENTIAL-ID-1_CREDENTIAL-ID-1_CREDENTIAL-ID-1_CREDEN",
           },
           {
             type: "public-key",
-            id: "CREDENTIAL-ID-2_CREDENTIAL-ID-2_CREDENTIAL-ID-2_CREDENTIAL-ID-2_CREDENTIAL-ID-2_CREDEN",
+            id:
+              "CREDENTIAL-ID-2_CREDENTIAL-ID-2_CREDENTIAL-ID-2_CREDENTIAL-ID-2_CREDENTIAL-ID-2_CREDEN",
           },
         ],
         rpId: "example.com",
@@ -85,13 +143,81 @@ describe("webauthn schema", () => {
     };
     const converted = convert(base64urlToBuffer, credentialRequestOptions, cro);
     expect(converted.publicKey.timeout).toBe(30000);
-    expect(converted.publicKey.allowCredentials[0].id).toEqualBuffer(new Uint8Array([9, 17, 3, 16, 212, 200, 0, 191, 136, 15, 237, 127, 9, 17, 3, 16, 212, 200, 0, 191, 136, 15, 237, 127, 9, 17, 3, 16, 212, 200, 0, 191, 136, 15, 237, 127, 9, 17, 3, 16, 212, 200, 0, 191, 136, 15, 237, 127, 9, 17, 3, 16, 212, 200, 0, 191, 136, 15, 237, 127, 9, 17, 3, 16]));
+    expect(converted.publicKey.allowCredentials[0].id).toEqualBuffer(
+      new Uint8Array([
+        9,
+        17,
+        3,
+        16,
+        212,
+        200,
+        0,
+        191,
+        136,
+        15,
+        237,
+        127,
+        9,
+        17,
+        3,
+        16,
+        212,
+        200,
+        0,
+        191,
+        136,
+        15,
+        237,
+        127,
+        9,
+        17,
+        3,
+        16,
+        212,
+        200,
+        0,
+        191,
+        136,
+        15,
+        237,
+        127,
+        9,
+        17,
+        3,
+        16,
+        212,
+        200,
+        0,
+        191,
+        136,
+        15,
+        237,
+        127,
+        9,
+        17,
+        3,
+        16,
+        212,
+        200,
+        0,
+        191,
+        136,
+        15,
+        237,
+        127,
+        9,
+        17,
+        3,
+        16,
+      ]),
+    );
   });
 
   test("converts PublicKeyCredentialWithAssertionJSON", () => {
     const pkcwa: PublicKeyCredentialWithClientExtensionResults = {
       type: "public-key",
-      id: "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
+      id:
+        "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
       rawId: new Uint8Array([1, 2, 3, 4]),
       response: {
         authenticatorData: new Uint8Array([5, 6, 7, 8]),
@@ -104,10 +230,15 @@ describe("webauthn schema", () => {
         appid: true,
       },
     };
-    const converted = convert(bufferToBase64url, publicKeyCredentialWithAssertion, pkcwa);
+    const converted = convert(
+      bufferToBase64url,
+      publicKeyCredentialWithAssertion,
+      pkcwa,
+    );
     expect(converted).toEqual({
       type: "public-key",
-      id: "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
+      id:
+        "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
       rawId: "AQIDBA",
       response: {
         authenticatorData: "BQYHCA",

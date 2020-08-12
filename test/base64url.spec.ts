@@ -5,9 +5,15 @@ describe("base64url", () => {
   test("should convert simple base64url values to `ArrayBuffer`", () => {
     expect(base64urlToBuffer("")).toEqualBuffer(new Uint8Array([]));
     expect(base64urlToBuffer("AA")).toEqualBuffer(new Uint8Array([0]));
-    expect(base64urlToBuffer("TEST")).toEqualBuffer(new Uint8Array([76, 68, 147]));
-    expect(base64urlToBuffer("BAMCAQ")).toEqualBuffer(new Uint8Array([4, 3, 2, 1]));
-    expect(base64urlToBuffer("A-B-C-")).toEqualBuffer(new Uint8Array([3, 224, 126, 11]));
+    expect(base64urlToBuffer("TEST")).toEqualBuffer(
+      new Uint8Array([76, 68, 147]),
+    );
+    expect(base64urlToBuffer("BAMCAQ")).toEqualBuffer(
+      new Uint8Array([4, 3, 2, 1]),
+    );
+    expect(base64urlToBuffer("A-B-C-")).toEqualBuffer(
+      new Uint8Array([3, 224, 126, 11]),
+    );
   });
 
   test("should convert simple `ArrayBuffer` values to base64url", () => {

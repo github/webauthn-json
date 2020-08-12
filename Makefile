@@ -2,7 +2,7 @@
 # https://github.com/lgarron/Makefile-scripts
 
 # Note: the first command becomes the default `make` target.
-NPM_COMMANDS = build dev clean test setup lint prepack postpublish
+NPM_COMMANDS = build build-main build-types build-extended build-extended-types build-browser-global build-bin build-demo dev clean test setup lint format prepack postpublish
 
 .PHONY: $(NPM_COMMANDS)
 $(NPM_COMMANDS):
@@ -13,3 +13,12 @@ DYNAMIC_NPM_COMMANDS = $(shell cat package.json | npx jq --raw-output ".scripts 
 .PHONY: update-Makefile
 update-Makefile:
 	sed -i "" "s/^NPM_COMMANDS = .*$$/NPM_COMMANDS = ${DYNAMIC_NPM_COMMANDS}/" Makefile
+
+VERSION=$(shell cat package.json | npx jq --raw-output ".version")
+
+.PHONY: format-bin
+format-bin:
+	echo "#!/usr/bin/env node\nconst version = \"${VERSION}\";" > /tmp/webauthn-json-bin.tmp.js
+	cat dist/bin/webauthn-json.js >> /tmp/webauthn-json-bin.tmp.js
+	cp /tmp/webauthn-json-bin.tmp.js dist/bin/webauthn-json.js
+	chmod +x dist/bin/webauthn-json.js

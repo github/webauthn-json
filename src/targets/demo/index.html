@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1" />
+    <script src="./index.ts"></script>
+    <link rel="stylesheet" type="text/css" href="./index.css" />
+  </head>
+
+  <body>
+    <code class="title">@github/webauthn-json</code>
+    <div class="title">
+      <a href="https://github.com/github/webauthn-json">project page</a>
+    </div>
+    <div class="title">
+      <a
+        href="https://github.com/github/webauthn-json/blob/gh-pages/src/index.ts"
+        >demo source</a
+      >
+    </div>
+
+    <button id="register">Register<span class="status"></span></button>
+    <button id="authenticate">Authenticate<span class="status"></span></button>
+    <button id="clear">Clear<span class="status"></span></button>
+    <button id="supported">supported()<span class="status"></span></button>
+
+    <textarea
+      id="registrations"
+      spellcheck="false"
+      placeholder="localStorage.webauthnExampleRegistrations"
+      title="localStorage.webauthnExampleRegistrations"
+    ></textarea>
+
+    <textarea
+      id="error"
+      spellcheck="false"
+      placeholder="Errors will be logged here."
+    ></textarea>
+  </body>
+</html>

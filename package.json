@@ -4,35 +4,73 @@
   "description": "A wrapper for the webauthn API that adapts input/output values to plain JSON with base64url.",
   "author": "GitHub, Inc. <opensource+webauthn-json@github.com>",
   "license": "MIT",
+  "type": "module",
   "repository": "github:github/webauthn-json",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "umd": "dist/webauthn-json.umd.js",
-  "types": "dist/src/index.d.ts",
-  "dependencies": {},
+  "main": "dist/main/webauthn-json.js",
+  "types": "dist/main/webauthn-json.d.ts",
+  "extended": "dist/extended/webauthn-json.extended.js",
+  "extended-types": "dist/extended/webauthn-json.extended.d.ts",
+  "browser-global": "dist/browser-global/webauthn-json.browser-global.js",
+  "bin": "dist/bin/webauthn-json.js",
+  "demo": "dist/demo/index.html",
+  "dependencies": {
+    "parcel": "^2.0.0-nightly.360"
+  },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.10.4",
     "@types/jest": "^24.0.23",
     "jest": "^26.1.0",
+    "prettier": "^2.0.5",
     "rollup": "^1.27.0",
     "rollup-plugin-terser": "^5.1.3",
     "rollup-plugin-tslint": "^0.2.2",
     "rollup-plugin-typescript2": "^0.21.2",
     "ts-jest": "^26.1.1",
     "tslint": "^5.20.1",
-    "typescript": "^3.7.2"
+    "typescript": "^3.9.7"
   },
   "scripts": {
-    "build": "npx rollup -c",
-    "dev": "npx rollup -cw",
-    "clean": "rm -rf dist",
+    "build": "npm run build-main && npm run build-types && npm run build-extended && npm run build-extended-types && npm run build-browser-global && npm run build-bin && npm run build-demo",
+    "build-main": "npx parcel build --target main src/targets/main.ts",
+    "build-types": "npx parcel build --target types src/targets/main.types.ts",
+    "build-extended": "npx parcel build --target extended src/targets/extended.ts",
+    "build-extended-types": "echo \"Skipping due to https://github.com/parcel-bundler/parcel/issues/5010\" || npx parcel build --target extended-types src/targets/extended.types.ts",
+    "build-browser-global": "npx parcel build --target browser-global src/targets/browser-global.ts",
+    "build-bin": "npx parcel build --target bin src/targets/bin.ts && make format-bin",
+    "build-demo": "npx parcel build --public-url . --target demo src/targets/demo/index.html",
+    "dev": "npx parcel serve src/targets/demo/index.html",
+    "clean": "rm -rf ./.parcel-cache ./dist",
     "test": "npx jest && npm run lint",
     "setup": "npm install",
-    "lint": "npx tslint --fix --project . && npx tslint --fix rollup.config.js",
+    "lint": "npx prettier --check src test",
+    "format": "npx prettier --write src test",
     "prepack": "npm run clean && npm run build",
     "postpublish": "npm publish --ignore-scripts --@github:registry='https://npm.pkg.github.com'"
   },
-  "bin": {
-    "webauthn-json": "./dist/bin/webauthn-json.js"
+  "targets": {
+    "main": {
+      "outputFormat": "esmodule"
+    },
+    "main-types": {
+      "outputFormat": "esmodule"
+    },
+    "extended": {
+      "outputFormat": "esmodule"
+    },
+    "extended-types": {},
+    "browser-global": {
+      "outputFormat": "esmodule",
+      "includeNodeModules": true
+    },
+    "bin": {
+      "outputFormat": "commonjs",
+      "context": "node",
+      "includeNodeModules": true
+    },
+    "demo": {
+      "outputFormat": "esmodule",
+      "includeNodeModules": true
+    }
   },
   "keywords": [
     "webauthn",
@@ -40,5 +78,20 @@
     "u2f",
     "security",
     "credentials"
-  ]
+  ],
+  "jest": {
+    "roots": [
+      "<rootDir>/src",
+      "<rootDir>/test"
+    ],
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    }
+  },
+  "prettier": {
+    "semi": true,
+    "trailingComma": "all",
+    "tabWidth": 2,
+    "quoteProps": "consistent"
+  }
 }

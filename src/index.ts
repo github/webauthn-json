@@ -1,14 +1,3 @@
-export {
-  CredentialCreationOptionsJSON,
-  PublicKeyCredentialWithAttestationJSON,
-  CredentialRequestOptionsJSON,
-  PublicKeyCredentialWithAssertionJSON,
-} from "./json";
-export {
-  create,
-  get,
-  supported,
-} from "./webauthn";
-export {
-  schema,
-} from "./webauthn-schema";
+export { create, get } from "./basic/api";
+export { supported } from "./basic/supported";
+export { schema } from "./basic/schema";
