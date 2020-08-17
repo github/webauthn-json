@@ -14,15 +14,14 @@
   "bin": "dist/bin/webauthn-json-bin.js",
   "demo": "dist/demo/index.html",
   "inspector": "dist/inspector/webauthn-json-inspector.js",
-  "dependencies": {
-    "parcel": "^2.0.0-nightly.360"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.11.0",
     "@babel/preset-typescript": "^7.10.4",
     "@types/jest": "^24.0.23",
     "@types/node": "^14.0.27",
     "jest": "^26.1.0",
+    "parcel": "^2.0.0-nightly.368",
     "prettier": "^2.0.5",
     "rollup": "^1.27.0",
     "rollup-plugin-terser": "^7.0.0",
