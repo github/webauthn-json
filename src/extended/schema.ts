@@ -1,6 +1,8 @@
 import {
   credentialCreationOptions,
   credentialRequestOptions,
+  publicKeyCredentialWithAssertion,
+  publicKeyCredentialWithAttestation,
 } from "../basic/schema";
 import {
   convertValue,
@@ -47,7 +49,7 @@ export const credentialCreationOptionsExtended: Schema = JSON.parse(
 );
 
 export const publicKeyCredentialWithAttestationExtended: Schema = JSON.parse(
-  JSON.stringify(credentialCreationOptions),
+  JSON.stringify(publicKeyCredentialWithAttestation),
 );
 (publicKeyCredentialWithAttestationExtended as any).clientExtensionResults = required(
   authenticationExtensionsClientOutputsSchema,
@@ -62,7 +64,7 @@ export const credentialRequestOptionsExtended: Schema = JSON.parse(
 );
 
 export const publicKeyCredentialWithAssertionExtended: Schema = JSON.parse(
-  JSON.stringify(credentialCreationOptions),
+  JSON.stringify(publicKeyCredentialWithAssertion),
 );
 (publicKeyCredentialWithAssertionExtended as any).clientExtensionResults = required(
   authenticationExtensionsClientOutputsSchema,
