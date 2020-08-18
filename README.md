@@ -32,7 +32,7 @@ async auth() {
 }
 ```
 
-See [here](https://github.com/github/webauthn-json/blob/gh-pages/src/index.ts) for fully working client-side [demo](https://github.github.com/webauthn-json/demo/) code.
+See [here](https://github.com/github/webauthn-json/blob/main/src/targets/demo/index.ts) for fully working client-side [demo](https://github.github.com/webauthn-json/demo/) code.
 
 ### API
 
