@@ -1,5 +1,5 @@
 {
-  "main": "../dist/extended.js",
-  "module": "../dist/extended.esm.js",
-  "types": "../dist/src/extended.d.ts"
+  "type": "module",
+  "main": "../dist/extended/webauthn-json.extended.js",
+  "types": "../dist/extended/webauthn-json.extended.d.ts"
 }
