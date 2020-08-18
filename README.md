@@ -56,7 +56,12 @@ npx @github/webauthn-json schema
 
 ## Extensions
 
-Modern browsers generally only support a single extension: the `appid` string. If you need to convert additional input or output extensions, use `createExtended()` and `getExtended()` from `@github/webauthn-json/dist/extended`.
+Modern browsers generally only support a small numbe rof extensions. To save code size, this library only includes the following extensions in the main build:
+
+- `appid`
+- `appidExclude`
+
+If you need to convert additional input or output extensions, use `createExtended()` and `getExtended()` from `@github/webauthn-json/dist/extended`.
 
 ## Contributions
 
