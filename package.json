@@ -1,6 +1,6 @@
 {
   "name": "@github/webauthn-json",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "A wrapper for the webauthn API that adapts input/output values to plain JSON with base64url.",
   "author": "GitHub, Inc. <opensource+webauthn-json@github.com>",
   "license": "MIT",
