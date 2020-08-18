@@ -8,6 +8,7 @@ export type Schema = SchemaLeaf | SchemaArray | SchemaObject;
 
 // We export these values in order so that they can be used to deduplicate
 // schema definitions in minified JS code.
+// TODO: Parcel isn't deduplicating these values.
 export const copyValue = "copy";
 export const convertValue = "convert";
 
