@@ -61,7 +61,7 @@ Modern browsers generally only support a small numbe rof extensions. To save cod
 - `appid`
 - `appidExclude`
 
-If you need to convert additional input or output extensions, use `createExtended()` and `getExtended()` from `@github/webauthn-json/dist/extended`.
+If you need to convert additional input or output extensions, use `createExtended()` and `getExtended()` from `@github/webauthn-json/extended`.
 
 ## Contributions
 
