@@ -22,12 +22,12 @@ Then:
 ```typescript
 import {create} from "@github/webauthn-json"
 
+const authRequest = fetch("...");
 async auth() {
-  const request = await fetch("...");
-  const response = await create(request.json());
+  const authResponse = await create((await authRequest).json());
   await fetch("...", {
     method: "POST",
-    body: JSON.stringify(response)
+    body: JSON.stringify(authResponse)
   });
 }
 ```
@@ -56,7 +56,7 @@ npx @github/webauthn-json schema
 
 ## Extensions
 
-Modern browsers generally only support a small numbe rof extensions. To save code size, this library only includes the following extensions in the main build:
+Modern browsers generally only support — and most sites only need to use — a small number of extensions. To save code size, `@github/webauthn-json` only includes the following extensions by default:
 
 - `appid`
 - `appidExclude`
