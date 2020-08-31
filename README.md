@@ -61,7 +61,7 @@ Modern browsers generally only support — and most sites only need to use — a
 - `appid`
 - `appidExclude`
 
-If you need to convert additional input or output extensions, use `createExtended()` and `getExtended()` from `@github/webauthn-json/dist/extended`.
+If you need to convert additional input or output extensions, use `createExtended()` and `getExtended()` from `@github/webauthn-json/extended`.
 
 ## Contributions
 
