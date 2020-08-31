@@ -56,7 +56,7 @@ npx @github/webauthn-json schema
 
 ## Extensions
 
-Modern browsers generally only support — and most sites only need to use — a small number of [extensions](https://www.w3.org/TR/webauthn/#sctn-defined-extensions). To save code size, `@github/webauthn-json` only includes the following extensions by default:
+Modern browsers generally only support — and most sites only need to use — a small number of [extensions](https://w3c.github.io/webauthn/#sctn-defined-extensions). To save code size, `@github/webauthn-json` only includes the following extensions by default:
 
 - `appid`
 - `appidExclude`
