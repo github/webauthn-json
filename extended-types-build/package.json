@@ -1,0 +1,8 @@
+{
+  "types": "../dist/extended/webauthn-json.extended.d.ts",
+  "targets": {
+    "types": {
+      "outputFormat": "esmodule"
+    }
+  }
+}
