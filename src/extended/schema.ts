@@ -19,8 +19,7 @@ const authenticationExtensionsClientInputsSchema: Schema = {
   appidExclude: optional(copyValue),
   uvm: optional(copyValue),
   credProps: optional({
-    first: required(convertValue),
-    secod: optional(convertValue),
+    credProps: optional(copyValue),
   }),
   largeBlob: optional({
     read: optional(copyValue),
@@ -34,8 +33,8 @@ const authenticationExtensionsClientOutputsSchema: Schema = {
   uvm: optional(copyValue),
   credProps: optional(copyValue),
   largeBlob: optional({
-    read: optional(copyValue),
-    write: optional(convertValue),
+    blob: optional(convertValue),
+    written: optional(copyValue),
   }),
 };
 

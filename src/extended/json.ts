@@ -13,6 +13,9 @@ interface ExtendedExtensionsClientInputsJSON {
   appidExclude?: string;
   uvm?: boolean;
   credProps?: {
+    credProps?: boolean;
+  };
+  prf?: {
     first: Base64urlString;
     second?: Base64urlString;
   };
@@ -27,7 +30,7 @@ interface ExtendedAuthenticationExtensionsClientOutputsJSON {
   appidExclude?: boolean;
   uvm?: Array<[number, number, number]>;
   credProps?: {
-    rk: boolean;
+    credProps: boolean;
   };
   largeBlob?: {
     blob?: Base64urlString;
