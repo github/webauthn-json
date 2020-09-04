@@ -30,8 +30,8 @@ interface ExtendedAuthenticationExtensionsClientOutputsJSON {
     rk: boolean;
   };
   largeBlob?: {
-    read?: boolean;
-    write?: Base64urlString;
+    blob?: Base64urlString;
+    written?: boolean;
   };
 }
 
