@@ -20,6 +20,7 @@ interface ExtendedExtensionsClientInputsJSON {
     second?: Base64urlString;
   };
   largeBlob?: {
+    support?: "required" | "preferred";
     read?: boolean;
     write?: Base64urlString;
   };
@@ -33,6 +34,7 @@ interface ExtendedAuthenticationExtensionsClientOutputsJSON {
     credProps: boolean;
   };
   largeBlob?: {
+    supported?: boolean;
     blob?: Base64urlString;
     written?: boolean;
   };

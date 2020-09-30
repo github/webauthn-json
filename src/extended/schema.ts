@@ -22,6 +22,7 @@ const authenticationExtensionsClientInputsSchema: Schema = {
     credProps: optional(copyValue),
   }),
   largeBlob: optional({
+    support: optional(copyValue),
     read: optional(copyValue),
     write: optional(convertValue),
   }),
@@ -33,6 +34,7 @@ const authenticationExtensionsClientOutputsSchema: Schema = {
   uvm: optional(copyValue),
   credProps: optional(copyValue),
   largeBlob: optional({
+    supported: optional(copyValue),
     blob: optional(convertValue),
     written: optional(copyValue),
   }),
