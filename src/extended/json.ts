@@ -15,10 +15,6 @@ interface ExtendedExtensionsClientInputsJSON {
   credProps?: {
     credProps?: boolean;
   };
-  prf?: {
-    first: Base64urlString;
-    second?: Base64urlString;
-  };
   largeBlob?: {
     support?: "required" | "preferred";
     read?: boolean;
