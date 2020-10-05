@@ -1,5 +1,0 @@
-{
-  "type": "module",
-  "main": "../dist/extended/webauthn-json.extended.js",
-  "types": "../dist/extended/webauthn-json.extended.d.ts"
-}

@@ -36,7 +36,7 @@
     "build-main": "npx parcel build --target main src/targets/main.ts",
     "build-types": "npx parcel build --target types src/targets/main.types.ts",
     "build-extended": "npx parcel build --target extended src/targets/extended.ts",
-    "build-extended-types": "echo \"Using workaround for https://github.com/parcel-bundler/parcel/issues/5010\" && cd extended-types-build && npx parcel build --target types ../src/targets/extended.types.ts",
+    "build-extended-types": "npx parcel build --target extended-types src/targets/extended.types.ts",
     "build-browser-global": "npx parcel build --target browser-global src/targets/browser-global.ts",
     "build-bin": "npx parcel build --target bin src/targets/bin.ts && make format-bin",
     "build-demo": "npx parcel build --public-url . --target demo src/targets/demo/index.html",
