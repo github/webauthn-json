@@ -10,7 +10,7 @@ import {
   publicKeyCredentialWithAssertion,
   publicKeyCredentialWithAttestation,
 } from "../src/basic/schema";
-import { convert } from "../src/schema-format";
+import { convert } from "../src/convert";
 import "./arraybuffer";
 
 describe("webauthn schema", () => {

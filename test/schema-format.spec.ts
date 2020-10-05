@@ -1,12 +1,12 @@
 import { base64urlToBuffer } from "../src/base64url";
+import { Schema } from "../src/schema-format";
 import {
   convert,
   convertValue,
   copyValue,
   optional,
   required,
-  Schema,
-} from "../src/schema-format";
+} from "../src/convert";
 import "./arraybuffer";
 
 describe("conversion", () => {

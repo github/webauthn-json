@@ -6,7 +6,7 @@ import {
   PublicKeyCredentialWithAttestationJSON,
   PublicKeyCredentialWithClientExtensionResults,
 } from "../basic/json";
-import { convert } from "../schema-format";
+import { convert } from "../convert";
 import {
   CredentialCreationOptionsExtendedJSON,
   CredentialRequestOptionsExtendedJSON,

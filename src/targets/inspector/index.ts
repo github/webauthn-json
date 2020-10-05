@@ -3,7 +3,7 @@ import "./inspector";
 import { base64urlToBuffer } from "../../base64url";
 import { CredentialCreationOptionsJSON } from "../../basic/json";
 import { credentialCreationOptions } from "../../basic/schema";
-import { convert } from "../../schema-format";
+import { convert } from "../../convert";
 
 const createButton = document.createElement("button");
 createButton.textContent = "create";

@@ -4,13 +4,8 @@ import {
   publicKeyCredentialWithAssertion,
   publicKeyCredentialWithAttestation,
 } from "../basic/schema";
-import {
-  convertValue,
-  copyValue,
-  optional,
-  required,
-  Schema,
-} from "../schema-format";
+import { convertValue, copyValue, optional, required } from "../convert";
+import { Schema } from "../schema-format";
 
 // shared
 

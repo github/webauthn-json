@@ -51,5 +51,5 @@ export type {
 // Conversion
 
 export { base64urlToBuffer, bufferToBase64url } from "../base64url";
-export { convert } from "../schema-format";
+export { convert } from "../convert";
 export { schema } from "../basic/schema";

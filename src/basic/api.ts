@@ -1,5 +1,5 @@
 import { base64urlToBuffer, bufferToBase64url } from "../base64url";
-import { convert } from "../schema-format";
+import { convert } from "../convert";
 import {
   CredentialCreationOptionsJSON,
   CredentialRequestOptionsJSON,

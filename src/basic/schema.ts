@@ -1,10 +1,10 @@
+import { Schema } from "../schema-format";
 import {
   convertValue as convert,
   copyValue as copy,
   optional,
   required,
-  Schema,
-} from "../schema-format";
+} from "../convert";
 
 // Shared by `create()` and `get()`.
 

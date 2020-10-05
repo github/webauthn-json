@@ -10,10 +10,10 @@ import {
   credentialCreationOptions,
   credentialRequestOptions,
 } from "../../basic/schema";
-import { convert } from "../../schema-format";
 
 import { readFileSync } from "fs";
 import { join } from "path";
+import { convert } from "../../convert";
 const indexStyle = readFileSync(join(__dirname, "index.css"), "utf8");
 
 const originalCreate = navigator.credentials?.create.bind(

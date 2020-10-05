@@ -1,7 +1,7 @@
 import { base64urlToBuffer } from "../src/base64url";
 import { CredentialCreationOptionsExtendedJSON } from "../src/extended/json";
 import { credentialCreationOptionsExtended } from "../src/extended/schema";
-import { convert } from "../src/schema-format";
+import { convert } from "../src/convert";
 import "./arraybuffer";
 
 describe("extended schema", () => {
