@@ -45,7 +45,7 @@ export function createExtendedResponseToJSON(
 }
 
 export async function createExtended(
-  requestJSON: CredentialCreationOptionsJSON,
+  requestJSON: CredentialCreationOptionsExtendedJSON,
 ): Promise<PublicKeyCredentialWithAttestationJSON> {
   const credential = (await navigator.credentials.create(
     createExtendedRequestFromJSON(requestJSON),
