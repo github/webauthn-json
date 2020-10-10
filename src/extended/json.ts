@@ -12,9 +12,7 @@ interface ExtendedExtensionsClientInputsJSON {
   appid?: string;
   appidExclude?: string;
   uvm?: boolean;
-  credProps?: {
-    credProps?: boolean;
-  };
+  credProps?: boolean;
   largeBlob?: {
     support?: "required" | "preferred";
     read?: boolean;
