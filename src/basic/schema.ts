@@ -17,11 +17,13 @@ const publicKeyCredentialDescriptorSchema: Schema = {
 const simplifiedExtensionsSchema: Schema = {
   appid: optional(copy),
   appidExclude: optional(copy),
+  credProps: optional(copy),
 };
 
 const simplifiedClientExtensionResultsSchema = {
   appid: optional(copy),
   appidExclude: optional(copy),
+  credProps: optional(copy),
 };
 
 // `navigator.create()` request

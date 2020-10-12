@@ -36,6 +36,7 @@ describe("webauthn schema", () => {
         challenge: "TEST-CHALLENGE_TEST-CHALLENGE_TEST-CHALLENG",
         extensions: {
           appidExclude: "https://example.com/trusted_facets",
+          credProps: true,
         },
       },
     };
@@ -96,6 +97,9 @@ describe("webauthn schema", () => {
       getClientExtensionResults: () => ({}),
       clientExtensionResults: {
         appidExclude: true,
+        credProps: {
+          rk: true,
+        },
       },
     };
     const converted = convert(
@@ -114,6 +118,9 @@ describe("webauthn schema", () => {
       },
       clientExtensionResults: {
         appidExclude: true,
+        credProps: {
+          rk: true,
+        },
       },
     });
   });

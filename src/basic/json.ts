@@ -3,9 +3,14 @@ import { Base64urlString } from "../base64url";
 // Intermediate type needed for attaching client outputs to WebAuthn API call
 // results before converting to JSON.
 
+interface CredPropsAuthenticationExtensionsClientOutputsJSON {
+  rk: boolean;
+}
+
 interface AuthenticationExtensionsClientOutputsJSON
   extends AuthenticationExtensionsClientOutputs {
   appidExclude?: boolean;
+  credProps?: CredPropsAuthenticationExtensionsClientOutputsJSON;
 }
 
 export interface PublicKeyCredentialWithClientExtensionResults
@@ -24,11 +29,13 @@ export interface PublicKeyCredentialDescriptorJSON {
 interface SimpleWebAuthnExtensionsJSON {
   appid?: string;
   appidExclude?: string;
+  credProps?: boolean;
 }
 
 interface SimpleClientExtensionResultsJSON {
   appid?: boolean;
   appidExclude?: boolean;
+  credProps?: CredPropsAuthenticationExtensionsClientOutputsJSON;
 }
 
 // `navigator.create()` request

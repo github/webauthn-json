@@ -60,6 +60,7 @@ Modern browsers generally only support — and most sites only need to use — a
 
 - `appid`
 - `appidExclude`
+- [`credProps`](https://w3c.github.io/webauthn/#sctn-authenticator-credential-properties-extension)
 
 If you need to convert additional input or output extensions, use `createExtended()` and `getExtended()` from `@github/webauthn-json/extended`.
 
