@@ -7,9 +7,9 @@ import {
   getResponseToJSON,
 } from "../../basic/api";
 import {
-  credentialCreationOptions,
-  credentialRequestOptions,
-} from "../../basic/schema";
+  credentialCreationOptionsExtended,
+  credentialRequestOptionsExtended,
+} from "../../extended/schema";
 
 import { readFileSync } from "fs";
 import { join } from "path";
@@ -97,7 +97,7 @@ export class WebAuthnInspector extends HTMLElement {
       };
       const json = convert(
         bufferToBase64url,
-        credentialCreationOptions,
+        credentialCreationOptionsExtended,
         options,
       );
       this.header.textContent = "WebAuthn Create Request";
@@ -132,7 +132,7 @@ export class WebAuthnInspector extends HTMLElement {
       };
       const json = convert(
         bufferToBase64url,
-        credentialRequestOptions,
+        credentialRequestOptionsExtended,
         options,
       );
       this.header.textContent = "WebAuthn Get Request";
