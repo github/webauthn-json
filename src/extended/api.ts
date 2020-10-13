@@ -1,23 +1,17 @@
 import { base64urlToBuffer, bufferToBase64url } from "../base64url";
-import {
-  CredentialCreationOptionsJSON,
-  CredentialRequestOptionsJSON,
-  PublicKeyCredentialWithAssertionJSON,
-  PublicKeyCredentialWithAttestationJSON,
-  PublicKeyCredentialWithClientExtensionResults,
-} from "../basic/json";
 import { convert } from "../convert";
+import { PublicKeyCredentialWithClientExtensionResults } from "../basic/json";
 import {
   CredentialCreationOptionsExtendedJSON,
   CredentialRequestOptionsExtendedJSON,
   PublicKeyCredentialWithAssertionExtendedResultsJSON,
-  PublicKeyCredentialWithAttestationExtendedResultsJSON,
+  PublicKeyCredentialWithAttestationExtendedResultsJSON
 } from "./json";
 import {
   credentialCreationOptionsExtended,
   credentialRequestOptionsExtended,
   publicKeyCredentialWithAssertionExtended,
-  publicKeyCredentialWithAttestationExtended,
+  publicKeyCredentialWithAttestationExtended
 } from "./schema";
 
 // create
@@ -46,7 +40,7 @@ export function createExtendedResponseToJSON(
 
 export async function createExtended(
   requestJSON: CredentialCreationOptionsExtendedJSON,
-): Promise<PublicKeyCredentialWithAttestationJSON> {
+): Promise<PublicKeyCredentialWithAttestationExtendedResultsJSON> {
   const credential = (await navigator.credentials.create(
     createExtendedRequestFromJSON(requestJSON),
   )) as PublicKeyCredential;
@@ -78,8 +72,8 @@ export function getExtendedResponseToJSON(
 }
 
 export async function getExtended(
-  requestJSON: CredentialRequestOptionsJSON,
-): Promise<PublicKeyCredentialWithAssertionJSON> {
+  requestJSON: CredentialRequestOptionsExtendedJSON,
+): Promise<PublicKeyCredentialWithAssertionExtendedResultsJSON> {
   const credential = (await navigator.credentials.get(
     getExtendedRequestFromJSON(requestJSON),
   )) as PublicKeyCredential;
