@@ -5,13 +5,13 @@ import {
   CredentialCreationOptionsExtendedJSON,
   CredentialRequestOptionsExtendedJSON,
   PublicKeyCredentialWithAssertionExtendedResultsJSON,
-  PublicKeyCredentialWithAttestationExtendedResultsJSON
+  PublicKeyCredentialWithAttestationExtendedResultsJSON,
 } from "./json";
 import {
   credentialCreationOptionsExtended,
   credentialRequestOptionsExtended,
   publicKeyCredentialWithAssertionExtended,
-  publicKeyCredentialWithAttestationExtended
+  publicKeyCredentialWithAttestationExtended,
 } from "./schema";
 
 // create
