@@ -55,9 +55,6 @@
     "main": {
       "outputFormat": "esmodule"
     },
-    "main-types": {
-      "outputFormat": "esmodule"
-    },
     "extended": {
       "outputFormat": "esmodule"
     },
