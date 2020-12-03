@@ -73,7 +73,7 @@ export interface CredentialCreationOptionsJSON {
 
 // `navigator.create()` response
 
-interface AuthenticatorAttestationResponseJSON {
+export interface AuthenticatorAttestationResponseJSON {
   clientDataJSON: Base64urlString;
   attestationObject: Base64urlString;
 }

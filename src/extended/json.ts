@@ -6,6 +6,7 @@ import {
   PublicKeyCredentialRequestOptionsJSON,
   PublicKeyCredentialWithAssertionJSON,
   PublicKeyCredentialWithAttestationJSON,
+  AuthenticatorAttestationResponseJSON,
 } from "../basic/json";
 
 interface ExtendedExtensionsClientInputsJSON {
@@ -44,8 +45,20 @@ export interface CredentialCreationOptionsExtendedJSON
   publicKey: PublicKeyCredentialCreationOptionsExtendedJSON;
 }
 
+export interface AuthenticatorAttestationResponseExtendedJSONCallablePartial {
+  getTransports?: () => string[];
+  getAuthenticatorData?: () => Base64urlString;
+  getPublicKey?: () => Base64urlString | null;
+  getPublicKeyAlgorithm?: () => COSEAlgorithmIdentifier;
+}
+
+export interface AuthenticatorAttestationResponseExtendedJSONCallable
+  extends AuthenticatorAttestationResponseJSON,
+    AuthenticatorAttestationResponseExtendedJSONCallablePartial {}
+
 export interface PublicKeyCredentialWithAttestationExtendedResultsJSON
   extends PublicKeyCredentialWithAttestationJSON {
+  response: AuthenticatorAttestationResponseExtendedJSONCallable;
   clientExtensionResults: ExtendedAuthenticationExtensionsClientOutputsJSON;
 }
 
