@@ -76,6 +76,7 @@ export interface CredentialCreationOptionsJSON {
 export interface AuthenticatorAttestationResponseJSON {
   clientDataJSON: Base64urlString;
   attestationObject: Base64urlString;
+  transports: string[];
 }
 
 export interface PublicKeyCredentialWithAttestationJSON {

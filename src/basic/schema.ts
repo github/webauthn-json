@@ -59,6 +59,10 @@ export const publicKeyCredentialWithAttestation: Schema = {
   response: required({
     clientDataJSON: required(convert),
     attestationObject: required(convert),
+    transports: derived(
+      copy,
+      (response: any) => response.getTransports?.() || [],
+    ),
   }),
   clientExtensionResults: derived(
     simplifiedClientExtensionResultsSchema,

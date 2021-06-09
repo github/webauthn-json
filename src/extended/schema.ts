@@ -49,6 +49,7 @@ export const publicKeyCredentialWithAttestationExtended: Schema = JSON.parse(
   authenticationExtensionsClientOutputsSchema,
   (publicKeyCredentialWithAttestation as any).clientExtensionResults.deriveFn,
 );
+(publicKeyCredentialWithAttestationExtended as any).response.schema.transports = (publicKeyCredentialWithAttestation as any).response.schema.transports;
 // get
 
 export const credentialRequestOptionsExtended: Schema = JSON.parse(
