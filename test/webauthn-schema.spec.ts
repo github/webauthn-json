@@ -94,13 +94,13 @@ describe("webauthn schema", () => {
         clientDataJSON: new Uint8Array([9, 10, 11, 12]),
         attestationObject: new Uint8Array([13, 14, 15, 16]),
       } as AuthenticatorAttestationResponse,
-      getClientExtensionResults: () => ({}),
-      clientExtensionResults: {
-        appidExclude: true,
-        credProps: {
-          rk: true,
-        },
-      },
+      getClientExtensionResults: () =>
+        ({
+          appidExclude: true,
+          credProps: {
+            rk: true,
+          },
+        } as AuthenticationExtensionsClientOutputs),
     };
     const converted = convert(
       bufferToBase64url,
@@ -232,10 +232,9 @@ describe("webauthn schema", () => {
         signature: new Uint8Array([13, 14, 15, 16]),
         userHandle: null,
       } as AuthenticatorAssertionResponse,
-      getClientExtensionResults: () => ({}),
-      clientExtensionResults: {
+      getClientExtensionResults: () => ({
         appid: true,
-      },
+      }),
     };
     const converted = convert(
       bufferToBase64url,

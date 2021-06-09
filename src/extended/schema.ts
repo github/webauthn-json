@@ -4,7 +4,7 @@ import {
   publicKeyCredentialWithAssertion,
   publicKeyCredentialWithAttestation,
 } from "../basic/schema";
-import { convertValue, copyValue, optional, required } from "../convert";
+import { convertValue, copyValue, derived, optional } from "../convert";
 import { Schema } from "../schema-format";
 
 // shared
@@ -45,8 +45,9 @@ export const credentialCreationOptionsExtended: Schema = JSON.parse(
 export const publicKeyCredentialWithAttestationExtended: Schema = JSON.parse(
   JSON.stringify(publicKeyCredentialWithAttestation),
 );
-(publicKeyCredentialWithAttestationExtended as any).clientExtensionResults = required(
+(publicKeyCredentialWithAttestationExtended as any).clientExtensionResults = derived(
   authenticationExtensionsClientOutputsSchema,
+  (publicKeyCredentialWithAttestation as any).clientExtensionResults.deriveFn,
 );
 // get
 
@@ -60,6 +61,7 @@ export const credentialRequestOptionsExtended: Schema = JSON.parse(
 export const publicKeyCredentialWithAssertionExtended: Schema = JSON.parse(
   JSON.stringify(publicKeyCredentialWithAssertion),
 );
-(publicKeyCredentialWithAssertionExtended as any).clientExtensionResults = required(
+(publicKeyCredentialWithAssertionExtended as any).clientExtensionResults = derived(
   authenticationExtensionsClientOutputsSchema,
+  (publicKeyCredentialWithAssertion as any).clientExtensionResults.deriveFn,
 );
