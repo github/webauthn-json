@@ -90,6 +90,7 @@ describe("extended schema", () => {
       response: {
         clientDataJSON: new Uint8Array([9, 10, 11, 12]),
         attestationObject: new Uint8Array([13, 14, 15, 16]),
+        getTransports: () => ["usb"],
       } as AuthenticatorAttestationResponse,
       getClientExtensionResults: () =>
         ({
@@ -108,6 +109,7 @@ describe("extended schema", () => {
       response: {
         attestationObject: "DQ4PEA",
         clientDataJSON: "CQoLDA",
+        transports: ["usb"],
       },
       clientExtensionResults: {
         appidExclude: true,
