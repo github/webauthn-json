@@ -1,7 +1,7 @@
 // We export these values in order so that they can be used to deduplicate
 // schema definitions in minified JS code.
 
-import { Schema } from "./schema-format";
+import { Schema, SchemaProperty } from "./schema-format";
 
 // TODO: Parcel isn't deduplicating these values.
 export const copyValue = "copy";
@@ -47,14 +47,14 @@ export function convert<From, To>(
   }
 }
 
-export function required(schema: Schema): any {
+export function required(schema: Schema): SchemaProperty {
   return {
     required: true,
     schema,
   };
 }
 
-export function optional(schema: Schema): any {
+export function optional(schema: Schema): SchemaProperty {
   return {
     required: false,
     schema,
