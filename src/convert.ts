@@ -24,6 +24,13 @@ export function convert<From, To>(
   if (schema instanceof Object) {
     const output: any = {};
     for (const [key, schemaField] of Object.entries(schema)) {
+      if (schemaField.deriveFn) {
+        const v = schemaField.deriveFn(input);
+        if (v !== undefined) {
+          input[key] = v;
+        }
+      }
+
       if (!(key in input)) {
         if (schemaField.required) {
           throw new Error(`Missing key: ${key}`);
@@ -45,6 +52,17 @@ export function convert<From, To>(
     }
     return output;
   }
+}
+
+export function derived(
+  schema: Schema,
+  deriveFn: (v: any) => any,
+): SchemaProperty {
+  return {
+    required: true,
+    schema,
+    deriveFn,
+  };
 }
 
 export function required(schema: Schema): SchemaProperty {
