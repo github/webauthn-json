@@ -2,6 +2,7 @@ import { Schema } from "../schema-format";
 import {
   convertValue as convert,
   copyValue as copy,
+  derived,
   optional,
   required,
 } from "../convert";
@@ -58,8 +59,15 @@ export const publicKeyCredentialWithAttestation: Schema = {
   response: required({
     clientDataJSON: required(convert),
     attestationObject: required(convert),
+    transports: derived(
+      copy,
+      (response: any) => response.getTransports?.() || [],
+    ),
   }),
-  clientExtensionResults: required(simplifiedClientExtensionResultsSchema),
+  clientExtensionResults: derived(
+    simplifiedClientExtensionResultsSchema,
+    (pkc: PublicKeyCredential) => pkc.getClientExtensionResults(),
+  ),
 };
 
 // `navigator.get()` request
@@ -89,7 +97,10 @@ export const publicKeyCredentialWithAssertion: Schema = {
     signature: required(convert),
     userHandle: required(convert),
   }),
-  clientExtensionResults: required(simplifiedClientExtensionResultsSchema),
+  clientExtensionResults: derived(
+    simplifiedClientExtensionResultsSchema,
+    (pkc: PublicKeyCredential) => pkc.getClientExtensionResults(),
+  ),
 };
 
 export const schema: { [s: string]: Schema } = {

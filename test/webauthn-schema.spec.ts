@@ -93,14 +93,15 @@ describe("webauthn schema", () => {
       response: {
         clientDataJSON: new Uint8Array([9, 10, 11, 12]),
         attestationObject: new Uint8Array([13, 14, 15, 16]),
+        getTransports: () => ["usb"],
       } as AuthenticatorAttestationResponse,
-      getClientExtensionResults: () => ({}),
-      clientExtensionResults: {
-        appidExclude: true,
-        credProps: {
-          rk: true,
-        },
-      },
+      getClientExtensionResults: () =>
+        ({
+          appidExclude: true,
+          credProps: {
+            rk: true,
+          },
+        } as AuthenticationExtensionsClientOutputs),
     };
     const converted = convert(
       bufferToBase64url,
@@ -115,6 +116,49 @@ describe("webauthn schema", () => {
       response: {
         attestationObject: "DQ4PEA",
         clientDataJSON: "CQoLDA",
+        transports: ["usb"],
+      },
+      clientExtensionResults: {
+        appidExclude: true,
+        credProps: {
+          rk: true,
+        },
+      },
+    });
+  });
+
+  test("converts PublicKeyCredentialWithAttestationJSON in browsers without getTransports()", () => {
+    const pkcwa: PublicKeyCredentialWithClientExtensionResults = {
+      type: "public-key",
+      id:
+        "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
+      rawId: new Uint8Array([1, 2, 3, 4]),
+      response: {
+        clientDataJSON: new Uint8Array([9, 10, 11, 12]),
+        attestationObject: new Uint8Array([13, 14, 15, 16]),
+      } as AuthenticatorAttestationResponse,
+      getClientExtensionResults: () =>
+        ({
+          appidExclude: true,
+          credProps: {
+            rk: true,
+          },
+        } as AuthenticationExtensionsClientOutputs),
+    };
+    const converted = convert(
+      bufferToBase64url,
+      publicKeyCredentialWithAttestation,
+      pkcwa,
+    );
+    expect(converted).toEqual({
+      type: "public-key",
+      id:
+        "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
+      rawId: "AQIDBA",
+      response: {
+        attestationObject: "DQ4PEA",
+        clientDataJSON: "CQoLDA",
+        transports: [],
       },
       clientExtensionResults: {
         appidExclude: true,
@@ -232,10 +276,9 @@ describe("webauthn schema", () => {
         signature: new Uint8Array([13, 14, 15, 16]),
         userHandle: null,
       } as AuthenticatorAssertionResponse,
-      getClientExtensionResults: () => ({}),
-      clientExtensionResults: {
+      getClientExtensionResults: () => ({
         appid: true,
-      },
+      }),
     };
     const converted = convert(
       bufferToBase64url,

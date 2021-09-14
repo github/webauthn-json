@@ -5,7 +5,6 @@ import {
   CredentialRequestOptionsJSON,
   PublicKeyCredentialWithAssertionJSON,
   PublicKeyCredentialWithAttestationJSON,
-  PublicKeyCredentialWithClientExtensionResults,
 } from "./json";
 import {
   credentialCreationOptions,
@@ -23,12 +22,10 @@ export function createRequestFromJSON(
 export function createResponseToJSON(
   credential: PublicKeyCredential,
 ): PublicKeyCredentialWithAttestationJSON {
-  const credentialWithClientExtensionResults = credential as PublicKeyCredentialWithClientExtensionResults;
-  credentialWithClientExtensionResults.clientExtensionResults = credential.getClientExtensionResults();
   return convert(
     bufferToBase64url,
     publicKeyCredentialWithAttestation,
-    credentialWithClientExtensionResults,
+    credential,
   );
 }
 
@@ -50,12 +47,10 @@ export function getRequestFromJSON(
 export function getResponseToJSON(
   credential: PublicKeyCredential,
 ): PublicKeyCredentialWithAssertionJSON {
-  const credentialWithClientExtensionResults = credential as PublicKeyCredentialWithClientExtensionResults;
-  credentialWithClientExtensionResults.clientExtensionResults = credential.getClientExtensionResults();
   return convert(
     bufferToBase64url,
     publicKeyCredentialWithAssertion,
-    credentialWithClientExtensionResults,
+    credential,
   );
 }
 

@@ -1,6 +1,11 @@
 type SchemaLeaf = "copy" | "convert";
+export interface SchemaProperty {
+  required: boolean;
+  schema: Schema;
+  deriveFn?(v: any): any;
+}
 interface SchemaObject {
-  [property: string]: { required: boolean; schema: Schema };
+  [property: string]: SchemaProperty;
 }
 type SchemaArray = [SchemaObject] | [SchemaLeaf];
 
