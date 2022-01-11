@@ -28,7 +28,6 @@
     "build": "npm run build-js && npm run build-types",
     "build-js": "node script/build.js",
     "build-types": "npx tsc -p tsconfig-types.json",
-    "build-bin": "npx parcel build --target bin src/targets/bin.ts && make format-bin",
     "build-demo": "npx parcel build --public-url . --target demo src/targets/demo/index.html",
     "build-inspector": "npx parcel build --target inspector src/targets/inspector/inspector.ts",
     "dev": "node script/dev.js",

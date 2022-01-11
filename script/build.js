@@ -1,4 +1,5 @@
 import { build } from "esbuild";
+import { readFileSync } from "fs";
 
 build({
   entryPoints: ["src/webauthn-json/index.ts"],
@@ -22,4 +23,16 @@ build({
   target: "es6",
   bundle: true,
   outfile: "dist/esm/webauthn-json.browser-global.js",
+});
+
+const { version } = JSON.parse(
+  readFileSync(new URL("../package.json", import.meta.url)),
+);
+build({
+  entryPoints: ["src/bin/main.ts"],
+  format: "esm",
+  target: "es2020",
+  bundle: true,
+  banner: { js: `const version = "${version}";\n` },
+  outfile: "dist/bin/main.js",
 });
