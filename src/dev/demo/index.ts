@@ -1,8 +1,8 @@
 // A minimal example to test `webauthn-json`.
 // Note: do not hardcode values in production.
 
-import { PublicKeyCredentialDescriptorJSON } from "../../basic/json";
-import { create, get, supported } from "../../index";
+import { PublicKeyCredentialDescriptorJSON } from "../../webauthn-json/basic/json";
+import { create, get, supported } from "../../webauthn-json";
 import {
   getRegistrations,
   saveRegistration,

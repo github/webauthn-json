@@ -1,13 +1,13 @@
-import { base64urlToBuffer } from "../src/base64url";
-import { CredentialCreationOptionsExtendedJSON } from "../src/extended/json";
-import { PublicKeyCredentialWithClientExtensionResults } from "../src/basic/json";
-import { credentialCreationOptionsExtended } from "../src/extended/schema";
+import { base64urlToBuffer } from "./base64url";
+import { CredentialCreationOptionsExtendedJSON } from "./extended/json";
+import { PublicKeyCredentialWithClientExtensionResults } from "./basic/json";
+import { credentialCreationOptionsExtended } from "./extended/schema";
 import {
   createExtendedResponseToJSON,
   getExtendedResponseToJSON,
-} from "../src/extended/api";
-import { convert } from "../src/convert";
-import "./arraybuffer";
+} from "./extended/api";
+import { convert } from "./convert";
+import "./arraybuffer.jest";
 
 describe("extended schema", () => {
   test("converts CredentialCreationOptionsExtendedJSON", () => {

@@ -1,6 +1,0 @@
-{
-  "extends": "@parcel/config-default",
-  "transformers": {
-    "extended-types:*.ts": ["@parcel/transformer-typescript-types"],
-  }
-}

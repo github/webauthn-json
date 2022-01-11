@@ -1,9 +1,9 @@
 import "regenerator-runtime/runtime";
 import "./inspector";
-import { base64urlToBuffer } from "../../base64url";
-import { CredentialCreationOptionsJSON } from "../../basic/json";
-import { credentialCreationOptions } from "../../basic/schema";
-import { convert } from "../../convert";
+import { base64urlToBuffer } from "../../webauthn-json/base64url";
+import { CredentialCreationOptionsJSON } from "../../webauthn-json/basic/json";
+import { credentialCreationOptions } from "../../webauthn-json/basic/schema";
+import { convert } from "../../webauthn-json/convert";
 
 const createButton = document.createElement("button");
 createButton.textContent = "create";

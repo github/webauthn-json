@@ -1,4 +1,4 @@
-import { PublicKeyCredentialWithAttestationJSON } from "../../basic/json";
+import { PublicKeyCredentialWithAttestationJSON } from "../../webauthn-json/basic/json";
 
 export function getRegistrations(): PublicKeyCredentialWithAttestationJSON[] {
   const registrations = JSON.parse(

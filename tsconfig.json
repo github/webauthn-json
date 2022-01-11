@@ -5,8 +5,8 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "moduleResolution": "node",
-    "target": "es2015",
-    "lib": ["es2017", "dom"]
+    "target": "es2020",
+    "outDir": "dist/types"
   },
-  "include": ["src/**/*", "test/**/*"]
+  "include": ["src/**/*"]
 }

@@ -1,18 +1,23 @@
 # This Makefile is a wrapper around the scripts from `package.json`.
 # https://github.com/lgarron/Makefile-scripts
+# Run `make first-run` once to set up the commands. # this-line-will-be-deleted-during-first-run
+.PHONY: first-run # this-line-will-be-deleted-during-first-run
+first-run: update-Makefile # this-line-will-be-deleted-during-first-run
 
 # Note: the first command becomes the default `make` target.
-NPM_COMMANDS = build build-main build-types build-extended build-extended-types build-browser-global build-bin build-demo build-inspector dev dev-inspector clean test setup lint format prepack postpublish
+NPM_COMMANDS = build build-js build-types dev clean test lint format prepack postpublish
 
 .PHONY: $(NPM_COMMANDS)
 $(NPM_COMMANDS):
 	npm run $@
 
 # We write the npm commands to the top of the file above to make shell autocompletion work in more places.
-DYNAMIC_NPM_COMMANDS = $(shell cat package.json | npx jq --raw-output ".scripts | keys_unsorted | join(\" \")")
+DYNAMIC_NPM_COMMANDS = $(shell node -e 'console.log(Object.keys(require("./package.json").scripts).join(" "))')
+UPDATE_MAKEFILE_SED_ARGS = "s/^NPM_COMMANDS = .*$$/NPM_COMMANDS = ${DYNAMIC_NPM_COMMANDS}/" Makefile
 .PHONY: update-Makefile
 update-Makefile:
-	sed -i "" "s/^NPM_COMMANDS = .*$$/NPM_COMMANDS = ${DYNAMIC_NPM_COMMANDS}/" Makefile
+	if [ "$(shell uname -s)" = "Darwin" ] ; then sed -i "" ${UPDATE_MAKEFILE_SED_ARGS} ; fi
+	if [ "$(shell uname -s)" != "Darwin" ] ; then sed -i"" ${UPDATE_MAKEFILE_SED_ARGS} ; fi
 
 .PHONY: publish
 publish:

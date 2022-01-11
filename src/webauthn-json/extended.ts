@@ -1,20 +1,20 @@
 // Basic
 
-export * from "../index";
+export * from "./index";
 
 export {
   createRequestFromJSON,
   createResponseToJSON,
   getRequestFromJSON,
   getResponseToJSON,
-} from "../basic/api";
+} from "./basic/api";
 
 import type {
   CredentialCreationOptionsJSON,
   CredentialRequestOptionsJSON,
   PublicKeyCredentialWithAssertionJSON,
   PublicKeyCredentialWithAttestationJSON,
-} from "../basic/json";
+} from "./basic/json";
 
 export type {
   CredentialCreationOptionsJSON,
@@ -32,14 +32,14 @@ export {
   getExtended,
   getExtendedRequestFromJSON,
   getExtendedResponseToJSON,
-} from "../extended/api";
+} from "./extended/api";
 
 import type {
   CredentialCreationOptionsExtendedJSON,
   CredentialRequestOptionsExtendedJSON,
   PublicKeyCredentialWithAssertionExtendedResultsJSON,
   PublicKeyCredentialWithAttestationExtendedResultsJSON,
-} from "../extended/json";
+} from "./extended/json";
 
 export type {
   CredentialCreationOptionsExtendedJSON,
@@ -50,6 +50,6 @@ export type {
 
 // Conversion
 
-export { base64urlToBuffer, bufferToBase64url } from "../base64url";
-export { convert } from "../convert";
-export { schema } from "../basic/schema";
+export { base64urlToBuffer, bufferToBase64url } from "./base64url";
+export { convert } from "./convert";
+export { schema } from "./basic/schema";

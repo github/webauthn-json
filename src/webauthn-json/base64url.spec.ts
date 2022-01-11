@@ -1,5 +1,5 @@
-import { base64urlToBuffer, bufferToBase64url } from "../src/base64url";
-import "./arraybuffer";
+import { base64urlToBuffer, bufferToBase64url } from "./base64url";
+import "./arraybuffer.jest";
 
 describe("base64url", () => {
   test("should convert simple base64url values to `ArrayBuffer`", () => {

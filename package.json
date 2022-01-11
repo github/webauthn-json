@@ -14,66 +14,36 @@
   "bin": "dist/bin/webauthn-json-bin.js",
   "demo": "dist/demo/index.html",
   "inspector": "dist/inspector/webauthn-json-inspector.js",
-  "dependencies": {},
   "devDependencies": {
-    "@babel/plugin-proposal-optional-chaining": "^7.11.0",
-    "@babel/preset-typescript": "^7.10.4",
     "@types/jest": "^24.0.23",
     "@types/node": "^14.0.27",
+    "barely-a-dev-server": "^0.2.6",
+    "esbuild": "^0.14.11",
     "jest": "^26.1.0",
-    "parcel": "^2.0.0-nightly.411",
     "prettier": "^2.0.5",
-    "rollup": "^1.27.0",
-    "rollup-plugin-terser": "^7.0.0",
-    "rollup-plugin-tslint": "^0.2.2",
-    "rollup-plugin-typescript2": "^0.21.2",
     "ts-jest": "^26.1.1",
-    "tslint": "^5.20.1",
-    "typescript": "^3.9.7"
+    "typescript": "^4.5.4"
   },
   "scripts": {
-    "build": "npm run build-main && npm run build-types && npm run build-extended && npm run build-extended-types && npm run build-browser-global && npm run build-bin && npm run build-demo",
-    "build-main": "npx parcel build --target main src/targets/main.ts",
-    "build-types": "npx parcel build --target types src/targets/main.types.ts",
-    "build-extended": "npx parcel build --target extended src/targets/extended.ts",
-    "build-extended-types": "npx parcel build --target extended-types src/targets/extended.types.ts",
-    "build-browser-global": "npx parcel build --target browser-global src/targets/browser-global.ts",
-    "build-bin": "npx parcel build --target bin src/targets/bin.ts && make format-bin",
-    "build-demo": "npx parcel build --public-url . --target demo src/targets/demo/index.html",
-    "build-inspector": "npx parcel build --target inspector src/targets/inspector/inspector.ts",
-    "dev": "npx parcel serve src/targets/demo/index.html",
-    "dev-inspector": "npx parcel serve src/targets/inspector/index.html",
-    "clean": "rm -rf ./.parcel-cache ./dist",
+    "build": "npm run build-js && npm run build-types",
+    "build-js": "node script/build.js",
+    "build-types": "npx tsc -p tsconfig-types.json",
+    "dev": "node script/dev.js",
+    "clean": "rm -rf ./.temp ./dist",
     "test": "npx jest && npm run lint",
-    "setup": "npm install",
-    "lint": "npx prettier --check src test",
-    "format": "npx prettier --write src test",
+    "lint": "npx prettier --check src",
+    "format": "npx prettier --write src",
     "prepack": "npm run clean && npm run build",
     "postpublish": "npm publish --ignore-scripts --@github:registry='https://npm.pkg.github.com'"
   },
-  "targets": {
-    "main": {
-      "outputFormat": "esmodule"
+  "exports": {
+    ".": {
+      "import": "./dist/webauthn-json.js",
+      "types": "./dist/types/webauthn-json/index.d.ts"
     },
-    "extended": {
-      "outputFormat": "esmodule"
-    },
-    "extended-types": {},
-    "browser-global": {
-      "outputFormat": "esmodule",
-      "includeNodeModules": true
-    },
-    "bin": {
-      "outputFormat": "commonjs",
-      "context": "node",
-      "includeNodeModules": true
-    },
-    "demo": {
-      "outputFormat": "esmodule",
-      "includeNodeModules": true
-    },
-    "inspector": {
-      "includeNodeModules": true
+    "./extended": {
+      "import": "./dist/webauthn-json.extended.js",
+      "types": "./dist/types/webauthn-json/extended.d.ts"
     }
   },
   "keywords": [
@@ -85,8 +55,7 @@
   ],
   "jest": {
     "roots": [
-      "<rootDir>/src",
-      "<rootDir>/test"
+      "<rootDir>/src"
     ],
     "transform": {
       "^.+\\.ts$": "ts-jest"
