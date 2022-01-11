@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { base64urlToBuffer } from "./base64url";
 import { Schema } from "./schema-format";
 import {

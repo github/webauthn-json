@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { base64urlToBuffer, bufferToBase64url } from "./base64url";
 import "./arraybuffer.jest";
 

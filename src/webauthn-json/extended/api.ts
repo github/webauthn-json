@@ -53,7 +53,8 @@ function makeCallable(
   jsonResponse: AuthenticatorAttestationResponseJSON,
   credentialResponse: AuthenticatorAttestationResponseExtendedCallablePartial,
 ): AuthenticatorAttestationResponseExtendedJSONCallable {
-  const callable: AuthenticatorAttestationResponseExtendedJSONCallablePartial = {};
+  const callable: AuthenticatorAttestationResponseExtendedJSONCallablePartial =
+    {};
 
   if (credentialResponse.getTransports) {
     callable.getTransports = (): string[] => {
