@@ -6,14 +6,19 @@
   "license": "MIT",
   "type": "module",
   "repository": "github:github/webauthn-json",
-  "main": "dist/main/webauthn-json.js",
-  "types": "dist/main/webauthn-json.d.ts",
-  "extended": "dist/extended/webauthn-json.extended.js",
-  "extended-types": "dist/extended/webauthn-json.extended.d.ts",
-  "browser-global": "dist/browser-global/webauthn-json.browser-global.js",
+  "main": "dist/esm/webauthn-json.js",
+  "types": "dist/types/index.d.ts",
   "bin": "dist/bin/webauthn-json-bin.js",
-  "demo": "dist/demo/index.html",
-  "inspector": "dist/inspector/webauthn-json-inspector.js",
+  "exports": {
+    ".": {
+      "import": "./dist/webauthn-json.js",
+      "types": "./dist/types/webauthn-json/index.d.ts"
+    },
+    "./extended": {
+      "import": "./dist/webauthn-json.extended.js",
+      "types": "./dist/types/webauthn-json/extended.d.ts"
+    }
+  },
   "devDependencies": {
     "@types/jest": "^27.4.0",
     "@types/node": "^17.0.8",
@@ -35,16 +40,6 @@
     "format": "npx prettier --write src",
     "prepack": "npm run clean && npm run build",
     "postpublish": "npm publish --ignore-scripts --@github:registry='https://npm.pkg.github.com'"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/webauthn-json.js",
-      "types": "./dist/types/webauthn-json/index.d.ts"
-    },
-    "./extended": {
-      "import": "./dist/webauthn-json.extended.js",
-      "types": "./dist/types/webauthn-json/extended.d.ts"
-    }
   },
   "keywords": [
     "webauthn",
