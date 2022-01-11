@@ -1,13 +1,13 @@
-import { base64urlToBuffer } from "../src/base64url";
-import { Schema } from "../src/schema-format";
+import { base64urlToBuffer } from "./base64url";
+import { Schema } from "./schema-format";
 import {
   convert,
   convertValue,
   copyValue,
   optional,
   required,
-} from "../src/convert";
-import "./arraybuffer";
+} from "./convert";
+import "./arraybuffer.jest";
 
 describe("conversion", () => {
   test("can handle empty schema", () => {

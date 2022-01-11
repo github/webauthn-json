@@ -1,17 +1,17 @@
-import { base64urlToBuffer, bufferToBase64url } from "../src/base64url";
+import { base64urlToBuffer, bufferToBase64url } from "./base64url";
 import {
   CredentialCreationOptionsJSON,
   CredentialRequestOptionsJSON,
   PublicKeyCredentialWithClientExtensionResults,
-} from "../src/basic/json";
+} from "./basic/json";
 import {
   credentialCreationOptions,
   credentialRequestOptions,
   publicKeyCredentialWithAssertion,
   publicKeyCredentialWithAttestation,
-} from "../src/basic/schema";
-import { convert } from "../src/convert";
-import "./arraybuffer";
+} from "./basic/schema";
+import { convert } from "./convert";
+import "./arraybuffer.jest";
 
 describe("webauthn schema", () => {
   test("converts CredentialCreationOptionsJSON", () => {

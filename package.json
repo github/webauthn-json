@@ -35,8 +35,8 @@
     "dev-inspector": "npx parcel serve src/targets/inspector/index.html",
     "clean": "rm -rf ./.parcel-cache ./dist",
     "test": "npx jest && npm run lint",
-    "lint": "npx prettier --check src test",
-    "format": "npx prettier --write src test",
+    "lint": "npx prettier --check src",
+    "format": "npx prettier --write src",
     "prepack": "npm run clean && npm run build",
     "postpublish": "npm publish --ignore-scripts --@github:registry='https://npm.pkg.github.com'"
   },
