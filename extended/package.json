@@ -1,0 +1,4 @@
+{
+  "main": "../dist/esm/webauthn-json.extended.js",
+  "types": "../dist/types/extended.d.ts"
+}
