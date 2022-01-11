@@ -1,4 +1,3 @@
-import "regenerator-runtime/runtime";
 import { bufferToBase64url } from "../../webauthn-json/base64url";
 import {
   createRequestFromJSON,
