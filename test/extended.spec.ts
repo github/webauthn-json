@@ -1,6 +1,11 @@
 import { base64urlToBuffer } from "../src/base64url";
 import { CredentialCreationOptionsExtendedJSON } from "../src/extended/json";
+import { PublicKeyCredentialWithClientExtensionResults } from "../src/basic/json";
 import { credentialCreationOptionsExtended } from "../src/extended/schema";
+import {
+  createExtendedResponseToJSON,
+  getExtendedResponseToJSON,
+} from "../src/extended/api";
 import { convert } from "../src/convert";
 import "./arraybuffer";
 
@@ -74,5 +79,83 @@ describe("extended schema", () => {
         0xe0,
       ]),
     );
+  });
+
+  test("converts PublicKeyCredentialWithClientExtensionResults with attestation", () => {
+    const pkcwa: PublicKeyCredentialWithClientExtensionResults = {
+      type: "public-key",
+      id:
+        "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
+      rawId: new Uint8Array([1, 2, 3, 4]),
+      response: {
+        clientDataJSON: new Uint8Array([9, 10, 11, 12]),
+        attestationObject: new Uint8Array([13, 14, 15, 16]),
+        getTransports: () => ["usb"],
+      } as AuthenticatorAttestationResponse,
+      getClientExtensionResults: () =>
+        ({
+          appidExclude: true,
+          largeBlob: {
+            supported: true,
+          },
+        } as AuthenticationExtensionsClientOutputs),
+    };
+    const converted = createExtendedResponseToJSON(pkcwa);
+    expect(converted).toEqual({
+      type: "public-key",
+      id:
+        "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
+      rawId: "AQIDBA",
+      response: {
+        attestationObject: "DQ4PEA",
+        clientDataJSON: "CQoLDA",
+        transports: ["usb"],
+      },
+      clientExtensionResults: {
+        appidExclude: true,
+        largeBlob: {
+          supported: true,
+        },
+      },
+    });
+  });
+
+  test("converts PublicKeyCredentialWithClientExtensionResults with assertion", () => {
+    const pkcwa: PublicKeyCredentialWithClientExtensionResults = {
+      type: "public-key",
+      id:
+        "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
+      rawId: new Uint8Array([1, 2, 3, 4]),
+      response: {
+        authenticatorData: new Uint8Array([5, 6, 7, 8]),
+        clientDataJSON: new Uint8Array([9, 10, 11, 12]),
+        signature: new Uint8Array([13, 14, 15, 16]),
+        userHandle: null,
+      } as AuthenticatorAssertionResponse,
+      getClientExtensionResults: () =>
+        ({
+          largeBlob: {
+            written: true,
+          },
+        } as AuthenticationExtensionsClientOutputs),
+    };
+    const converted = getExtendedResponseToJSON(pkcwa);
+    expect(converted).toEqual({
+      type: "public-key",
+      id:
+        "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
+      rawId: "AQIDBA",
+      response: {
+        authenticatorData: "BQYHCA",
+        clientDataJSON: "CQoLDA",
+        signature: "DQ4PEA",
+        userHandle: null,
+      },
+      clientExtensionResults: {
+        largeBlob: {
+          written: true,
+        },
+      },
+    });
   });
 });
