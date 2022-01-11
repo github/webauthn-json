@@ -1,4 +1,4 @@
-:host {
+export const inspectorCSS = `:host {
   position: absolute;
   top: 2em;
   left: 2em;
@@ -53,3 +53,4 @@ textarea {
 button {
   margin-right: 0.5em;
 }
+`;

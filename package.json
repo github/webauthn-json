@@ -28,8 +28,6 @@
     "build": "npm run build-js && npm run build-types",
     "build-js": "node script/build.js",
     "build-types": "npx tsc -p tsconfig-types.json",
-    "build-demo": "npx parcel build --public-url . --target demo src/targets/demo/index.html",
-    "build-inspector": "npx parcel build --target inspector src/targets/inspector/inspector.ts",
     "dev": "node script/dev.js",
     "dev-inspector": "npx parcel serve src/targets/inspector/index.html",
     "clean": "rm -rf ./.parcel-cache ./dist",

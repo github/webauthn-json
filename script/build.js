@@ -19,10 +19,18 @@ build({
 
 build({
   entryPoints: ["src/webauthn-json/browser-global.ts"],
-  format: "esm",
+  format: "cjs",
   target: "es6",
   bundle: true,
   outfile: "dist/esm/webauthn-json.browser-global.js",
+});
+
+build({
+  entryPoints: ["src/dev/inspector/inspector.ts"],
+  format: "iife",
+  target: "es6",
+  bundle: true,
+  outfile: "dist/inspector/inspector.js",
 });
 
 const { version } = JSON.parse(
