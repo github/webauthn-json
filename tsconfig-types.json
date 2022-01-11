@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "removeComments": false,
+  },
+  "include": ["src/webauthn-json"],
+  "exclude": ["src/**/*.spec.ts"]
+}

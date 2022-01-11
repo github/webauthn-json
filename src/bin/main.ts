@@ -1,7 +1,7 @@
 /* tslint:disable:no-console no-var-requires */
 
 declare const version: string;
-import { schema } from "../index";
+import { schema } from "../webauthn-json";
 
 const help = `Usage: ${process.argv[1]} schema`;
 

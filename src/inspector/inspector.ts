@@ -1,19 +1,19 @@
 import "regenerator-runtime/runtime";
-import { bufferToBase64url } from "../../base64url";
+import { bufferToBase64url } from "../webauthn-json/base64url";
 import {
   createRequestFromJSON,
   createResponseToJSON,
   getRequestFromJSON,
   getResponseToJSON,
-} from "../../basic/api";
+} from "../webauthn-json/basic/api";
 import {
   credentialCreationOptionsExtended,
   credentialRequestOptionsExtended,
-} from "../../extended/schema";
+} from "../webauthn-json/extended/schema";
 
 import { readFileSync } from "fs";
 import { join } from "path";
-import { convert } from "../../convert";
+import { convert } from "../webauthn-json/convert";
 const indexStyle = readFileSync(join(__dirname, "index.css"), "utf8");
 
 const originalCreate = navigator.credentials?.create.bind(
