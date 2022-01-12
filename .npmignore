@@ -1,8 +1,0 @@
-*
-!/LICENSE.md
-!/README.md
-!/package.json
-!/package-lock.json
-!/dist/**/*
-!/src/**/*
-!/extended

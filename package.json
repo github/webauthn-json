@@ -61,5 +61,14 @@
     "trailingComma": "all",
     "tabWidth": 2,
     "quoteProps": "consistent"
-  }
+  },
+  "files": [
+    "/LICENSE.md",
+    "/README.md",
+    "/package.json",
+    "/package-lock.json",
+    "/dist/**/*",
+    "/extended/**/*",
+    "/src/webauthn-json/**/*"
+  ]
 }
