@@ -6,6 +6,7 @@ build({
   format: "esm",
   target: "es2020",
   bundle: true,
+  sourcemap: true,
   outfile: "dist/esm/webauthn-json.js",
 });
 
@@ -14,6 +15,7 @@ build({
   format: "esm",
   target: "es2020",
   bundle: true,
+  sourcemap: true,
   outfile: "dist/esm/webauthn-json.extended.js",
 });
 
@@ -22,6 +24,7 @@ build({
   format: "cjs",
   target: "es6",
   bundle: true,
+  sourcemap: true,
   outfile: "dist/esm/webauthn-json.browser-global.js",
 });
 
@@ -30,6 +33,7 @@ build({
   format: "iife",
   target: "es6",
   bundle: true,
+  sourcemap: true,
   outfile: "dist/inspector/inspector.js",
 });
 
@@ -41,6 +45,7 @@ build({
   format: "esm",
   target: "es2020",
   bundle: true,
+  sourcemap: true,
   banner: { js: `const version = "${version}";\n` },
   outfile: "dist/bin/main.js",
 });
