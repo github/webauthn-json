@@ -8,7 +8,7 @@
   "repository": "github:github/webauthn-json",
   "main": "dist/esm/webauthn-json.js",
   "types": "dist/types/index.d.ts",
-  "bin": "dist/bin/webauthn-json-bin.js",
+  "bin": "dist/bin/main.js",
   "exports": {
     ".": {
       "import": "./dist/webauthn-json.js",
