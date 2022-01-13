@@ -46,6 +46,6 @@ build({
   target: "es2020",
   bundle: true,
   sourcemap: true,
-  banner: { js: `const version = "${version}";\n` },
+  define: { WEBAUTHN_JSON_VERSION: JSON.stringify(version) },
   outfile: "dist/bin/main.js",
 });
