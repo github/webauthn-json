@@ -24,8 +24,8 @@ export function convert<From, To>(
   if (schema instanceof Object) {
     const output: any = {};
     for (const [key, schemaField] of Object.entries(schema)) {
-      if (schemaField.deriveFn) {
-        const v = schemaField.deriveFn(input);
+      if (schemaField.derive) {
+        const v = schemaField.derive(input);
         if (v !== undefined) {
           input[key] = v;
         }
@@ -56,12 +56,12 @@ export function convert<From, To>(
 
 export function derived(
   schema: Schema,
-  deriveFn: (v: any) => any,
+  derive: (v: any) => any,
 ): SchemaProperty {
   return {
     required: true,
     schema,
-    deriveFn,
+    derive,
   };
 }
 

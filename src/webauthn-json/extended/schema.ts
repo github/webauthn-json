@@ -47,7 +47,7 @@ export const publicKeyCredentialWithAttestationExtended: Schema = JSON.parse(
 (publicKeyCredentialWithAttestationExtended as any).clientExtensionResults =
   derived(
     authenticationExtensionsClientOutputsSchema,
-    (publicKeyCredentialWithAttestation as any).clientExtensionResults.deriveFn,
+    (publicKeyCredentialWithAttestation as any).clientExtensionResults.derive,
   );
 (publicKeyCredentialWithAttestationExtended as any).response.schema.transports =
   (publicKeyCredentialWithAttestation as any).response.schema.transports;
@@ -65,5 +65,5 @@ export const publicKeyCredentialWithAssertionExtended: Schema = JSON.parse(
 (publicKeyCredentialWithAssertionExtended as any).clientExtensionResults =
   derived(
     authenticationExtensionsClientOutputsSchema,
-    (publicKeyCredentialWithAssertion as any).clientExtensionResults.deriveFn,
+    (publicKeyCredentialWithAssertion as any).clientExtensionResults.derive,
   );
