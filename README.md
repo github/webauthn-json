@@ -20,14 +20,14 @@ npm install --save @github/webauthn-json
 Then:
 
 ```typescript
-import {create} from "@github/webauthn-json"
+import { create } from "@github/webauthn-json";
 
-const authRequest = fetch("...");
-async auth() {
-  const authResponse = await create((await authRequest).json());
+const request = fetch("...");
+async createCredential() {
+  const response = await create((await request).json());
   await fetch("...", {
     method: "POST",
-    body: JSON.stringify(authResponse)
+    body: JSON.stringify(response)
   });
 }
 ```
