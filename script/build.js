@@ -1,5 +1,6 @@
 import { build } from "esbuild";
 import { readFileSync } from "fs";
+import { chmod } from "fs/promises";
 
 build({
   entryPoints: ["src/webauthn-json/index.ts"],
@@ -40,12 +41,14 @@ build({
 const { version } = JSON.parse(
   readFileSync(new URL("../package.json", import.meta.url)),
 );
-build({
+await build({
   entryPoints: ["src/bin/main.ts"],
   format: "esm",
   target: "es2020",
   bundle: true,
   sourcemap: true,
   define: { WEBAUTHN_JSON_VERSION: JSON.stringify(version) },
+  banner: { js: "#!/usr/bin/env node" },
   outfile: "dist/bin/main.js",
 });
+chmod("dist/bin/main.js", 0o755);
