@@ -12,11 +12,11 @@
   "exports": {
     ".": {
       "import": "./dist/webauthn-json.js",
-      "types": "./dist/types/webauthn-json/index.d.ts"
+      "types": "./dist/types/index.d.ts"
     },
     "./extended": {
       "import": "./dist/webauthn-json.extended.js",
-      "types": "./dist/types/webauthn-json/extended.d.ts"
+      "types": "./dist/types/extended.d.ts"
     }
   },
   "devDependencies": {

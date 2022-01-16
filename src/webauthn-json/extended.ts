@@ -9,19 +9,12 @@ export {
   getResponseToJSON,
 } from "./basic/api";
 
-import type {
+export type {
   CredentialCreationOptionsJSON,
   CredentialRequestOptionsJSON,
   PublicKeyCredentialWithAssertionJSON,
   PublicKeyCredentialWithAttestationJSON,
 } from "./basic/json";
-
-export type {
-  CredentialCreationOptionsJSON,
-  PublicKeyCredentialWithAttestationJSON,
-  CredentialRequestOptionsJSON,
-  PublicKeyCredentialWithAssertionJSON,
-};
 
 // Extended
 
@@ -34,19 +27,12 @@ export {
   getExtendedResponseToJSON,
 } from "./extended/api";
 
-import type {
-  CredentialCreationOptionsExtendedJSON,
-  CredentialRequestOptionsExtendedJSON,
-  PublicKeyCredentialWithAssertionExtendedResultsJSON,
-  PublicKeyCredentialWithAttestationExtendedResultsJSON,
-} from "./extended/json";
-
 export type {
   CredentialCreationOptionsExtendedJSON,
   CredentialRequestOptionsExtendedJSON,
   PublicKeyCredentialWithAssertionExtendedResultsJSON,
   PublicKeyCredentialWithAttestationExtendedResultsJSON,
-};
+} from "./extended/json";
 
 // Conversion
 
