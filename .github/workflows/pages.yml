@@ -21,7 +21,7 @@ jobs:
           npm install
           make build-pages
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        uses: JamesIves/github-pages-deploy-action@2731bec0dbf2bbf03977acbe88f9977eb7c2fbb7 # v4.2.2
         with:
           branch: gh-pages
           folder: dist/pages
