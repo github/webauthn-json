@@ -1,4 +1,3 @@
-import "regenerator-runtime/runtime";
 import "./inspector";
 import { base64urlToBuffer } from "../../webauthn-json/base64url";
 import { CredentialCreationOptionsJSON } from "../../webauthn-json/basic/json";

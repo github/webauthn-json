@@ -1,3 +1,4 @@
+import { barelyServe } from "barely-a-dev-server";
 import { build } from "esbuild";
 import { readFileSync } from "fs";
 import { chmod } from "fs/promises";

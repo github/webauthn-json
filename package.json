@@ -31,8 +31,9 @@
   },
   "scripts": {
     "build": "npm run build-js && npm run build-types",
-    "build-js": "node script/build.js",
+    "build-js": "node script/build-js.js",
     "build-types": "npx tsc -p tsconfig-types.json",
+    "build-pages": "node script/build-pages.js",
     "dev": "node script/dev.js",
     "clean": "rm -rf ./.temp ./dist",
     "test": "npx jest && npm run lint",
