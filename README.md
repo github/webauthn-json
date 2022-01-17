@@ -62,6 +62,10 @@ Modern browsers generally only support — and most sites only need to use — a
 - `appidExclude`
 - [`credProps`](https://w3c.github.io/webauthn/#sctn-authenticator-credential-properties-extension)
 
+In addition, we handle the following info (that is not technically part of extensions):
+
+- [`transports`](https://w3c.github.io/webauthn/#dom-authenticatorattestationresponse-transports-slot) (on a public key credential)
+
 If you need to convert additional input or output extensions, use `createExtended()` and `getExtended()` from `@github/webauthn-json/extended`.
 
 ## Contributions
