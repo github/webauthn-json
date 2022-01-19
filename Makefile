@@ -19,12 +19,3 @@ update-Makefile:
 .PHONY: publish
 publish:
 	npm publish
-
-VERSION=$(shell cat package.json | npx jq --raw-output ".version")
-
-.PHONY: format-bin
-format-bin:
-	echo "#!/usr/bin/env node\nconst version = \"${VERSION}\";" > /tmp/webauthn-json-bin.tmp.js
-	cat dist/bin/webauthn-json-bin.js >> /tmp/webauthn-json-bin.tmp.js
-	cp /tmp/webauthn-json-bin.tmp.js dist/bin/webauthn-json-bin.js
-	chmod +x dist/bin/webauthn-json-bin.js
