@@ -23,7 +23,7 @@ build({
 
 build({
   entryPoints: ["src/webauthn-json/index.ts"],
-  format: "cjs",
+  format: "esm",
   target: "es2020",
   bundle: true,
   sourcemap: true,
@@ -32,7 +32,7 @@ build({
 
 build({
   entryPoints: ["src/webauthn-json/extended.ts"],
-  format: "cjs",
+  format: "esm",
   target: "es2020",
   bundle: true,
   sourcemap: true,
