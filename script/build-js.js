@@ -5,7 +5,25 @@ import { chmod } from "fs/promises";
 
 build({
   entryPoints: ["src/webauthn-json/index.ts"],
-  format: "esm",
+  format: "cjs",
+  target: "es2015",
+  bundle: true,
+  sourcemap: true,
+  outfile: "dist/cjs/webauthn-json.cjs",
+});
+
+build({
+  entryPoints: ["src/webauthn-json/extended.ts"],
+  format: "cjs",
+  target: "es2015",
+  bundle: true,
+  sourcemap: true,
+  outfile: "dist/cjs/webauthn-json.extended.cjs",
+});
+
+build({
+  entryPoints: ["src/webauthn-json/index.ts"],
+  format: "cjs",
   target: "es2020",
   bundle: true,
   sourcemap: true,
@@ -14,7 +32,7 @@ build({
 
 build({
   entryPoints: ["src/webauthn-json/extended.ts"],
-  format: "esm",
+  format: "cjs",
   target: "es2020",
   bundle: true,
   sourcemap: true,
@@ -27,7 +45,7 @@ build({
   target: "es6",
   bundle: true,
   sourcemap: true,
-  outfile: "dist/esm/webauthn-json.browser-global.js",
+  outfile: "dist/browser-global/webauthn-json.browser-global.js",
 });
 
 build({

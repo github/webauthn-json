@@ -11,10 +11,12 @@
   "bin": "dist/bin/main.js",
   "exports": {
     ".": {
+      "require": "./dist/cjs/webauthn-json.cjs",
       "import": "./dist/esm/webauthn-json.js",
       "types": "./dist/types/index.d.ts"
     },
     "./extended": {
+      "require": "./dist/cjs/webauthn-json.extended.cjs",
       "import": "./dist/esm/webauthn-json.extended.js",
       "types": "./dist/types/extended.d.ts"
     }
