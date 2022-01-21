@@ -24,7 +24,7 @@ build({
 build({
   entryPoints: ["src/webauthn-json/index.ts"],
   format: "esm",
-  target: "es2020",
+  target: "es2019",
   bundle: true,
   sourcemap: true,
   outfile: "dist/esm/webauthn-json.js",
@@ -33,7 +33,7 @@ build({
 build({
   entryPoints: ["src/webauthn-json/extended.ts"],
   format: "esm",
-  target: "es2020",
+  target: "es2019",
   bundle: true,
   sourcemap: true,
   outfile: "dist/esm/webauthn-json.extended.js",
@@ -63,7 +63,7 @@ const { version } = JSON.parse(
 await build({
   entryPoints: ["src/bin/main.ts"],
   format: "esm",
-  target: "es2020",
+  target: "es2019",
   bundle: true,
   sourcemap: true,
   define: { WEBAUTHN_JSON_VERSION: JSON.stringify(version) },
