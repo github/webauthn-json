@@ -9,13 +9,6 @@ export {
   getResponseToJSON,
 } from "./basic/api";
 
-export type {
-  CredentialCreationOptionsJSON,
-  CredentialRequestOptionsJSON,
-  PublicKeyCredentialWithAssertionJSON,
-  PublicKeyCredentialWithAttestationJSON,
-} from "./basic/json";
-
 // Extended
 
 export {

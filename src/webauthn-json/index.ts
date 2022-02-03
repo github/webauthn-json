@@ -6,4 +6,6 @@ export type {
   PublicKeyCredentialDescriptorJSON,
   PublicKeyCredentialWithAssertionJSON,
   PublicKeyCredentialWithAttestationJSON,
+  CredentialCreationOptionsJSON,
+  CredentialRequestOptionsJSON,
 } from "./basic/json";
