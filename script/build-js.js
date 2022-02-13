@@ -49,6 +49,15 @@ build({
 });
 
 build({
+  entryPoints: ["src/webauthn-json/browser-global.extended.ts"],
+  format: "cjs",
+  target: "es6",
+  bundle: true,
+  sourcemap: true,
+  outfile: "dist/browser-global/webauthn-json.browser-global.extended.js",
+});
+
+build({
   entryPoints: ["src/dev/inspector/inspector.ts"],
   format: "iife",
   target: "es6",
