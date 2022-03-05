@@ -1,13 +1,5 @@
 import { Base64urlString } from "../base64url";
 
-interface PublicKeyCredentialJSON {
-  id: string;
-  type: PublicKeyCredentialType;
-  rawId: Base64urlString;
-  // TODO: This field is technically not optional in the spec, but Firefox hasn't implemented it.
-  authenticatorAttachment?: AuthenticatorAttachment;
-}
-
 // Intermediate type needed for attaching client outputs to WebAuthn API call
 // results before converting to JSON.
 
@@ -46,6 +38,14 @@ interface SimpleClientExtensionResultsJSON {
   appid?: boolean;
   appidExclude?: boolean;
   credProps?: CredPropsAuthenticationExtensionsClientOutputsJSON;
+}
+
+interface PublicKeyCredentialJSON {
+  id: string;
+  type: PublicKeyCredentialType;
+  rawId: Base64urlString;
+  // TODO: This field is technically not optional in the spec, but Firefox hasn't implemented it.
+  authenticatorAttachment?: AuthenticatorAttachment;
 }
 
 // `navigator.create()` request
