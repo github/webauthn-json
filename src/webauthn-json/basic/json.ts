@@ -17,13 +17,13 @@ interface CredPropsAuthenticationExtensionsClientOutputsJSON {
 
 interface AuthenticationExtensionsClientOutputsJSON
   extends AuthenticationExtensionsClientOutputs {
-  // TODO: This field is technically not optional in the spec, but Firefox hasn't implemented it.
   appidExclude?: boolean;
   credProps?: CredPropsAuthenticationExtensionsClientOutputsJSON;
 }
 
 export interface PublicKeyCredentialWithClientExtensionResults
   extends PublicKeyCredential {
+  // TODO: This field is technically not optional in the spec, but Firefox hasn't implemented it.
   authenticatorAttachment?: string;
   clientExtensionResults?: AuthenticationExtensionsClientOutputsJSON;
 }
