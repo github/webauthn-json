@@ -105,7 +105,7 @@ describe("webauthn schema", () => {
       type: "public-key",
       id: "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
       rawId: new Uint8Array([1, 2, 3, 4]),
-      authenticatorAttachment: "cross-platform",
+      authenticatorAttachment: "platform",
       response: {
         clientDataJSON: new Uint8Array([9, 10, 11, 12]),
         attestationObject: new Uint8Array([13, 14, 15, 16]),
@@ -127,7 +127,7 @@ describe("webauthn schema", () => {
       type: "public-key",
       id: "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
       rawId: "AQIDBA",
-      authenticatorAttachment: "cross-platform",
+      authenticatorAttachment: "platform",
       response: {
         attestationObject: "DQ4PEA",
         clientDataJSON: "CQoLDA",
@@ -180,7 +180,7 @@ describe("webauthn schema", () => {
       type: "public-key",
       id: "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
       rawId: new Uint8Array([1, 2, 3, 4]),
-      authenticatorAttachment: "cross-platform",
+      authenticatorAttachment: null,
       response: {
         authenticatorData: new Uint8Array([5, 6, 7, 8]),
         clientDataJSON: new Uint8Array([9, 10, 11, 12]),
@@ -200,7 +200,7 @@ describe("webauthn schema", () => {
       type: "public-key",
       id: "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
       rawId: "AQIDBA",
-      authenticatorAttachment: "cross-platform",
+      authenticatorAttachment: null,
       response: {
         authenticatorData: "BQYHCA",
         clientDataJSON: "CQoLDA",
