@@ -56,6 +56,7 @@ export const publicKeyCredentialWithAttestation: Schema = {
   type: required(copy),
   id: required(copy),
   rawId: required(convert),
+  authenticatorAttachment: optional(copy),
   response: required({
     clientDataJSON: required(convert),
     attestationObject: required(convert),
@@ -91,6 +92,7 @@ export const publicKeyCredentialWithAssertion: Schema = {
   type: required(copy),
   id: required(copy),
   rawId: required(convert),
+  authenticatorAttachment: optional(copy),
   response: required({
     clientDataJSON: required(convert),
     authenticatorData: required(convert),

@@ -1,5 +1,13 @@
 import { Base64urlString } from "../base64url";
 
+interface PublicKeyCredentialJSON {
+  id: string;
+  type: PublicKeyCredentialType;
+  rawId: Base64urlString;
+  // TODO: This field is technically not optional in the spec, but Firefox hasn't implemented it.
+  authenticatorAttachment?: AuthenticatorAttachment;
+}
+
 // Intermediate type needed for attaching client outputs to WebAuthn API call
 // results before converting to JSON.
 
@@ -9,12 +17,14 @@ interface CredPropsAuthenticationExtensionsClientOutputsJSON {
 
 interface AuthenticationExtensionsClientOutputsJSON
   extends AuthenticationExtensionsClientOutputs {
+  // TODO: This field is technically not optional in the spec, but Firefox hasn't implemented it.
   appidExclude?: boolean;
   credProps?: CredPropsAuthenticationExtensionsClientOutputsJSON;
 }
 
 export interface PublicKeyCredentialWithClientExtensionResults
   extends PublicKeyCredential {
+  authenticatorAttachment?: string;
   clientExtensionResults?: AuthenticationExtensionsClientOutputsJSON;
 }
 
@@ -77,12 +87,12 @@ export interface AuthenticatorAttestationResponseJSON {
   clientDataJSON: Base64urlString;
   attestationObject: Base64urlString;
   transports: string[];
+  // This field is technically not optional in the spec, but Firefox hasn't implemented it.
+  authenticatorAttachment?: AuthenticatorAttachment;
 }
 
-export interface PublicKeyCredentialWithAttestationJSON {
-  id: string;
-  type: PublicKeyCredentialType;
-  rawId: Base64urlString;
+export interface PublicKeyCredentialWithAttestationJSON
+  extends PublicKeyCredentialJSON {
   response: AuthenticatorAttestationResponseJSON;
   clientExtensionResults: SimpleClientExtensionResultsJSON;
 }
@@ -113,10 +123,8 @@ interface AuthenticatorAssertionResponseJSON {
   userHandle: Base64urlString | null;
 }
 
-export interface PublicKeyCredentialWithAssertionJSON {
-  type: PublicKeyCredentialType;
-  id: string;
-  rawId: Base64urlString;
+export interface PublicKeyCredentialWithAssertionJSON
+  extends PublicKeyCredentialJSON {
   response: AuthenticatorAssertionResponseJSON;
   clientExtensionResults: SimpleClientExtensionResultsJSON;
 }

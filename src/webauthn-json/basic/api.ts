@@ -35,6 +35,7 @@ export async function create(
   const credential = (await navigator.credentials.create(
     createRequestFromJSON(requestJSON),
   )) as PublicKeyCredential;
+  console.log(credential);
   return createResponseToJSON(credential);
 }
 
