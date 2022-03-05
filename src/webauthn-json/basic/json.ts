@@ -15,8 +15,7 @@ interface AuthenticationExtensionsClientOutputsJSON
 
 export interface PublicKeyCredentialWithClientExtensionResults
   extends PublicKeyCredential {
-  // TODO: This field is technically not optional in the spec, but Firefox hasn't implemented it.
-  authenticatorAttachment?: string;
+  authenticatorAttachment?: string | null;
   clientExtensionResults?: AuthenticationExtensionsClientOutputsJSON;
 }
 
@@ -45,7 +44,7 @@ interface PublicKeyCredentialJSON {
   type: PublicKeyCredentialType;
   rawId: Base64urlString;
   // TODO: This field is technically not optional in the spec, but Firefox hasn't implemented it.
-  authenticatorAttachment?: AuthenticatorAttachment;
+  authenticatorAttachment?: AuthenticatorAttachment | null;
 }
 
 // `navigator.create()` request
@@ -88,7 +87,7 @@ export interface AuthenticatorAttestationResponseJSON {
   attestationObject: Base64urlString;
   transports: string[];
   // This field is technically not optional in the spec, but Firefox hasn't implemented it.
-  authenticatorAttachment?: AuthenticatorAttachment;
+  authenticatorAttachment?: AuthenticatorAttachment | null;
 }
 
 export interface PublicKeyCredentialWithAttestationJSON
