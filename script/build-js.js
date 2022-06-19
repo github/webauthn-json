@@ -41,7 +41,7 @@ build({
 
 build({
   entryPoints: ["src/webauthn-json/browser-global.ts"],
-  format: "cjs",
+  format: "iife",
   target: "es6",
   bundle: true,
   sourcemap: true,
