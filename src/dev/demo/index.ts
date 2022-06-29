@@ -33,7 +33,7 @@ async function register(): Promise<void> {
         name: "test_user",
         displayName: "Test User",
       },
-      pubKeyCredParams: [{ type: "public-key", alg: -7 }],
+      pubKeyCredParams: [],
       excludeCredentials: registeredCredentials(),
       authenticatorSelection: { userVerification: "discouraged" },
       extensions: {
