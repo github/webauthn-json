@@ -2,7 +2,7 @@
 
 `@github/webauthn-json` is a client-side Javascript library that serves as convenience wrapper for the the [WebAuthn API](https://www.w3.org/TR/webauthn/) by encoding binary data using [base64url](https://w3c.github.io/webauthn/#sctn-dependencies) (also known as "websafe" or "urlsafe" base64).
 
-The WebAuthn API itself takes input and output values that look almost like JSON, except that binary data is represented as `ArrayBuffer`s. Using `webauthn-json` allows the data to be sent from/to the server as normal JSON without any custom client-side processing. Hopefully this will be possible [directly in the browser](https://github.com/w3c/webauthn/issues/1683) some day, but we're here for you until then.
+The WebAuthn API itself takes input and output values that look almost like JSON, except that binary data is represented as `ArrayBuffer`s. Using `webauthn-json` allows the data to be sent from/to the server as normal JSON without any custom client-side processing. This will be possible [directly in the browser](https://github.com/w3c/webauthn/issues/1683) some day, but we're here for you until then.
 
 ## Usage
 
@@ -34,9 +34,33 @@ async createCredential() {
 
 See [here](https://github.com/github/webauthn-json/blob/main/src/dev/demo/index.ts) for fully working client-side [demo](https://github.github.com/webauthn-json/demo/) code.
 
-### API
+### API (browser ponyfill)
+
+We now recommend using a [ponyfill](https://ponyfill.com/) for the [new JSON-based APIs](https://github.com/w3c/webauthn/issues/1683) in the WebAuthn spec:
 
 ```typescript
+// @github/webauthn-json/browser-ponyfill
+
+function supported(): boolean;
+
+function parseCreationOptionsFromJSON(json: JSON): CredentialCreationOptions;
+function parseRequestOptionsFromJSON(json: JSON): CredentialRequestOptions;
+
+// Can call `.toJSON()` on the result.
+function create(
+  options: CredentialCreationOptions,
+): Promise<PublicKeyCredential>;
+// Can call `.toJSON()` on the result.
+function get(options: CredentialRequestOptions): Promise<PublicKeyCredential>;
+```
+
+### API (main library)
+
+This was the original simplified API, which remains supported.
+
+```typescript
+// @github/webauthn-json
+
 function create(requestJSON: JSON): Promise<JSON>;
 function get(requestJSON: JSON): Promise<JSON>;
 function supported(): boolean;

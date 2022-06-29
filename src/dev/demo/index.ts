@@ -1,14 +1,20 @@
 // A minimal example to test `webauthn-json`.
 // Note: do not hardcode values in production.
 
-import { PublicKeyCredentialDescriptorJSON } from "../../webauthn-json/basic/json";
-import { create, get, supported } from "../../webauthn-json";
+import { type PublicKeyCredentialDescriptorJSON } from "../../webauthn-json";
 import {
   getRegistrations,
   saveRegistration,
   setRegistrations,
   withStatus,
 } from "./state";
+import {
+  parseCreationOptionsFromJSON,
+  create,
+  get,
+  parseRequestOptionsFromJSON,
+  supported,
+} from "../../webauthn-json/browser-ponyfill";
 
 function registeredCredentials(): PublicKeyCredentialDescriptorJSON[] {
   return getRegistrations().map((reg) => ({
@@ -18,35 +24,35 @@ function registeredCredentials(): PublicKeyCredentialDescriptorJSON[] {
 }
 
 async function register(): Promise<void> {
-  saveRegistration(
-    await create({
-      publicKey: {
-        challenge: "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
-        rp: { name: "Localhost, Inc." },
-        user: {
-          id: "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII",
-          name: "test_user",
-          displayName: "Test User",
-        },
-        pubKeyCredParams: [{ type: "public-key", alg: -7 }],
-        excludeCredentials: registeredCredentials(),
-        authenticatorSelection: { userVerification: "discouraged" },
-        extensions: {
-          credProps: true,
-        },
+  const cco = parseCreationOptionsFromJSON({
+    publicKey: {
+      challenge: "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+      rp: { name: "Localhost, Inc." },
+      user: {
+        id: "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII",
+        name: "test_user",
+        displayName: "Test User",
       },
-    }),
-  );
+      pubKeyCredParams: [{ type: "public-key", alg: -7 }],
+      excludeCredentials: registeredCredentials(),
+      authenticatorSelection: { userVerification: "discouraged" },
+      extensions: {
+        credProps: true,
+      },
+    },
+  });
+  saveRegistration(await create(cco));
 }
 
 async function authenticate(): Promise<void> {
-  await get({
+  const cro = parseRequestOptionsFromJSON({
     publicKey: {
       challenge: "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
       allowCredentials: registeredCredentials(),
       userVerification: "discouraged",
     },
   });
+  await get(cro);
 }
 
 async function clear(): Promise<void> {

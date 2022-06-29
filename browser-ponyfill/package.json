@@ -1,0 +1,4 @@
+{
+  "main": "../dist/esm/webauthn-json.browser-ponyfill.js",
+  "types": "../dist/types/browser-ponyfill.d.ts"
+}

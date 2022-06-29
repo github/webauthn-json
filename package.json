@@ -19,6 +19,11 @@
       "require": "./dist/cjs/webauthn-json.extended.cjs",
       "import": "./dist/esm/webauthn-json.extended.js",
       "types": "./dist/types/extended.d.ts"
+    },
+    "./browser-ponyfill": {
+      "require": "./dist/cjs/webauthn-json.browser-ponyfill.cjs",
+      "import": "./dist/esm/webauthn-json.browser-ponyfill.js",
+      "types": "./dist/types/browser-ponyfill.d.ts"
     }
   },
   "devDependencies": {
