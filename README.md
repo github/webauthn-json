@@ -20,14 +20,20 @@ npm install --save @github/webauthn-json
 Then:
 
 ```typescript
-import { create } from "@github/webauthn-json";
+import {
+  create,
+  parseCreationOptionsFromJSON,
+} from "@github/webauthn-json/browser-ponyfill";
 
 const request = fetch("...");
-async createCredential() {
-  const response = await create((await request).json());
-  await fetch("...", {
+
+async function createCredential() {
+  const json = await (await request).json();
+  const options = parseCreationOptionsFromJSON(json);
+  const response = await create(options);
+  fetch("...", {
     method: "POST",
-    body: JSON.stringify(response)
+    body: JSON.stringify(response.toJSON()),
   });
 }
 ```
@@ -46,11 +52,11 @@ function supported(): boolean;
 function parseCreationOptionsFromJSON(json: JSON): CredentialCreationOptions;
 function parseRequestOptionsFromJSON(json: JSON): CredentialRequestOptions;
 
-// Can call `.toJSON()` on the result.
+// You can call `.toJSON()` on the result.
 function create(
   options: CredentialCreationOptions,
 ): Promise<PublicKeyCredential>;
-// Can call `.toJSON()` on the result.
+// You can call `.toJSON()` on the result.
 function get(options: CredentialRequestOptions): Promise<PublicKeyCredential>;
 ```
 
