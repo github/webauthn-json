@@ -1,18 +1,25 @@
 import {
   createExtendedRequestFromJSON as parseCreationOptionsFromJSON,
   createExtendedResponseToJSON,
+  CredentialCreationOptionsExtendedJSON,
+  CredentialRequestOptionsExtendedJSON,
   getExtendedRequestFromJSON as parseRequestOptionsFromJSON,
   getExtendedResponseToJSON,
-  PublicKeyCredentialWithAssertionExtendedResultsJSON as AuthenticationResponseJSON,
-  PublicKeyCredentialWithAttestationExtendedResultsJSON as RegistrationResponseJSON,
+  PublicKeyCredentialWithAssertionExtendedResultsJSON as AuthenticationResponseExtendedJSON,
+  PublicKeyCredentialWithAttestationExtendedResultsJSON as RegistrationResponseExtendedJSON,
   supported,
 } from "./extended";
 
 export { parseCreationOptionsFromJSON, parseRequestOptionsFromJSON, supported };
-export type { AuthenticationResponseJSON, RegistrationResponseJSON };
+export type {
+  CredentialCreationOptionsExtendedJSON,
+  CredentialRequestOptionsExtendedJSON,
+  AuthenticationResponseExtendedJSON,
+  RegistrationResponseExtendedJSON,
+};
 
 export interface RegistrationPublicKeyCredential extends PublicKeyCredential {
-  toJSON(): RegistrationResponseJSON;
+  toJSON(): RegistrationResponseExtendedJSON;
 }
 
 export async function create(
@@ -26,7 +33,7 @@ export async function create(
 }
 
 export interface AuthenticationPublicKeyCredential extends PublicKeyCredential {
-  toJSON(): AuthenticationResponseJSON;
+  toJSON(): AuthenticationResponseExtendedJSON;
 }
 
 export async function get(
