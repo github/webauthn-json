@@ -33,7 +33,7 @@ async function createCredential() {
   const response = await create(options);
   fetch("...", {
     method: "POST",
-    body: JSON.stringify(response.toJSON()),
+    body: JSON.stringify(response),
   });
 }
 ```
@@ -52,11 +52,11 @@ function supported(): boolean;
 function parseCreationOptionsFromJSON(json: JSON): CredentialCreationOptions;
 function parseRequestOptionsFromJSON(json: JSON): CredentialRequestOptions;
 
-// You can call `.toJSON()` on the result.
+// You can call `.toJSON()` on the result or pass directly to `JSON.stringify()`.
 function create(
   options: CredentialCreationOptions,
 ): Promise<PublicKeyCredential>;
-// You can call `.toJSON()` on the result.
+// You can call `.toJSON()` on the result or pass directly to `JSON.stringify()`.
 function get(options: CredentialRequestOptions): Promise<PublicKeyCredential>;
 ```
 
