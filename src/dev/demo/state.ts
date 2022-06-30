@@ -1,9 +1,9 @@
 import {
   RegistrationPublicKeyCredential,
-  RegistrationResponseJSON,
+  RegistrationResponseExtendedJSON,
 } from "../../webauthn-json/browser-ponyfill";
 
-export function getRegistrations(): RegistrationResponseJSON[] {
+export function getRegistrations(): RegistrationResponseExtendedJSON[] {
   const registrations = JSON.parse(
     localStorage.webauthnExampleRegistrations || "[]",
   );
@@ -11,7 +11,7 @@ export function getRegistrations(): RegistrationResponseJSON[] {
 }
 
 export function setRegistrations(
-  registrations: RegistrationResponseJSON[],
+  registrations: RegistrationResponseExtendedJSON[],
   display: boolean = true,
 ): void {
   localStorage.webauthnExampleRegistrations = JSON.stringify(
