@@ -1,25 +1,28 @@
 import {
-  createExtendedRequestFromJSON as parseCreationOptionsFromJSON,
-  createExtendedResponseToJSON,
-  CredentialCreationOptionsExtendedJSON,
-  CredentialRequestOptionsExtendedJSON,
-  getExtendedRequestFromJSON as parseRequestOptionsFromJSON,
-  getExtendedResponseToJSON,
-  PublicKeyCredentialWithAssertionExtendedResultsJSON as AuthenticationResponseExtendedJSON,
-  PublicKeyCredentialWithAttestationExtendedResultsJSON as RegistrationResponseExtendedJSON,
-  supported,
-} from "./extended";
+  createRequestFromJSON as parseCreationOptionsFromJSON,
+  createResponseToJSON,
+  getRequestFromJSON as parseRequestOptionsFromJSON,
+  getResponseToJSON,
+} from "./basic/api";
+import { supported } from "./basic/supported";
+
+import {
+  CredentialCreationOptionsJSON,
+  CredentialRequestOptionsJSON,
+  PublicKeyCredentialWithAssertionJSON as AuthenticationResponseJSON,
+  PublicKeyCredentialWithAttestationJSON as RegistrationResponseJSON,
+} from "./basic/json";
 
 export { parseCreationOptionsFromJSON, parseRequestOptionsFromJSON, supported };
 export type {
-  CredentialCreationOptionsExtendedJSON,
-  CredentialRequestOptionsExtendedJSON,
-  AuthenticationResponseExtendedJSON,
-  RegistrationResponseExtendedJSON,
+  CredentialCreationOptionsJSON,
+  CredentialRequestOptionsJSON,
+  AuthenticationResponseJSON,
+  RegistrationResponseJSON,
 };
 
 export interface RegistrationPublicKeyCredential extends PublicKeyCredential {
-  toJSON(): RegistrationResponseExtendedJSON;
+  toJSON(): RegistrationResponseJSON;
 }
 
 export async function create(
@@ -28,12 +31,12 @@ export async function create(
   const response = (await navigator.credentials.create(
     options,
   )) as RegistrationPublicKeyCredential;
-  response.toJSON = () => createExtendedResponseToJSON(response);
+  response.toJSON = () => createResponseToJSON(response);
   return response;
 }
 
 export interface AuthenticationPublicKeyCredential extends PublicKeyCredential {
-  toJSON(): AuthenticationResponseExtendedJSON;
+  toJSON(): AuthenticationResponseJSON;
 }
 
 export async function get(
@@ -42,6 +45,6 @@ export async function get(
   const response = (await navigator.credentials.get(
     options,
   )) as AuthenticationPublicKeyCredential;
-  response.toJSON = () => getExtendedResponseToJSON(response);
+  response.toJSON = () => getResponseToJSON(response);
   return response;
 }

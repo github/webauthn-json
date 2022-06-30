@@ -66,6 +66,15 @@ build({
   outfile: "dist/esm/webauthn-json.browser-ponyfill.js",
 });
 
+build({
+  entryPoints: ["src/webauthn-json/browser-ponyfill.extended.ts"],
+  format: "esm",
+  target: "es2019",
+  bundle: true,
+  sourcemap: true,
+  outfile: "dist/esm/webauthn-json.browser-ponyfill.extended.js",
+});
+
 const { version } = JSON.parse(
   readFileSync(new URL("../package.json", import.meta.url)),
 );

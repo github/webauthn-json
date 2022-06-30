@@ -96,7 +96,10 @@ In addition, we handle the following info (that is not technically part of exten
 
 - [`transports`](https://w3c.github.io/webauthn/#dom-authenticatorattestationresponse-transports-slot) (on a public key credential)
 
-If you need to convert additional input or output extensions, use `createExtended()` and `getExtended()` from `@github/webauthn-json/extended`.
+If you need to convert additional input or output extensions, use either of the following:
+
+- `createExtended()` and `getExtended()` from `@github/webauthn-json/extended`.
+- `parseExtendedCreationOptionsFromJSON()` and `parseExtendedRequestOptionsFromJSON()` from `@github/webauthn-json/browser-ponyfill/extended`.
 
 ## Contributions
 
