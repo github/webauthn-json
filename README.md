@@ -53,9 +53,7 @@ function parseCreationOptionsFromJSON(json: JSON): CredentialCreationOptions;
 function parseRequestOptionsFromJSON(json: JSON): CredentialRequestOptions;
 
 // You can call `.toJSON()` on the result or pass directly to `JSON.stringify()`.
-function create(
-  options: CredentialCreationOptions,
-): Promise<PublicKeyCredential>;
+function create(options: CredentialCreationOptions): Promise<PublicKeyCredential>;
 // You can call `.toJSON()` on the result or pass directly to `JSON.stringify()`.
 function get(options: CredentialRequestOptions): Promise<PublicKeyCredential>;
 ```
