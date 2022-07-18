@@ -88,8 +88,8 @@ npx @github/webauthn-json schema
 
 Modern browsers generally only support — and most sites only need to use — a small number of [extensions](https://w3c.github.io/webauthn/#sctn-defined-extensions). To save code size, `@github/webauthn-json` only includes the following extensions by default:
 
-- `appid`
-- `appidExclude`
+- [`appid`](https://w3c.github.io/webauthn/#sctn-appid-extension)
+- [`appidExclude`](https://w3c.github.io/webauthn/#sctn-appid-exclude-extension)
 - [`credProps`](https://w3c.github.io/webauthn/#sctn-authenticator-credential-properties-extension)
 
 In addition, we handle the following info (that is not technically part of extensions):
