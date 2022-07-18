@@ -6,7 +6,9 @@ The WebAuthn API itself takes input and output values that look almost like JSON
 
 ## Usage
 
-1. Replace calls to `navigator.credentials.create()` with `create()`, and `navigator.credentials.get()` with `get()`.
+1. Replace calls:
+  - `navigator.credentials.create(...)` with `create(parseCreationOptionsFromJSON(...))`.
+  - `navigator.credentials.get(...)` with `get(parseRequestOptionsFromJSON(...))`.
 2. Encode/decode binary values on the server as base64url.
 
 ### Example
