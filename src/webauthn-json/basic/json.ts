@@ -21,10 +21,12 @@ export interface PublicKeyCredentialWithClientExtensionResults
 
 // Shared
 
+type AuthenticatorTransportJSON = AuthenticatorTransport | "hybrid";
+
 export interface PublicKeyCredentialDescriptorJSON {
   type: PublicKeyCredentialType;
   id: Base64urlString;
-  transports?: AuthenticatorTransport[];
+  transports?: AuthenticatorTransportJSON[];
 }
 
 interface SimpleWebAuthnExtensionsJSON {
@@ -85,7 +87,7 @@ export interface CredentialCreationOptionsJSON {
 export interface AuthenticatorAttestationResponseJSON {
   clientDataJSON: Base64urlString;
   attestationObject: Base64urlString;
-  transports: string[];
+  transports: AuthenticatorTransportJSON[];
   // This field is technically not optional in the spec, but Firefox hasn't implemented it.
   authenticatorAttachment?: AuthenticatorAttachment | null;
 }
