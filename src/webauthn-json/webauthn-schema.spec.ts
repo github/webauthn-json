@@ -74,7 +74,7 @@ describe("webauthn schema", () => {
           credProps: {
             rk: true,
           },
-        } as AuthenticationExtensionsClientOutputs),
+        }) as AuthenticationExtensionsClientOutputs,
     };
     const converted = convert(
       bufferToBase64url,
@@ -116,7 +116,7 @@ describe("webauthn schema", () => {
           credProps: {
             rk: true,
           },
-        } as AuthenticationExtensionsClientOutputs),
+        }) as AuthenticationExtensionsClientOutputs,
     };
     const converted = convert(
       bufferToBase64url,

@@ -29,6 +29,7 @@ describe("base64url", () => {
   test("should round-trip through `ArrayBuffer`", () => {
     // Fun fact: multiple base64url encodings can represent the same value. We expect
     // the output value to be different than the input in this case.
-    expect(bufferToBase64url(base64urlToBuffer("ABCDEF"))).toBe("ABCDEA");
+    expect(bufferToBase64url(base64urlToBuffer("ABCDEF")))
+      .toBe("ABCDEA");
   });
 });
