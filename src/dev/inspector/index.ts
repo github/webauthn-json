@@ -50,5 +50,4 @@ getButton.addEventListener("click", async () => {
 
 document.body.append(createButton);
 document.body.append(getButton);
-
 // createButton.click();

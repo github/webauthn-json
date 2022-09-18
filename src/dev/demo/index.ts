@@ -17,10 +17,12 @@ import {
 } from "../../webauthn-json/browser-ponyfill";
 
 function registeredCredentials(): PublicKeyCredentialDescriptorJSON[] {
-  return getRegistrations().map((reg) => ({
-    id: reg.rawId,
-    type: reg.type,
-  }));
+  return getRegistrations().map(
+    (reg) => ({
+      id: reg.rawId,
+      type: reg.type,
+    }),
+  );
 }
 
 async function register(): Promise<void> {
@@ -68,21 +70,22 @@ async function testSupported() {
 
 window.addEventListener("load", () => {
   try {
-    document
-      .querySelector("#register")!
-      .addEventListener("click", withStatus("#register .status", register));
-    document
-      .querySelector("#authenticate")!
-      .addEventListener(
-        "click",
-        withStatus("#authenticate .status", authenticate),
-      );
-    document
-      .querySelector("#clear")!
-      .addEventListener("click", withStatus("#clear .status", clear));
-    document
-      .querySelector("#supported")!
-      .addEventListener("click", testSupported);
+    document.querySelector("#register")!.addEventListener(
+      "click",
+      withStatus("#register .status", register),
+    );
+    document.querySelector("#authenticate")!.addEventListener(
+      "click",
+      withStatus("#authenticate .status", authenticate),
+    );
+    document.querySelector("#clear")!.addEventListener(
+      "click",
+      withStatus("#clear .status", clear),
+    );
+    document.querySelector("#supported")!.addEventListener(
+      "click",
+      testSupported,
+    );
   } catch (e) {
     console.error(e);
   }

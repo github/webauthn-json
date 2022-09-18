@@ -71,7 +71,7 @@ describe("extended schema", () => {
           largeBlob: {
             supported: true,
           },
-        } as AuthenticationExtensionsClientOutputs),
+        }) as AuthenticationExtensionsClientOutputs,
     };
     const converted = createExtendedResponseToJSON(pkcwa);
     expect(converted).toEqual({
@@ -108,7 +108,7 @@ describe("extended schema", () => {
           largeBlob: {
             written: true,
           },
-        } as AuthenticationExtensionsClientOutputs),
+        }) as AuthenticationExtensionsClientOutputs,
     };
     const converted = getExtendedResponseToJSON(pkcwa);
     expect(converted).toEqual({
