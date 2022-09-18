@@ -9,6 +9,11 @@ import {
   AuthenticatorAttestationResponseJSON,
 } from "../basic/json";
 
+interface AuthenticationExtensionsPRFValuesJSON {
+  first: Base64urlString;
+  second?: Base64urlString;
+}
+
 interface ExtendedExtensionsClientInputsJSON {
   appid?: string;
   appidExclude?: string;
@@ -19,6 +24,18 @@ interface ExtendedExtensionsClientInputsJSON {
     read?: boolean;
     write?: Base64urlString;
   };
+  prf?: {
+    eval: AuthenticationExtensionsPRFValuesJSON;
+    evalByCredential: Record<
+      Base64urlString,
+      AuthenticationExtensionsPRFValuesJSON
+    >;
+  };
+}
+
+interface AuthenticationExtensionsPRFOutputsJSON {
+  enabled?: boolean;
+  results?: AuthenticationExtensionsPRFValuesJSON;
 }
 
 interface ExtendedAuthenticationExtensionsClientOutputsJSON {
@@ -33,6 +50,7 @@ interface ExtendedAuthenticationExtensionsClientOutputsJSON {
     blob?: Base64urlString;
     written?: boolean;
   };
+  prf?: AuthenticationExtensionsPRFOutputsJSON;
 }
 
 interface PublicKeyCredentialCreationOptionsExtendedJSON
