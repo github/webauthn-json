@@ -1,7 +1,7 @@
 import {
   RegistrationPublicKeyCredential,
-  RegistrationResponseExtendedJSON,
 } from "../../webauthn-json/browser-ponyfill";
+import type { RegistrationResponseExtendedJSON } from "../../webauthn-json/browser-ponyfill.extended";
 
 export function getRegistrations(): RegistrationResponseExtendedJSON[] {
   const registrations = JSON.parse(
@@ -12,7 +12,6 @@ export function getRegistrations(): RegistrationResponseExtendedJSON[] {
 
 export function setRegistrations(
   registrations: RegistrationResponseExtendedJSON[],
-  display: boolean = true,
 ): void {
   localStorage.webauthnExampleRegistrations = JSON.stringify(
     registrations,
@@ -57,7 +56,7 @@ async function saveInput(): Promise<void> {
   document.querySelector("#error")!.textContent = "";
   registrationElem().style.backgroundColor = "rgba(255, 127, 0, 0.5)";
   try {
-    setRegistrations(JSON.parse(registrationElem().value), false);
+    setRegistrations(JSON.parse(registrationElem().value));
     registrationElem().style.backgroundColor = "rgba(0, 255, 0, 0.5)";
   } catch (e) {
     registrationElem().style.backgroundColor = "rgba(255, 0, 0, 0.5)";

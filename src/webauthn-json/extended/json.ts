@@ -24,7 +24,7 @@ interface ExtendedExtensionsClientInputsJSON {
 interface ExtendedAuthenticationExtensionsClientOutputsJSON {
   appid?: boolean;
   appidExclude?: boolean;
-  uvm?: Array<[number, number, number]>;
+  uvm?: [number, number, number][];
   credProps?: {
     rk: boolean;
   };
