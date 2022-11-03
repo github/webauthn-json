@@ -6,11 +6,9 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "js": {
-        "recommended": true
-      },
-      "ts": {
-        "recommended": true
+      "recommended": true,
+      "correctness": {
+        "useSimplifiedLogicExpression": "off"
       }
     }
   }
