@@ -6,8 +6,10 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "moduleResolution": "node",
-    "target": "es2020",
+    "target": "es2019",
     "outDir": "dist/types"
   },
-  "include": ["src/**/*"]
+  "include": [
+    "src/**/*"
+  ]
 }
