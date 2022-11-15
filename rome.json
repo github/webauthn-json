@@ -6,10 +6,7 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
-      "correctness": {
-        "useSimplifiedLogicExpression": "off"
-      }
+      "recommended": true
     }
   }
 }
