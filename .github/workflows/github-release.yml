@@ -6,7 +6,7 @@ on:
       - v*
 
 jobs:
-  Publish:
+  create-github-release:
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -26,3 +26,31 @@ jobs:
           release_name: ${{ env.RELEASE_NAME }}
           draft: false
           prerelease: false
+  publish-npm-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '19.x'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Clone npm
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3
+        with:
+          repository: npm/cli
+          ref: provenance
+          path: npm
+      - name: Link npm
+        run: |
+          cd npm
+          node . link
+          cd ..
+          npm version
+      - run: npm ci
+      - run: make build
+      - run: npm publish --provenance --access public
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_WEBAUTHN_JSON_PUBLISH_TOKEN }}
