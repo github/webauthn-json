@@ -53,4 +53,4 @@ jobs:
       - run: make build
       - run: npm publish --provenance --access public
         env:
-          NPM_TOKEN: ${{ secrets.NPM_WEBAUTHN_JSON_PUBLISH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_WEBAUTHN_JSON_PUBLISH_TOKEN }}
