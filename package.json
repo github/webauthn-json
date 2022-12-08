@@ -50,8 +50,7 @@
     "test": "npx jest && npm run lint",
     "lint": "npx rome check src",
     "format": "npx rome format --write src",
-    "prepack": "npm run clean && npm run build",
-    "postpublish": "npm publish --ignore-scripts --@github:registry='https://npm.pkg.github.com'"
+    "prepack": "npm run clean && npm run build"
   },
   "keywords": [
     "webauthn",
