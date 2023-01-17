@@ -13,8 +13,12 @@ interface AuthenticationExtensionsClientOutputsJSON
   credProps?: CredPropsAuthenticationExtensionsClientOutputsJSON;
 }
 
+type PublicKeyCredentialWithOptionalAuthenticatorAttachment =
+  Partial<PublicKeyCredential> &
+    Omit<PublicKeyCredential, "authenticatorAttachment">;
+
 export interface PublicKeyCredentialWithClientExtensionResults
-  extends PublicKeyCredential {
+  extends PublicKeyCredentialWithOptionalAuthenticatorAttachment {
   authenticatorAttachment?: string | null;
   clientExtensionResults?: AuthenticationExtensionsClientOutputsJSON;
 }
