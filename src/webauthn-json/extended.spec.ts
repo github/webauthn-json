@@ -13,6 +13,10 @@ import {
 import { convert } from "./convert";
 import "./arraybuffer.jest";
 
+const unimplemented: any = () => {
+  throw new Error("unimplemented");
+};
+
 describe("extended schema", () => {
   test("converts CredentialCreationOptionsExtendedJSON", () => {
     const cco: CredentialCreationOptionsExtendedJSON = {
@@ -63,6 +67,9 @@ describe("extended schema", () => {
       response: {
         clientDataJSON: new Uint8Array([9, 10, 11, 12]),
         attestationObject: new Uint8Array([13, 14, 15, 16]),
+        getAuthenticatorData: unimplemented,
+        getPublicKey: unimplemented,
+        getPublicKeyAlgorithm: unimplemented,
         getTransports: () => ["usb"],
       } as AuthenticatorAttestationResponse,
       getClientExtensionResults: () =>

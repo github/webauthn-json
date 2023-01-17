@@ -4,7 +4,10 @@ import {
   Base64urlString,
 } from "../base64url";
 import { convert } from "../convert";
-import { AuthenticatorAttestationResponseJSON } from "../basic/json";
+import {
+  AuthenticatorAttestationResponseJSON,
+  PublicKeyCredentialWithClientExtensionResults,
+} from "../basic/json";
 import {
   CredentialCreationOptionsExtendedJSON,
   CredentialRequestOptionsExtendedJSON,
@@ -33,7 +36,7 @@ export function createExtendedRequestFromJSON(
 }
 
 export function createExtendedResponseToJSON(
-  credential: PublicKeyCredential,
+  credential: PublicKeyCredentialWithClientExtensionResults,
 ): PublicKeyCredentialWithAttestationExtendedResultsJSON {
   return convert(
     bufferToBase64url,
@@ -113,7 +116,7 @@ export function getExtendedRequestFromJSON(
 }
 
 export function getExtendedResponseToJSON(
-  credential: PublicKeyCredential,
+  credential: PublicKeyCredentialWithClientExtensionResults,
 ): PublicKeyCredentialWithAssertionExtendedResultsJSON {
   return convert(
     bufferToBase64url,
