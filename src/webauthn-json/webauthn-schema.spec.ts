@@ -119,8 +119,7 @@ describe("webauthn schema", () => {
         getAuthenticatorData: unimplemented,
         getPublicKey: unimplemented,
         getPublicKeyAlgorithm: unimplemented,
-        getTransports: unimplemented,
-      } as AuthenticatorAttestationResponse,
+      } as Omit<AuthenticatorAttestationResponse, "getTransports">,
       getClientExtensionResults: () =>
         ({
           appidExclude: true,
