@@ -17,6 +17,10 @@ import {
 import { convert } from "./convert";
 import "./arraybuffer.jest";
 
+const unimplemented: any = () => {
+  throw new Error("unimplemented");
+};
+
 describe("webauthn schema", () => {
   test("converts CredentialCreationOptionsJSON", () => {
     const cco: CredentialCreationOptionsJSON = {
@@ -67,6 +71,9 @@ describe("webauthn schema", () => {
         clientDataJSON: new Uint8Array([9, 10, 11, 12]),
         attestationObject: new Uint8Array([13, 14, 15, 16]),
         getTransports: () => ["usb"],
+        getAuthenticatorData: unimplemented,
+        getPublicKey: unimplemented,
+        getPublicKeyAlgorithm: unimplemented,
       } as AuthenticatorAttestationResponse,
       getClientExtensionResults: () =>
         ({
@@ -109,6 +116,10 @@ describe("webauthn schema", () => {
       response: {
         clientDataJSON: new Uint8Array([9, 10, 11, 12]),
         attestationObject: new Uint8Array([13, 14, 15, 16]),
+        getAuthenticatorData: unimplemented,
+        getPublicKey: unimplemented,
+        getPublicKeyAlgorithm: unimplemented,
+        getTransports: unimplemented,
       } as AuthenticatorAttestationResponse,
       getClientExtensionResults: () =>
         ({
