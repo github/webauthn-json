@@ -94,7 +94,10 @@ Modern browsers generally only support — and most sites only need to use — a
 
 In addition, we handle the following info (that is not technically part of extensions):
 
-- [`transports`](https://w3c.github.io/webauthn/#dom-authenticatorattestationresponse-transports-slot) (on a public key credential)
+- [`transports`](https://w3c.github.io/webauthn/#dom-authenticatorattestationresponse-transports-slot) (on `AuthenticatorAttestationResponse`)[^1]
+
+[^1]: This comes from `getTransports()` on the `AuthenticatorAttestationResponse`. Note that we don't include its three sibling functions (`getAuthenticatorData()`, `getPublicKey()`, and `getPublicKeyAlgorithm()`), since they duplicates information that is available in other parts of the response. In particular, the authenticator data is available inside the signed [attestation object](https://w3c.github.io/webauthn/#attestation-object).
+
 
 If you need to convert additional input or output extensions, use either of the following:
 
