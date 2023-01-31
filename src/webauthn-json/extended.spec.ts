@@ -1,8 +1,6 @@
-/**
- * @jest-environment jsdom
- */
+import { expect } from "@open-wc/testing";
 
-import { base64urlToBuffer } from "./base64url";
+import { base64urlToBuffer, bufferToBase64url } from "./base64url";
 import { CredentialCreationOptionsExtendedJSON } from "./extended/json";
 import { PublicKeyCredentialWithClientExtensionResults } from "./basic/json";
 import { credentialCreationOptionsExtended } from "./extended/schema";
@@ -11,13 +9,12 @@ import {
   getExtendedResponseToJSON,
 } from "./extended/api";
 import { convert } from "./convert";
-import "./arraybuffer.jest";
 
 const unimplemented: any = () => {
   throw new Error("unimplemented");
 };
 
-describe("extended schema", () => {
+suite("extended schema", () => {
   test("converts CredentialCreationOptionsExtendedJSON", () => {
     const cco: CredentialCreationOptionsExtendedJSON = {
       publicKey: {
@@ -50,12 +47,16 @@ describe("extended schema", () => {
       credentialCreationOptionsExtended,
       cco,
     );
-    expect(converted.publicKey!.extensions!.largeBlob!.write).toEqualBuffer(
-      new Uint8Array([
-        0x2c, 0x04, 0x46, 0x13, 0xe0, 0x4b, 0x38, 0x1f, 0x8b, 0x01, 0x11, 0x84,
-        0xf8, 0x12, 0xce, 0x07, 0xe2, 0xc0, 0x44, 0x61, 0x3e, 0x04, 0xb3, 0x81,
-        0xf8, 0xb0, 0x11, 0x18, 0x4f, 0x81, 0x2c, 0xe0,
-      ]),
+    expect(
+      bufferToBase64url(converted.publicKey!.extensions!.largeBlob!.write),
+    ).to.equal(
+      bufferToBase64url(
+        new Uint8Array([
+          0x2c, 0x04, 0x46, 0x13, 0xe0, 0x4b, 0x38, 0x1f, 0x8b, 0x01, 0x11,
+          0x84, 0xf8, 0x12, 0xce, 0x07, 0xe2, 0xc0, 0x44, 0x61, 0x3e, 0x04,
+          0xb3, 0x81, 0xf8, 0xb0, 0x11, 0x18, 0x4f, 0x81, 0x2c, 0xe0,
+        ]),
+      ),
     );
   });
 
@@ -81,7 +82,7 @@ describe("extended schema", () => {
         }) as AuthenticationExtensionsClientOutputs,
     };
     const converted = createExtendedResponseToJSON(pkcwa);
-    expect(converted).toEqual({
+    expect(converted).to.deep.equal({
       type: "public-key",
       id: "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
       rawId: "AQIDBA",
@@ -118,7 +119,7 @@ describe("extended schema", () => {
         }) as AuthenticationExtensionsClientOutputs,
     };
     const converted = getExtendedResponseToJSON(pkcwa);
-    expect(converted).toEqual({
+    expect(converted).to.deep.equal({
       type: "public-key",
       id: "URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENTIAL_ID-URL_SAFE_BASE_64_CREDENT",
       rawId: "AQIDBA",

@@ -1,8 +1,6 @@
-/**
- * @jest-environment jsdom
- */
+import { expect } from "@open-wc/testing";
 
-import { base64urlToBuffer } from "./base64url";
+import { base64urlToBuffer, bufferToBase64url } from "./base64url";
 import { Schema } from "./schema-format";
 import {
   convert,
@@ -11,23 +9,22 @@ import {
   optional,
   required,
 } from "./convert";
-import "./arraybuffer.jest";
 
-describe("conversion", () => {
+suite("conversion", () => {
   test("can handle empty schema", () => {
     const schema: Schema = {};
-    expect(() => convert(base64urlToBuffer, schema, {})).not.toThrow();
+    expect(() => convert(base64urlToBuffer, schema, {})).not.to.throw();
   });
 
   test("copies a required `copy` value", () => {
     const schema: Schema = { number: { required: true, schema: "copy" } };
     const converted = convert(base64urlToBuffer, schema, { number: 4 });
-    expect(converted.number).toBe(4);
+    expect(converted.number).to.equal(4);
   });
 
   test("errors when a required `copy` value is missing", () => {
     const schema: Schema = { number: { required: true, schema: "copy" } };
-    expect(() => convert(base64urlToBuffer, schema, {})).toThrowError(
+    expect(() => convert(base64urlToBuffer, schema, {})).to.throw(
       /Missing key/,
     );
   });
@@ -35,12 +32,14 @@ describe("conversion", () => {
   test("copies a required `convert` value", () => {
     const schema: Schema = { number: { required: true, schema: "convert" } };
     const converted = convert(base64urlToBuffer, schema, { number: "AA==" });
-    expect(converted.number).toEqualBuffer(new Uint8Array([0]));
+    expect(bufferToBase64url(converted.number)).to.equal(
+      bufferToBase64url(new Uint8Array([0])),
+    );
   });
 
   test("errors when a required `convert` value is missing", () => {
     const schema: Schema = { number: { required: true, schema: "convert" } };
-    expect(() => convert(base64urlToBuffer, schema, {})).toThrowError(
+    expect(() => convert(base64urlToBuffer, schema, {})).to.throw(
       /Missing key/,
     );
   });
@@ -48,7 +47,7 @@ describe("conversion", () => {
   test("allows a missing optional value", () => {
     const schema: Schema = { number: { required: false, schema: "copy" } };
     const converted = convert(base64urlToBuffer, schema, {});
-    expect(converted).not.toHaveProperty("number");
+    expect(converted).not.to.haveOwnProperty("number");
   });
 
   test("ignores unknown properties", () => {
@@ -57,8 +56,8 @@ describe("conversion", () => {
       number: 6,
       extra: "hi",
     });
-    expect(converted.number).toBe(6);
-    expect(converted).not.toHaveProperty("extra");
+    expect(converted.number).to.equal(6);
+    expect(converted).not.haveOwnProperty("extra");
   });
 
   test("converts object", () => {
@@ -74,9 +73,9 @@ describe("conversion", () => {
     const converted = convert(base64urlToBuffer, schema, {
       nestedObject: { number: 7, convertField: "BB==" },
     });
-    expect(converted.nestedObject.number).toBe(7);
-    expect(converted.nestedObject.convertField).toEqualBuffer(
-      new Uint8Array([4]),
+    expect(converted.nestedObject.number).to.equal(7);
+    expect(bufferToBase64url(converted.nestedObject.convertField)).to.equal(
+      bufferToBase64url(new Uint8Array([4])),
     );
   });
 
@@ -100,31 +99,35 @@ describe("conversion", () => {
       ],
     });
 
-    expect(converted.nestedObjectList).toHaveLength(2);
+    expect(converted.nestedObjectList).to.have.length(2);
 
-    expect(converted.nestedObjectList[0].number).toBe(8);
-    expect(converted.nestedObjectList[0].string).toBe("hi");
-    expect(converted.nestedObjectList[0].convertField).toEqualBuffer(
-      new Uint8Array([8]),
-    );
+    expect(converted.nestedObjectList[0].number).to.equal(8);
+    expect(converted.nestedObjectList[0].string).to.equal("hi");
+    expect(
+      bufferToBase64url(converted.nestedObjectList[0].convertField),
+    ).to.equal(bufferToBase64url(new Uint8Array([8])));
 
-    expect(converted.nestedObjectList[1].number).toBe(9);
-    expect(converted.nestedObjectList[1]).not.toHaveProperty("string");
-    expect(converted.nestedObjectList[1].convertField).toEqualBuffer(
-      new Uint8Array([12]),
-    );
+    expect(converted.nestedObjectList[1].number).to.equal(9);
+    expect(converted.nestedObjectList[1]).not.to.haveOwnProperty("string");
+    expect(
+      bufferToBase64url(converted.nestedObjectList[1].convertField),
+    ).to.equal(bufferToBase64url(new Uint8Array([12])));
   });
 });
 
 test("converts leaf lists", () => {
   const schema: Schema = ["convert"];
   const converted = convert(base64urlToBuffer, schema, ["EE", "FF"]);
-  expect(converted).toHaveLength(2);
-  expect(converted[0]).toEqualBuffer(new Uint8Array([16]));
-  expect(converted[1]).toEqualBuffer(new Uint8Array([20]));
+  expect(converted).to.have.length(2);
+  expect(bufferToBase64url(converted[0])).to.equal(
+    bufferToBase64url(new Uint8Array([16])),
+  );
+  expect(bufferToBase64url(converted[1])).to.equal(
+    bufferToBase64url(new Uint8Array([20])),
+  );
 });
 
-describe("convenience functions", () => {
+suite("convenience functions", () => {
   test("can be called", () => {
     const schema: Schema = {
       a: required(copyValue),
@@ -138,15 +141,19 @@ describe("convenience functions", () => {
       c: 7,
       d: "FF",
     });
-    expect(converted.a).toBe(5);
-    expect(converted.b).toEqualBuffer(new Uint8Array([16]));
-    expect(converted.c).toBe(7);
-    expect(converted.d).toEqualBuffer(new Uint8Array([20]));
+    expect(converted.a).to.equal(5);
+    expect(bufferToBase64url(converted.b)).to.equal(
+      bufferToBase64url(new Uint8Array([16])),
+    );
+    expect(converted.c).to.equal(7);
+    expect(bufferToBase64url(converted.d)).to.equal(
+      bufferToBase64url(new Uint8Array([20])),
+    );
   });
 
   test("enforce required value", () => {
     const schema: Schema = { number: required(copyValue) };
-    expect(() => convert(base64urlToBuffer, schema, {})).toThrowError(
+    expect(() => convert(base64urlToBuffer, schema, {})).to.throw(
       /Missing key/,
     );
   });
@@ -154,11 +161,11 @@ describe("convenience functions", () => {
   test("allow leaving out optional value", () => {
     const schema: Schema = { number: { required: false, schema: "copy" } };
     const converted = convert(base64urlToBuffer, schema, {});
-    expect(converted).not.toHaveProperty("number");
+    expect(converted).not.to.haveOwnProperty("number");
   });
 });
 
-describe("conversion function", () => {
+suite("conversion function", () => {
   function double(s: string): string {
     return s + s;
   }
@@ -168,6 +175,6 @@ describe("conversion function", () => {
       convertField: { required: true, schema: "convert" },
     };
     const converted = convert(double, schema, { convertField: "hi" });
-    expect(converted.convertField).toBe("hihi");
+    expect(converted.convertField).to.equal("hihi");
   });
 });
