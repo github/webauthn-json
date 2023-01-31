@@ -50,7 +50,8 @@ jobs:
           cd ..
           npm version
       - run: npm ci
-      - run: make build
+      - run: make test
+      - run: make clean build
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_WEBAUTHN_JSON_PUBLISH_TOKEN }}
