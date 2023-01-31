@@ -90,8 +90,6 @@ export interface AuthenticatorAttestationResponseJSON {
   clientDataJSON: Base64urlString;
   attestationObject: Base64urlString;
   transports: AuthenticatorTransportJSON[];
-  // This field is technically not optional in the spec, but Firefox hasn't implemented it.
-  authenticatorAttachment?: AuthenticatorAttachment | null;
 }
 
 export interface PublicKeyCredentialWithAttestationJSON
