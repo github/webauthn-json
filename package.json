@@ -73,5 +73,8 @@
     "/browser-ponyfill/**/*",
     "/extended/**/*",
     "/src/webauthn-json/**/*"
-  ]
+  ],
+  "dependencies": {
+    "@web/test-runner": "^0.15.0"
+  }
 }
