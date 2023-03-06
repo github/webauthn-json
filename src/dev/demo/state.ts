@@ -1,6 +1,4 @@
-import {
-  RegistrationPublicKeyCredential,
-} from "../../webauthn-json/browser-ponyfill";
+import { RegistrationPublicKeyCredential } from "../../webauthn-json/browser-ponyfill";
 import type { RegistrationResponseExtendedJSON } from "../../webauthn-json/browser-ponyfill.extended";
 
 export function getRegistrations(): RegistrationResponseExtendedJSON[] {
@@ -37,7 +35,7 @@ export function displayRegistrations() {
   registrationElem().value = JSON.stringify(getRegistrations(), null, "  ");
 }
 
-export function withStatus(selector: string, fn: () => Promise<void>) {
+export function withStatus(selector: string, fn: () => Promise<any>) {
   return async function () {
     document.querySelector("#error")!.textContent = "";
     document.querySelector(selector)!.textContent = "…";

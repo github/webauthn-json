@@ -14,6 +14,7 @@ import {
   get,
   parseRequestOptionsFromJSON,
   supported,
+  AuthenticationPublicKeyCredential,
 } from "../../webauthn-json/browser-ponyfill";
 
 function registeredCredentials(): PublicKeyCredentialDescriptorJSON[] {
@@ -44,7 +45,9 @@ async function register(): Promise<void> {
   saveRegistration(await create(cco));
 }
 
-async function authenticate(): Promise<void> {
+async function authenticate(options?: {
+  conditionalMediation?: boolean;
+}): Promise<AuthenticationPublicKeyCredential> {
   const cro = parseRequestOptionsFromJSON({
     publicKey: {
       challenge: "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
@@ -52,7 +55,7 @@ async function authenticate(): Promise<void> {
       userVerification: "discouraged",
     },
   });
-  await get(cro);
+  return get(cro);
 }
 
 async function clear(): Promise<void> {
@@ -83,6 +86,14 @@ window.addEventListener("load", () => {
     document
       .querySelector("#supported")!
       .addEventListener("click", testSupported);
+
+    if (
+      new URL(location.href).searchParams.get(
+        "conditional-mediation-prompt-on-load",
+      ) === "true"
+    ) {
+      authenticate({ conditionalMediation: true }).then(console.log);
+    }
   } catch (e) {
     console.error(e);
   }
