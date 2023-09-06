@@ -6,7 +6,7 @@
 export function supported(): boolean {
   // rome-ignore format: Work around https://github.com/rome/tools/issues/3734
   return !!(
-    // rome-ignore lint(style/useOptionalChain): Optional chaining creates more complicated ES2019 code
+    // rome-ignore lint/complexity/useOptionalChain: Optional chaining creates more complicated ES2019 code
     navigator.credentials &&
     navigator.credentials.create &&
     navigator.credentials.get &&
