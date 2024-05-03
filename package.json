@@ -30,11 +30,11 @@
     }
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.0.0",
     "@open-wc/testing": "^3.1.7",
     "@types/node": "^18.11.9",
     "barely-a-dev-server": "^0.3.6",
     "esbuild": "^0.15.13",
-    "rome": "^10.0.1",
     "typescript": "^5.0.2"
   },
   "scripts": {
@@ -45,8 +45,8 @@
     "dev": "node script/dev.js",
     "clean": "rm -rf ./.temp ./dist",
     "test": "npx web-test-runner && npm run lint",
-    "lint": "npx rome check src",
-    "format": "npx rome format --write src",
+    "lint": "npx biome check src",
+    "format": "npx biome format --write src",
     "prepack": "npm run clean && npm run build"
   },
   "keywords": [
