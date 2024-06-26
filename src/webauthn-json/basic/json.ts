@@ -80,6 +80,7 @@ export interface PublicKeyCredentialCreationOptionsJSON {
 }
 
 export interface CredentialCreationOptionsJSON {
+  mediation?: CredentialMediationRequirement;
   publicKey: PublicKeyCredentialCreationOptionsJSON;
   signal?: AbortSignal;
 }

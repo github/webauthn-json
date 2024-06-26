@@ -13,9 +13,12 @@ import {
   publicKeyCredentialWithAttestation,
 } from "./schema";
 
+interface MCredentialCreationOptions extends CredentialCreationOptions {
+  mediation?: CredentialMediationRequirement;
+}
 export function createRequestFromJSON(
   requestJSON: CredentialCreationOptionsJSON,
-): CredentialCreationOptions {
+): MCredentialCreationOptions {
   return convert(base64urlToBuffer, credentialCreationOptions, requestJSON);
 }
 

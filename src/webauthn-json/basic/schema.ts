@@ -30,6 +30,7 @@ const simplifiedClientExtensionResultsSchema = {
 // `navigator.create()` request
 
 export const credentialCreationOptions: Schema = {
+  mediation: optional(copy),
   publicKey: required({
     rp: required(copy),
     user: required({
