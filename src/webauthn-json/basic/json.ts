@@ -67,6 +67,8 @@ interface AuthenticatorSelectionCriteriaJSON
   residentKey?: ResidentKeyRequirement;
 }
 
+type PublicKeyCredentialHint = "client-device" | "hybrid" | "security-key";
+
 export interface PublicKeyCredentialCreationOptionsJSON {
   rp: PublicKeyCredentialRpEntity;
   user: PublicKeyCredentialUserEntityJSON;
@@ -77,6 +79,7 @@ export interface PublicKeyCredentialCreationOptionsJSON {
   authenticatorSelection?: AuthenticatorSelectionCriteriaJSON;
   attestation?: AttestationConveyancePreference;
   extensions?: SimpleWebAuthnExtensionsJSON;
+  hints?: PublicKeyCredentialHint[];
 }
 
 export interface CredentialCreationOptionsJSON {
@@ -107,6 +110,7 @@ export interface PublicKeyCredentialRequestOptionsJSON {
   allowCredentials?: PublicKeyCredentialDescriptorJSON[];
   userVerification?: UserVerificationRequirement;
   extensions?: SimpleWebAuthnExtensionsJSON;
+  hints?: PublicKeyCredentialHint[];
 }
 
 export interface CredentialRequestOptionsJSON {

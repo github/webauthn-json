@@ -46,6 +46,7 @@ export const credentialCreationOptions: Schema = {
     authenticatorSelection: optional(copy),
     attestation: optional(copy),
     extensions: optional(simplifiedExtensionsSchema),
+    hints: optional(copy),
   }),
   signal: optional(copy),
 };
