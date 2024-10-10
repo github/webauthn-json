@@ -46,6 +46,7 @@ export const credentialCreationOptions: Schema = {
     authenticatorSelection: optional(copy),
     attestation: optional(copy),
     extensions: optional(simplifiedExtensionsSchema),
+    hints: optional(copy),
   }),
   signal: optional(copy),
 };
@@ -82,6 +83,7 @@ export const credentialRequestOptions: Schema = {
     allowCredentials: optional([publicKeyCredentialDescriptorSchema]),
     userVerification: optional(copy),
     extensions: optional(simplifiedExtensionsSchema),
+    hints: optional(copy),
   }),
   signal: optional(copy),
 };
