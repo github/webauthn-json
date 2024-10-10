@@ -83,6 +83,7 @@ export const credentialRequestOptions: Schema = {
     allowCredentials: optional([publicKeyCredentialDescriptorSchema]),
     userVerification: optional(copy),
     extensions: optional(simplifiedExtensionsSchema),
+    hints: optional(copy),
   }),
   signal: optional(copy),
 };
