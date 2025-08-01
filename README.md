@@ -1,6 +1,6 @@
 ⚠️ ⚠️ ⚠️
 
-Webauthn-json has been sunset. Now that all major browsers support webauthn we recommend invoking the native APIs
+WebAuthn-json has been sunset. Now that all major browsers support WebAuthn we recommend invoking the native APIs
 
 ⚠️ ⚠️ ⚠️
 
