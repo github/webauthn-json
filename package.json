@@ -32,8 +32,8 @@
   "devDependencies": {
     "@open-wc/testing": "^3.1.7",
     "@types/node": "^18.11.9",
-    "barely-a-dev-server": "^0.3.6",
-    "esbuild": "^0.15.13",
+    "barely-a-dev-server": "^0.8.1",
+    "esbuild": "^0.25.8",
     "rome": "^10.0.1",
     "typescript": "^5.0.2"
   },
@@ -75,7 +75,7 @@
     "/src/webauthn-json/**/*"
   ],
   "dependencies": {
-    "@web/dev-server-esbuild": "^0.3.3",
-    "@web/test-runner": "^0.15.0"
+    "@web/dev-server-esbuild": "^1.0.4",
+    "@web/test-runner": "^0.20.2"
   }
 }
